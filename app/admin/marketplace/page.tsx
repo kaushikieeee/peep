@@ -51,230 +51,71 @@ const mockProviders: Provider[] = [
     responseTime: '1-2 hours',
     availability: 'Mon-Sun, 8AM-8PM',
   },
-  {
-    id: 4,
-    name: 'EcoClean Pro Services',
-    service: 'Environmental cleanup & waste management',
-    rating: 4.7,
-    reviews: 203,
-    estimate: '₹1,48,000 - ₹5,33,000',
-    specialties: ['Waste removal', 'Site cleanup', 'Environmental compliance'],
-    responseTime: '2-3 hours',
-    availability: 'Mon-Fri, 9AM-5PM',
-  },
-  {
-    id: 5,
-    name: 'AquaPure Treatment',
-    service: 'Water purification & testing',
-    rating: 4.9,
-    reviews: 178,
-    estimate: '₹1,80,000 - ₹5,74,000',
-    specialties: ['Water testing', 'Purification systems', 'Quality assurance'],
-    responseTime: '1-2 hours',
-    availability: '24/7 Support',
-  },
-  {
-    id: 6,
-    name: 'Soil Restoration Inc',
-    service: 'Soil analysis & heavy metal removal',
-    rating: 4.5,
-    reviews: 95,
-    estimate: '₹1,64,000 - ₹4,92,000',
-    specialties: ['Heavy metal removal', 'Soil testing', 'Certification'],
-    responseTime: '3-4 hours',
-    availability: 'Mon-Sat, 8AM-6PM',
-  },
-  {
-    id: 7,
-    name: 'NoiseControl Systems',
-    service: 'Noise monitoring & reduction',
-    rating: 4.6,
-    reviews: 112,
-    estimate: '₹65,600 - ₹2,46,000',
-    specialties: ['Noise measurement', 'Sound barriers', 'Compliance reports'],
-    responseTime: '2-6 hours',
-    availability: 'Mon-Sun, 24/7',
-  },
-  {
-    id: 8,
-    name: 'PlasticClean Technologies',
-    service: 'Plastic waste & microplastic removal',
-    rating: 4.8,
-    reviews: 167,
-    estimate: '₹1,23,000 - ₹3,69,000',
-    specialties: ['Microplastic removal', 'Recycling', 'Waste sorting'],
-    responseTime: '2-3 hours',
-    availability: 'Mon-Sun, 7AM-7PM',
-  },
-  {
-    id: 9,
-    name: 'BioRemediation Experts',
-    service: 'Biological contamination treatment',
-    rating: 4.7,
-    reviews: 134,
-    estimate: '₹2,05,000 - ₹6,15,000',
-    specialties: ['Bioremediation', 'Enzyme treatment', 'Bacterial cultures'],
-    responseTime: '4-6 hours',
-    availability: 'Mon-Fri, 9AM-6PM',
-  },
-  {
-    id: 10,
-    name: 'PollutionDetect Services',
-    service: 'Pollution monitoring & detection',
-    rating: 4.9,
-    reviews: 201,
-    estimate: '₹98,400 - ₹3,28,000',
-    specialties: ['Air quality monitoring', 'Emissions testing', 'Real-time tracking'],
-    responseTime: '1-2 hours',
-    availability: '24/7 Monitoring',
-  },
-  {
-    id: 11,
-    name: 'SmogBuster Environmental',
-    service: 'Air quality improvement & pollution control',
-    rating: 4.8,
-    reviews: 145,
-    estimate: '₹1,64,000 - ₹4,51,000',
-    specialties: ['Air purification', 'Emission reduction', 'Industrial cleanup'],
-    responseTime: '2-4 hours',
-    availability: 'Mon-Fri, 8AM-6PM',
-  },
-  {
-    id: 12,
-    name: 'Waste Master Solutions',
-    service: 'Hazardous waste management & disposal',
-    rating: 4.7,
-    reviews: 189,
-    estimate: '₹2,05,000 - ₹6,56,000',
-    specialties: ['Hazardous waste', 'Safe disposal', 'Documentation'],
-    responseTime: '3-5 hours',
-    availability: 'Mon-Sun, 24/7',
-  },
-  {
-    id: 13,
-    name: 'RiverClean Technologies',
-    service: 'Water body cleanup & restoration',
-    rating: 4.9,
-    reviews: 176,
-    estimate: '₹2,87,000 - ₹8,20,000',
-    specialties: ['Water body cleanup', 'Aquatic ecosystem', 'Sediment removal'],
-    responseTime: '1-3 hours',
-    availability: 'Mon-Sun, 7AM-7PM',
-  },
-  {
-    id: 14,
-    name: 'GreenShield Environmental',
-    service: 'Industrial pollution mitigation',
-    rating: 4.6,
-    reviews: 128,
-    estimate: '₹2,30,000 - ₹6,15,000',
-    specialties: ['Industrial cleanup', 'Chemical treatment', 'Compliance audit'],
-    responseTime: '2-6 hours',
-    availability: 'Mon-Fri, 8AM-5PM',
-  },
-  {
-    id: 15,
-    name: 'AirGuard Pro Services',
-    service: 'Air pollution monitoring & control',
-    rating: 4.8,
-    reviews: 152,
-    estimate: '₹1,23,000 - ₹3,28,000',
-    specialties: ['Air monitoring', 'PM2.5 reduction', 'Dust control'],
-    responseTime: '1-2 hours',
-    availability: '24/7 Monitoring',
-  },
-  {
-    id: 16,
-    name: 'SoilSafe Restoration',
-    service: 'Contaminated soil treatment & disposal',
-    rating: 4.7,
-    reviews: 131,
-    estimate: '₹1,80,000 - ₹5,58,000',
-    specialties: ['Soil treatment', 'Toxin removal', 'Certification'],
-    responseTime: '3-4 hours',
-    availability: 'Mon-Sat, 9AM-5PM',
-  },
-  {
-    id: 17,
-    name: 'EcoWater Systems',
-    service: 'Wastewater treatment & recycling',
-    rating: 4.9,
-    reviews: 198,
-    estimate: '₹2,05,000 - ₹5,74,000',
-    specialties: ['Wastewater treatment', 'Water recycling', 'Quality testing'],
-    responseTime: '2-3 hours',
-    availability: 'Mon-Sun, 8AM-8PM',
-  },
-  {
-    id: 18,
-    name: 'ChemClean Specialists',
-    service: 'Chemical spill cleanup & remediation',
-    rating: 4.8,
-    reviews: 167,
-    estimate: '₹1,64,000 - ₹5,33,000',
-    specialties: ['Chemical cleanup', 'Emergency response', 'Decontamination'],
-    responseTime: '1-2 hours',
-    availability: '24/7 Emergency',
-  },
-  {
-    id: 19,
-    name: 'GreenRecycle Solutions',
-    service: 'Waste segregation & recycling management',
-    rating: 4.6,
-    reviews: 114,
-    estimate: '₹65,600 - ₹2,87,000',
-    specialties: ['Waste sorting', 'Recycling', 'Composting', 'E-waste'],
-    responseTime: '3-4 hours',
-    availability: 'Mon-Sat, 7AM-6PM',
-  },
-  {
-    id: 20,
-    name: 'BioClean Environmental',
-    service: 'Organic waste & sewage treatment',
-    rating: 4.7,
-    reviews: 143,
-    estimate: '₹1,48,000 - ₹4,51,000',
-    specialties: ['Sewage treatment', 'Composting', 'Odor control'],
-    responseTime: '2-4 hours',
-    availability: 'Mon-Fri, 9AM-6PM',
-  },
-  {
-    id: 21,
-    name: 'PollutionShield Pro',
-    service: 'Comprehensive pollution control & prevention',
-    rating: 4.9,
-    reviews: 212,
-    estimate: '₹2,46,000 - ₹7,38,000',
-    specialties: ['All pollution types', 'Long-term prevention', 'Consulting'],
-    responseTime: '1-2 hours',
-    availability: '24/7 Support',
-  },
-  {
-    id: 22,
-    name: 'Urban EcoClean',
-    service: 'Street & urban area pollution cleanup',
-    rating: 4.7,
-    reviews: 156,
-    estimate: '₹98,400 - ₹3,94,000',
-    specialties: ['Street cleaning', 'Public area cleanup', 'Dust management'],
-    responseTime: '2-3 hours',
-    availability: 'Mon-Sun, 6AM-8PM',
-  },
 ];
 
 interface AssignmentRecord {
   providerId: number;
   providerName: string;
+  problemId: string;
+  problemTitle: string;
   timestamp: string;
   status: 'assigned' | 'in-progress' | 'completed';
 }
 
+interface PollutionProblem {
+  id: string;
+  title: string;
+  location: string;
+  severity: 'Low' | 'Medium' | 'High';
+  category: string;
+}
+
+const mockProblems: PollutionProblem[] = [
+  {
+    id: 'P001',
+    title: 'Stagnant water at Market Street',
+    location: 'Market Street, Downtown',
+    severity: 'High',
+    category: 'Water Pollution',
+  },
+  {
+    id: 'P002',
+    title: 'Soil contamination near Industrial Zone',
+    location: 'Industrial Area, East Side',
+    severity: 'High',
+    category: 'Soil Pollution',
+  },
+  {
+    id: 'P003',
+    title: 'Air quality degradation at Main Road',
+    location: 'Main Road Junction',
+    severity: 'Medium',
+    category: 'Air Pollution',
+  },
+  {
+    id: 'P004',
+    title: 'Plastic waste accumulation in Park',
+    location: 'Central Park',
+    severity: 'Medium',
+    category: 'Waste Pollution',
+  },
+  {
+    id: 'P005',
+    title: 'Heavy metal residue at Abandoned Factory',
+    location: 'Old Industrial Factory',
+    severity: 'High',
+    category: 'Chemical Pollution',
+  },
+];
+
 export default function MarketplacePage() {
   const router = useRouter();
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
-  const [caseDetails, setCaseDetails] = useState('');
   const [assignedTasks, setAssignedTasks] = useState<AssignmentRecord[]>([]);
   const [showAssignConfirm, setShowAssignConfirm] = useState(false);
+  const [showProblemModal, setShowProblemModal] = useState(false);
+  const [selectedProblem, setSelectedProblem] = useState<PollutionProblem | null>(null);
+  const [providerForAssignment, setProviderForAssignment] = useState<Provider | null>(null);
 
   useEffect(() => {
     const isAuth = localStorage.getItem('admin-auth');
@@ -288,46 +129,37 @@ export default function MarketplacePage() {
     router.push('/admin/login');
   };
 
-  const handleAutoAssignAll = () => {
-    if (!caseDetails.trim()) {
-      alert('Please enter case details before assigning tasks');
-      return;
-    }
-
-    const newTasks: AssignmentRecord[] = mockProviders.map((provider) => ({
-      providerId: provider.id,
-      providerName: provider.name,
-      timestamp: new Date().toLocaleString(),
-      status: 'assigned',
-    }));
-
-    setAssignedTasks(newTasks);
-    setShowAssignConfirm(true);
-
-    setTimeout(() => setShowAssignConfirm(false), 3000);
+  const handleOpenProblemModal = (provider: Provider) => {
+    setProviderForAssignment(provider);
+    setShowProblemModal(true);
   };
 
-  const handleAssignSingle = (provider: Provider) => {
-    if (!caseDetails.trim()) {
-      alert('Please enter case details before assigning a task');
-      return;
-    }
+  const handleAssignProblem = (problem: PollutionProblem) => {
+    if (!providerForAssignment) return;
 
-    const isAlreadyAssigned = assignedTasks.some((t) => t.providerId === provider.id);
+    const isAlreadyAssigned = assignedTasks.some(
+      (t) => t.providerId === providerForAssignment.id && t.problemId === problem.id
+    );
+
     if (isAlreadyAssigned) {
-      alert('This provider is already assigned to this case');
+      alert('This problem is already assigned to this provider');
       return;
     }
 
     const newTask: AssignmentRecord = {
-      providerId: provider.id,
-      providerName: provider.name,
+      providerId: providerForAssignment.id,
+      providerName: providerForAssignment.name,
+      problemId: problem.id,
+      problemTitle: problem.title,
       timestamp: new Date().toLocaleString(),
       status: 'assigned',
     };
 
     setAssignedTasks([...assignedTasks, newTask]);
     setShowAssignConfirm(true);
+    setShowProblemModal(false);
+    setSelectedProblem(null);
+    setProviderForAssignment(null);
 
     setTimeout(() => setShowAssignConfirm(false), 3000);
   };
@@ -352,54 +184,98 @@ export default function MarketplacePage() {
         {showAssignConfirm && (
           <div className="bg-green-50 border-b border-green-200 px-6 py-3 flex items-center gap-3 text-green-700 animate-pulse">
             <CheckCircle size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">✓ Task(s) assigned successfully! Providers notified.</span>
+            <span className="text-sm font-medium">✓ Task assigned successfully!</span>
+          </div>
+        )}
+
+        {/* Problem Selection Modal */}
+        {showProblemModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full mx-4">
+              <div className="p-6 border-b border-gray-200">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Select a Problem to Assign
+                </h2>
+                <p className="text-sm text-gray-600 mt-1">
+                  Assigning to: <span className="font-semibold">{providerForAssignment?.name}</span>
+                </p>
+              </div>
+
+              <div className="max-h-96 overflow-y-auto p-6 space-y-3">
+                {mockProblems.map((problem) => (
+                  <div
+                    key={problem.id}
+                    className="p-4 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer transition"
+                    onClick={() => handleAssignProblem(problem)}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900">{problem.title}</h3>
+                        <p className="text-sm text-gray-600">{problem.location}</p>
+                        <p className="text-xs text-gray-500 mt-1">{problem.category}</p>
+                      </div>
+                      <div className="text-right">
+                        <span
+                          className={`text-xs font-bold px-3 py-1 rounded ${
+                            problem.severity === 'High'
+                              ? 'bg-red-100 text-red-700'
+                              : problem.severity === 'Medium'
+                              ? 'bg-yellow-100 text-yellow-700'
+                              : 'bg-green-100 text-green-700'
+                          }`}
+                        >
+                          {problem.severity}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-6 border-t border-gray-200 flex justify-end gap-2">
+                <button
+                  onClick={() => {
+                    setShowProblemModal(false);
+                    setProviderForAssignment(null);
+                  }}
+                  className="px-4 py-2 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg font-medium transition"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
         <div className="flex-1 overflow-auto p-6">
           <div className="grid grid-cols-3 gap-6">
-            {/* Left: Case details & Task list */}
+            {/* Left: Task list */}
             <div className="col-span-1">
               <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4 sticky top-24 max-h-[calc(100vh-200px)] overflow-y-auto">
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Case Details</h3>
-                  <textarea
-                    value={caseDetails}
-                    onChange={(e) => setCaseDetails(e.target.value)}
-                    placeholder="Describe the pollution issue, location, severity, and required services..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    rows={6}
-                  />
-                  <button
-                    onClick={handleAutoAssignAll}
-                    className="w-full mt-3 py-2 px-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition-all"
-                  >
-                    Assign to All Providers
-                  </button>
-                </div>
+                <h2 className="text-lg font-bold text-gray-900">
+                  Assigned Tasks ({assignedTasks.length})
+                </h2>
 
-                {assignedTasks.length > 0 && (
-                  <div>
-                    <p className="text-sm font-bold text-gray-900 mb-3">
-                      Assigned Tasks ({assignedTasks.length}/{mockProviders.length})
-                    </p>
-                    <div className="space-y-2">
-                      {assignedTasks.map((task, idx) => (
-                        <div
-                          key={idx}
-                          className="p-3 rounded-lg bg-green-50 border border-green-200"
-                        >
-                          <p className="text-xs font-semibold text-green-800">{task.providerName}</p>
-                          <p className="text-xs text-green-700">Task ID: #{1000 + idx}</p>
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded capitalize font-semibold">
-                              ✓ Assigned
-                            </span>
-                            <span className="text-xs text-green-600">{task.timestamp.split(',')[0]}</span>
-                          </div>
+                {assignedTasks.length === 0 ? (
+                  <p className="text-sm text-gray-500 italic">No tasks assigned yet. Select a provider and problem to begin.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {assignedTasks.map((task, idx) => (
+                      <div
+                        key={idx}
+                        className="p-3 rounded-lg bg-green-50 border border-green-200"
+                      >
+                        <p className="text-xs font-semibold text-green-800">{task.providerName}</p>
+                        <p className="text-xs text-gray-700 mt-1">{task.problemTitle}</p>
+                        <p className="text-xs text-green-600 mt-1">Task ID: #{1000 + idx}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded font-semibold">
+                            ✓ Assigned
+                          </span>
+                          <span className="text-xs text-gray-600">{task.timestamp.split(',')[0]}</span>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
@@ -407,17 +283,15 @@ export default function MarketplacePage() {
 
             {/* Right: Provider cards (2 columns) */}
             <div className="col-span-2">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Available Service Providers ({mockProviders.length})</h2>
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Service Providers ({mockProviders.length})</h2>
               <div className="grid grid-cols-2 gap-4">
                 {mockProviders.map((provider) => {
-                  const isAssigned = assignedTasks.some((t) => t.providerId === provider.id);
+                  const providerTaskCount = assignedTasks.filter((t) => t.providerId === provider.id).length;
                   return (
                     <div
                       key={provider.id}
                       className={`bg-white rounded-lg border transition-all cursor-pointer ${
-                        isAssigned
-                          ? 'border-green-500 bg-green-50 shadow-md'
-                          : selectedProvider?.id === provider.id
+                        selectedProvider?.id === provider.id
                           ? 'border-2 shadow-lg border-blue-500'
                           : 'border-gray-200 hover:shadow-md'
                       }`}
@@ -429,8 +303,10 @@ export default function MarketplacePage() {
                             <h3 className="font-semibold text-gray-900 text-sm">{provider.name}</h3>
                             <p className="text-xs text-gray-600">{provider.service}</p>
                           </div>
-                          {isAssigned && (
-                            <span className="text-xs bg-green-500 text-white px-2 py-1 rounded font-bold">✓</span>
+                          {providerTaskCount > 0 && (
+                            <span className="text-xs bg-blue-500 text-white px-2 py-1 rounded font-bold">
+                              {providerTaskCount}
+                            </span>
                           )}
                         </div>
 
@@ -470,22 +346,12 @@ export default function MarketplacePage() {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleAssignSingle(provider);
+                            handleOpenProblemModal(provider);
                           }}
-                          disabled={isAssigned}
-                          className="w-full py-2 px-3 rounded-lg text-white font-semibold text-xs transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                          style={{
-                            backgroundColor: isAssigned ? '#16a34a' : '#8b5cf6',
-                          }}
+                          className="w-full py-2 px-3 rounded-lg bg-purple-500 hover:bg-purple-600 text-white font-semibold text-xs transition-all flex items-center justify-center gap-2"
                         >
-                          {isAssigned ? (
-                            <>✓ Assigned</>
-                          ) : (
-                            <>
-                              <CheckCircle className="w-3 h-3" />
-                              Assign Task
-                            </>
-                          )}
+                          <CheckCircle className="w-3 h-3" />
+                          Assign Task
                         </button>
                       </div>
                     </div>
