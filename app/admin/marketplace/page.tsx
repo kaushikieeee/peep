@@ -128,6 +128,138 @@ const mockProviders: Provider[] = [
     responseTime: '1-2 hours',
     availability: '24/7 Monitoring',
   },
+  {
+    id: 11,
+    name: 'SmogBuster Environmental',
+    service: 'Air quality improvement & pollution control',
+    rating: 4.8,
+    reviews: 145,
+    estimate: '$2,000 - $5,500',
+    specialties: ['Air purification', 'Emission reduction', 'Industrial cleanup'],
+    responseTime: '2-4 hours',
+    availability: 'Mon-Fri, 8AM-6PM',
+  },
+  {
+    id: 12,
+    name: 'Waste Master Solutions',
+    service: 'Hazardous waste management & disposal',
+    rating: 4.7,
+    reviews: 189,
+    estimate: '$2,500 - $8,000',
+    specialties: ['Hazardous waste', 'Safe disposal', 'Documentation'],
+    responseTime: '3-5 hours',
+    availability: 'Mon-Sun, 24/7',
+  },
+  {
+    id: 13,
+    name: 'RiverClean Technologies',
+    service: 'Water body cleanup & restoration',
+    rating: 4.9,
+    reviews: 176,
+    estimate: '$3,500 - $10,000',
+    specialties: ['Water body cleanup', 'Aquatic ecosystem', 'Sediment removal'],
+    responseTime: '1-3 hours',
+    availability: 'Mon-Sun, 7AM-7PM',
+  },
+  {
+    id: 14,
+    name: 'GreenShield Environmental',
+    service: 'Industrial pollution mitigation',
+    rating: 4.6,
+    reviews: 128,
+    estimate: '$2,800 - $7,500',
+    specialties: ['Industrial cleanup', 'Chemical treatment', 'Compliance audit'],
+    responseTime: '2-6 hours',
+    availability: 'Mon-Fri, 8AM-5PM',
+  },
+  {
+    id: 15,
+    name: 'AirGuard Pro Services',
+    service: 'Air pollution monitoring & control',
+    rating: 4.8,
+    reviews: 152,
+    estimate: '$1,500 - $4,000',
+    specialties: ['Air monitoring', 'PM2.5 reduction', 'Dust control'],
+    responseTime: '1-2 hours',
+    availability: '24/7 Monitoring',
+  },
+  {
+    id: 16,
+    name: 'SoilSafe Restoration',
+    service: 'Contaminated soil treatment & disposal',
+    rating: 4.7,
+    reviews: 131,
+    estimate: '$2,200 - $6,800',
+    specialties: ['Soil treatment', 'Toxin removal', 'Certification'],
+    responseTime: '3-4 hours',
+    availability: 'Mon-Sat, 9AM-5PM',
+  },
+  {
+    id: 17,
+    name: 'EcoWater Systems',
+    service: 'Wastewater treatment & recycling',
+    rating: 4.9,
+    reviews: 198,
+    estimate: '$2,500 - $7,000',
+    specialties: ['Wastewater treatment', 'Water recycling', 'Quality testing'],
+    responseTime: '2-3 hours',
+    availability: 'Mon-Sun, 8AM-8PM',
+  },
+  {
+    id: 18,
+    name: 'ChemClean Specialists',
+    service: 'Chemical spill cleanup & remediation',
+    rating: 4.8,
+    reviews: 167,
+    estimate: '$2,000 - $6,500',
+    specialties: ['Chemical cleanup', 'Emergency response', 'Decontamination'],
+    responseTime: '1-2 hours',
+    availability: '24/7 Emergency',
+  },
+  {
+    id: 19,
+    name: 'GreenRecycle Solutions',
+    service: 'Waste segregation & recycling management',
+    rating: 4.6,
+    reviews: 114,
+    estimate: '$800 - $3,500',
+    specialties: ['Waste sorting', 'Recycling', 'Composting', 'E-waste'],
+    responseTime: '3-4 hours',
+    availability: 'Mon-Sat, 7AM-6PM',
+  },
+  {
+    id: 20,
+    name: 'BioClean Environmental',
+    service: 'Organic waste & sewage treatment',
+    rating: 4.7,
+    reviews: 143,
+    estimate: '$1,800 - $5,500',
+    specialties: ['Sewage treatment', 'Composting', 'Odor control'],
+    responseTime: '2-4 hours',
+    availability: 'Mon-Fri, 9AM-6PM',
+  },
+  {
+    id: 21,
+    name: 'PollutionShield Pro',
+    service: 'Comprehensive pollution control & prevention',
+    rating: 4.9,
+    reviews: 212,
+    estimate: '$3,000 - $9,000',
+    specialties: ['All pollution types', 'Long-term prevention', 'Consulting'],
+    responseTime: '1-2 hours',
+    availability: '24/7 Support',
+  },
+  {
+    id: 22,
+    name: 'Urban EcoClean',
+    service: 'Street & urban area pollution cleanup',
+    rating: 4.7,
+    reviews: 156,
+    estimate: '$1,200 - $4,800',
+    specialties: ['Street cleaning', 'Public area cleanup', 'Dust management'],
+    responseTime: '2-3 hours',
+    availability: 'Mon-Sun, 6AM-8PM',
+  },
 ];
 
 interface AssignmentRecord {
@@ -262,7 +394,7 @@ export default function MarketplacePage() {
             {/* Right: Provider cards */}
             <div className="col-span-3">
               <h2 className="text-lg font-bold text-gray-900 mb-4">Available Service Providers ({mockProviders.length})</h2>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-4 gap-4">
                 {mockProviders.map((provider) => (
                   <div
                     key={provider.id}
@@ -273,9 +405,9 @@ export default function MarketplacePage() {
                     }`}
                     onClick={() => setSelectedProvider(provider)}
                   >
-                    <div className="p-4 space-y-3">
+                    <div className="p-3 space-y-2">
                       <div>
-                        <h3 className="font-semibold text-gray-900 text-sm">{provider.name}</h3>
+                        <h3 className="font-semibold text-gray-900 text-xs leading-tight">{provider.name}</h3>
                         <p className="text-xs text-gray-600">{provider.service}</p>
                       </div>
 
@@ -297,49 +429,43 @@ export default function MarketplacePage() {
                       </div>
 
                       <div className="space-y-1">
-                        <div className="bg-blue-50 rounded p-2">
-                          <p className="text-xs text-gray-600">Est. Cost</p>
-                          <p className="text-sm font-bold text-blue-600">{provider.estimate}</p>
+                        <div className="bg-blue-50 rounded p-1">
+                          <p className="text-xs text-gray-600">Cost</p>
+                          <p className="text-xs font-bold text-blue-600">{provider.estimate}</p>
                         </div>
                         <div className="flex items-center gap-1 text-xs text-gray-600">
-                          <Clock size={14} />
+                          <Clock size={12} />
                           <span>{provider.responseTime}</span>
                         </div>
-                        <p className="text-xs text-gray-600">
-                          <span className="font-semibold">Hours:</span> {provider.availability}
-                        </p>
                       </div>
 
-                      <div className="flex flex-wrap gap-1">
-                        {provider.specialties.map((spec) => (
+                      <div className="flex flex-wrap gap-0.5">
+                        {provider.specialties.slice(0, 1).map((spec) => (
                           <span
                             key={spec}
-                            className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700"
+                            className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-700"
                           >
                             {spec}
                           </span>
                         ))}
                       </div>
 
-                      <div className="space-y-2 pt-2 border-t border-gray-200">
+                      <div className="space-y-1 pt-1 border-t border-gray-200">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             handleInvite(provider);
                           }}
                           disabled={invitedProviders.includes(provider.id)}
-                          className="w-full py-2 px-3 rounded-lg text-white font-medium text-xs transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                          className="w-full py-1.5 px-2 rounded text-white font-medium text-xs transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-1"
                           style={{
                             backgroundColor: invitedProviders.includes(provider.id) ? '#16a34a' : '#3b82f6',
                           }}
                         >
                           {invitedProviders.includes(provider.id) ? (
-                            <>✓ Invited</>
+                            <>✓</>
                           ) : (
-                            <>
-                              <Send className="w-3 h-3" />
-                              Invite to Bid
-                            </>
+                            <>📧</>
                           )}
                         </button>
                         <button
@@ -347,10 +473,10 @@ export default function MarketplacePage() {
                             e.stopPropagation();
                             handleAssignTask(provider);
                           }}
-                          className="w-full py-2 px-3 rounded-lg bg-purple-500 hover:bg-purple-600 text-white font-medium text-xs transition-all flex items-center justify-center gap-2"
+                          className="w-full py-1.5 px-2 rounded bg-purple-500 hover:bg-purple-600 text-white font-medium text-xs transition-all flex items-center justify-center gap-1"
                         >
                           <CheckCircle className="w-3 h-3" />
-                          Assign Task
+                          Assign
                         </button>
                       </div>
                     </div>
