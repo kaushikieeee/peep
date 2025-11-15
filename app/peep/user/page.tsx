@@ -216,21 +216,33 @@ export default function MapPage() {
 
         {/* Selected Report Card */}
         {selectedPin && (
-          <div className="absolute bottom-20 left-4 right-4 bg-white rounded-lg border border-gray-200 shadow-lg p-4 max-w-sm z-50">
-            <div className="flex items-start justify-between gap-2 mb-2">
-              <h3 className="text-sm font-bold">Case #{selectedPin.id}</h3>
-              <button onClick={() => setSelectedPin(null)} className="text-gray-400 hover:text-gray-600">✕</button>
+          <div className="absolute bottom-20 left-4 right-4 bg-white rounded-lg border border-gray-200 shadow-lg overflow-hidden max-w-sm z-50">
+            {/* Image */}
+            <div className="w-full h-48 bg-gray-200 overflow-hidden">
+              <img 
+                src={selectedPin.imagePlaceholder} 
+                alt={selectedPin.category}
+                className="w-full h-full object-cover"
+              />
             </div>
-            <p className="text-xs text-gray-600 mb-1">{selectedPin.category}</p>
-            <p className="text-sm text-gray-700 mb-3">{selectedPin.note}</p>
-            <div className="flex gap-2">
-              <span className="px-2 py-1 rounded text-xs font-bold" style={{
-                backgroundColor: selectedPin.severity === 'High' ? '#fca5a5' : selectedPin.severity === 'Medium' ? '#fcd34d' : '#c6f6d5',
-                color: selectedPin.severity === 'High' ? '#7f1d1d' : selectedPin.severity === 'Medium' ? '#78350f' : '#15803d',
-              }}>
-                {selectedPin.severity}
-              </span>
-              <span className="text-xs text-gray-500">By {selectedPin.reporter}</span>
+            
+            {/* Content */}
+            <div className="p-4">
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <h3 className="text-sm font-bold">Case #{selectedPin.id}</h3>
+                <button onClick={() => setSelectedPin(null)} className="text-gray-400 hover:text-gray-600">✕</button>
+              </div>
+              <p className="text-xs text-gray-600 mb-1">{selectedPin.category}</p>
+              <p className="text-sm text-gray-700 mb-3">{selectedPin.note}</p>
+              <div className="flex gap-2">
+                <span className="px-2 py-1 rounded text-xs font-bold" style={{
+                  backgroundColor: selectedPin.severity === 'High' ? '#fca5a5' : selectedPin.severity === 'Medium' ? '#fcd34d' : '#c6f6d5',
+                  color: selectedPin.severity === 'High' ? '#7f1d1d' : selectedPin.severity === 'Medium' ? '#78350f' : '#15803d',
+                }}>
+                  {selectedPin.severity}
+                </span>
+                <span className="text-xs text-gray-500">By {selectedPin.reporter}</span>
+              </div>
             </div>
           </div>
         )}
