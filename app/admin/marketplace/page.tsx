@@ -24,7 +24,7 @@ const mockProviders: Provider[] = [
     service: 'Turf restoration & cleanup',
     rating: 4.8,
     reviews: 124,
-    estimate: '$2,500 - $5,000',
+    estimate: '₹2,05,000 - ₹4,10,000',
     specialties: ['Turf restoration', 'Soil remediation', 'Land cleanup'],
     responseTime: '2-4 hours',
     availability: 'Mon-Sat, 7AM-6PM',
@@ -35,7 +35,7 @@ const mockProviders: Provider[] = [
     service: 'Water drainage & treatment',
     rating: 4.6,
     reviews: 87,
-    estimate: '$1,500 - $3,500',
+    estimate: '₹1,23,000 - ₹2,87,000',
     specialties: ['Water treatment', 'Drainage systems', 'Stagnant water'],
     responseTime: '4-6 hours',
     availability: '24/7 Emergency',
@@ -46,7 +46,7 @@ const mockProviders: Provider[] = [
     service: 'Soil testing & remediation',
     rating: 4.9,
     reviews: 156,
-    estimate: '$3,000 - $8,000',
+    estimate: '₹2,46,000 - ₹6,56,000',
     specialties: ['Soil analysis', 'Contamination testing', 'Remediation'],
     responseTime: '1-2 hours',
     availability: 'Mon-Sun, 8AM-8PM',
@@ -57,7 +57,7 @@ const mockProviders: Provider[] = [
     service: 'Environmental cleanup & waste management',
     rating: 4.7,
     reviews: 203,
-    estimate: '$1,800 - $6,500',
+    estimate: '₹1,48,000 - ₹5,33,000',
     specialties: ['Waste removal', 'Site cleanup', 'Environmental compliance'],
     responseTime: '2-3 hours',
     availability: 'Mon-Fri, 9AM-5PM',
@@ -68,7 +68,7 @@ const mockProviders: Provider[] = [
     service: 'Water purification & testing',
     rating: 4.9,
     reviews: 178,
-    estimate: '$2,200 - $7,000',
+    estimate: '₹1,80,000 - ₹5,74,000',
     specialties: ['Water testing', 'Purification systems', 'Quality assurance'],
     responseTime: '1-2 hours',
     availability: '24/7 Support',
@@ -79,7 +79,7 @@ const mockProviders: Provider[] = [
     service: 'Soil analysis & heavy metal removal',
     rating: 4.5,
     reviews: 95,
-    estimate: '$2,000 - $6,000',
+    estimate: '₹1,64,000 - ₹4,92,000',
     specialties: ['Heavy metal removal', 'Soil testing', 'Certification'],
     responseTime: '3-4 hours',
     availability: 'Mon-Sat, 8AM-6PM',
@@ -90,7 +90,7 @@ const mockProviders: Provider[] = [
     service: 'Noise monitoring & reduction',
     rating: 4.6,
     reviews: 112,
-    estimate: '$800 - $3,000',
+    estimate: '₹65,600 - ₹2,46,000',
     specialties: ['Noise measurement', 'Sound barriers', 'Compliance reports'],
     responseTime: '2-6 hours',
     availability: 'Mon-Sun, 24/7',
@@ -101,7 +101,7 @@ const mockProviders: Provider[] = [
     service: 'Plastic waste & microplastic removal',
     rating: 4.8,
     reviews: 167,
-    estimate: '$1,500 - $4,500',
+    estimate: '₹1,23,000 - ₹3,69,000',
     specialties: ['Microplastic removal', 'Recycling', 'Waste sorting'],
     responseTime: '2-3 hours',
     availability: 'Mon-Sun, 7AM-7PM',
@@ -112,7 +112,7 @@ const mockProviders: Provider[] = [
     service: 'Biological contamination treatment',
     rating: 4.7,
     reviews: 134,
-    estimate: '$2,500 - $7,500',
+    estimate: '₹2,05,000 - ₹6,15,000',
     specialties: ['Bioremediation', 'Enzyme treatment', 'Bacterial cultures'],
     responseTime: '4-6 hours',
     availability: 'Mon-Fri, 9AM-6PM',
@@ -123,7 +123,7 @@ const mockProviders: Provider[] = [
     service: 'Pollution monitoring & detection',
     rating: 4.9,
     reviews: 201,
-    estimate: '$1,200 - $4,000',
+    estimate: '₹98,400 - ₹3,28,000',
     specialties: ['Air quality monitoring', 'Emissions testing', 'Real-time tracking'],
     responseTime: '1-2 hours',
     availability: '24/7 Monitoring',
@@ -134,7 +134,7 @@ const mockProviders: Provider[] = [
     service: 'Air quality improvement & pollution control',
     rating: 4.8,
     reviews: 145,
-    estimate: '$2,000 - $5,500',
+    estimate: '₹1,64,000 - ₹4,51,000',
     specialties: ['Air purification', 'Emission reduction', 'Industrial cleanup'],
     responseTime: '2-4 hours',
     availability: 'Mon-Fri, 8AM-6PM',
@@ -145,7 +145,7 @@ const mockProviders: Provider[] = [
     service: 'Hazardous waste management & disposal',
     rating: 4.7,
     reviews: 189,
-    estimate: '$2,500 - $8,000',
+    estimate: '₹2,05,000 - ₹6,56,000',
     specialties: ['Hazardous waste', 'Safe disposal', 'Documentation'],
     responseTime: '3-5 hours',
     availability: 'Mon-Sun, 24/7',
@@ -156,7 +156,7 @@ const mockProviders: Provider[] = [
     service: 'Water body cleanup & restoration',
     rating: 4.9,
     reviews: 176,
-    estimate: '$3,500 - $10,000',
+    estimate: '₹2,87,000 - ₹8,20,000',
     specialties: ['Water body cleanup', 'Aquatic ecosystem', 'Sediment removal'],
     responseTime: '1-3 hours',
     availability: 'Mon-Sun, 7AM-7PM',
@@ -167,7 +167,7 @@ const mockProviders: Provider[] = [
     service: 'Industrial pollution mitigation',
     rating: 4.6,
     reviews: 128,
-    estimate: '$2,800 - $7,500',
+    estimate: '₹2,30,000 - ₹6,15,000',
     specialties: ['Industrial cleanup', 'Chemical treatment', 'Compliance audit'],
     responseTime: '2-6 hours',
     availability: 'Mon-Fri, 8AM-5PM',
@@ -178,7 +178,7 @@ const mockProviders: Provider[] = [
     service: 'Air pollution monitoring & control',
     rating: 4.8,
     reviews: 152,
-    estimate: '$1,500 - $4,000',
+    estimate: '₹1,23,000 - ₹3,28,000',
     specialties: ['Air monitoring', 'PM2.5 reduction', 'Dust control'],
     responseTime: '1-2 hours',
     availability: '24/7 Monitoring',
@@ -189,7 +189,7 @@ const mockProviders: Provider[] = [
     service: 'Contaminated soil treatment & disposal',
     rating: 4.7,
     reviews: 131,
-    estimate: '$2,200 - $6,800',
+    estimate: '₹1,80,000 - ₹5,58,000',
     specialties: ['Soil treatment', 'Toxin removal', 'Certification'],
     responseTime: '3-4 hours',
     availability: 'Mon-Sat, 9AM-5PM',
@@ -200,7 +200,7 @@ const mockProviders: Provider[] = [
     service: 'Wastewater treatment & recycling',
     rating: 4.9,
     reviews: 198,
-    estimate: '$2,500 - $7,000',
+    estimate: '₹2,05,000 - ₹5,74,000',
     specialties: ['Wastewater treatment', 'Water recycling', 'Quality testing'],
     responseTime: '2-3 hours',
     availability: 'Mon-Sun, 8AM-8PM',
@@ -211,7 +211,7 @@ const mockProviders: Provider[] = [
     service: 'Chemical spill cleanup & remediation',
     rating: 4.8,
     reviews: 167,
-    estimate: '$2,000 - $6,500',
+    estimate: '₹1,64,000 - ₹5,33,000',
     specialties: ['Chemical cleanup', 'Emergency response', 'Decontamination'],
     responseTime: '1-2 hours',
     availability: '24/7 Emergency',
@@ -222,7 +222,7 @@ const mockProviders: Provider[] = [
     service: 'Waste segregation & recycling management',
     rating: 4.6,
     reviews: 114,
-    estimate: '$800 - $3,500',
+    estimate: '₹65,600 - ₹2,87,000',
     specialties: ['Waste sorting', 'Recycling', 'Composting', 'E-waste'],
     responseTime: '3-4 hours',
     availability: 'Mon-Sat, 7AM-6PM',
@@ -233,7 +233,7 @@ const mockProviders: Provider[] = [
     service: 'Organic waste & sewage treatment',
     rating: 4.7,
     reviews: 143,
-    estimate: '$1,800 - $5,500',
+    estimate: '₹1,48,000 - ₹4,51,000',
     specialties: ['Sewage treatment', 'Composting', 'Odor control'],
     responseTime: '2-4 hours',
     availability: 'Mon-Fri, 9AM-6PM',
@@ -244,7 +244,7 @@ const mockProviders: Provider[] = [
     service: 'Comprehensive pollution control & prevention',
     rating: 4.9,
     reviews: 212,
-    estimate: '$3,000 - $9,000',
+    estimate: '₹2,46,000 - ₹7,38,000',
     specialties: ['All pollution types', 'Long-term prevention', 'Consulting'],
     responseTime: '1-2 hours',
     availability: '24/7 Support',
@@ -255,7 +255,7 @@ const mockProviders: Provider[] = [
     service: 'Street & urban area pollution cleanup',
     rating: 4.7,
     reviews: 156,
-    estimate: '$1,200 - $4,800',
+    estimate: '₹98,400 - ₹3,94,000',
     specialties: ['Street cleaning', 'Public area cleanup', 'Dust management'],
     responseTime: '2-3 hours',
     availability: 'Mon-Sun, 6AM-8PM',
@@ -272,7 +272,6 @@ interface AssignmentRecord {
 export default function MarketplacePage() {
   const router = useRouter();
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
-  const [invitedProviders, setInvitedProviders] = useState<number[]>([]);
   const [caseDetails, setCaseDetails] = useState('');
   const [assignedTasks, setAssignedTasks] = useState<AssignmentRecord[]>([]);
   const [showAssignConfirm, setShowAssignConfirm] = useState(false);
@@ -289,15 +288,34 @@ export default function MarketplacePage() {
     router.push('/admin/login');
   };
 
-  const handleInvite = (provider: Provider) => {
-    if (!invitedProviders.includes(provider.id)) {
-      setInvitedProviders([...invitedProviders, provider.id]);
+  const handleAutoAssignAll = () => {
+    if (!caseDetails.trim()) {
+      alert('Please enter case details before assigning tasks');
+      return;
     }
+
+    const newTasks: AssignmentRecord[] = mockProviders.map((provider) => ({
+      providerId: provider.id,
+      providerName: provider.name,
+      timestamp: new Date().toLocaleString(),
+      status: 'assigned',
+    }));
+
+    setAssignedTasks(newTasks);
+    setShowAssignConfirm(true);
+
+    setTimeout(() => setShowAssignConfirm(false), 3000);
   };
 
-  const handleAssignTask = (provider: Provider) => {
+  const handleAssignSingle = (provider: Provider) => {
     if (!caseDetails.trim()) {
       alert('Please enter case details before assigning a task');
+      return;
+    }
+
+    const isAlreadyAssigned = assignedTasks.some((t) => t.providerId === provider.id);
+    if (isAlreadyAssigned) {
+      alert('This provider is already assigned to this case');
       return;
     }
 
@@ -334,15 +352,15 @@ export default function MarketplacePage() {
         {showAssignConfirm && (
           <div className="bg-green-50 border-b border-green-200 px-6 py-3 flex items-center gap-3 text-green-700 animate-pulse">
             <CheckCircle size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">✓ Task assigned successfully! Provider will be notified shortly.</span>
+            <span className="text-sm font-medium">✓ Task(s) assigned successfully! Providers notified.</span>
           </div>
         )}
 
         <div className="flex-1 overflow-auto p-6">
-          <div className="grid grid-cols-4 gap-6">
-            {/* Left: Case details */}
+          <div className="grid grid-cols-3 gap-6">
+            {/* Left: Case details & Task list */}
             <div className="col-span-1">
-              <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4 sticky top-24">
+              <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4 sticky top-24 max-h-[calc(100vh-200px)] overflow-y-auto">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Case Details</h3>
                   <textarea
@@ -352,37 +370,33 @@ export default function MarketplacePage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     rows={6}
                   />
-                  <p className="text-xs text-gray-500 mt-2">Required to assign tasks</p>
+                  <button
+                    onClick={handleAutoAssignAll}
+                    className="w-full mt-3 py-2 px-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition-all"
+                  >
+                    Assign to All Providers
+                  </button>
                 </div>
-
-                {invitedProviders.length > 0 && (
-                  <div>
-                    <p className="text-xs font-semibold text-gray-600 uppercase mb-2">Invitations Sent ({invitedProviders.length})</p>
-                    <div className="space-y-2 max-h-32 overflow-y-auto">
-                      {mockProviders
-                        .filter((p) => invitedProviders.includes(p.id))
-                        .map((p) => (
-                          <div
-                            key={p.id}
-                            className="p-2 rounded-lg bg-blue-50 border border-blue-200 text-xs text-blue-700"
-                          >
-                            📧 {p.name}
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                )}
 
                 {assignedTasks.length > 0 && (
                   <div>
-                    <p className="text-xs font-semibold text-gray-600 uppercase mb-2">Tasks Assigned ({assignedTasks.length})</p>
-                    <div className="space-y-2 max-h-32 overflow-y-auto">
+                    <p className="text-sm font-bold text-gray-900 mb-3">
+                      Assigned Tasks ({assignedTasks.length}/{mockProviders.length})
+                    </p>
+                    <div className="space-y-2">
                       {assignedTasks.map((task, idx) => (
                         <div
                           key={idx}
-                          className="p-2 rounded-lg bg-green-50 border border-green-200 text-xs text-green-700"
+                          className="p-3 rounded-lg bg-green-50 border border-green-200"
                         >
-                          ✓ {task.providerName}
+                          <p className="text-xs font-semibold text-green-800">{task.providerName}</p>
+                          <p className="text-xs text-green-700">Task ID: #{1000 + idx}</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded capitalize font-semibold">
+                              ✓ Assigned
+                            </span>
+                            <span className="text-xs text-green-600">{task.timestamp.split(',')[0]}</span>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -391,97 +405,92 @@ export default function MarketplacePage() {
               </div>
             </div>
 
-            {/* Right: Provider cards */}
-            <div className="col-span-3">
+            {/* Right: Provider cards (2 columns) */}
+            <div className="col-span-2">
               <h2 className="text-lg font-bold text-gray-900 mb-4">Available Service Providers ({mockProviders.length})</h2>
-              <div className="grid grid-cols-4 gap-4">
-                {mockProviders.map((provider) => (
-                  <div
-                    key={provider.id}
-                    className={`bg-white rounded-lg border transition-all cursor-pointer ${
-                      selectedProvider?.id === provider.id
-                        ? 'border-2 shadow-lg border-blue-500'
-                        : 'border-gray-200 hover:shadow-md'
-                    }`}
-                    onClick={() => setSelectedProvider(provider)}
-                  >
-                    <div className="p-3 space-y-2">
-                      <div>
-                        <h3 className="font-semibold text-gray-900 text-xs leading-tight">{provider.name}</h3>
-                        <p className="text-xs text-gray-600">{provider.service}</p>
-                      </div>
+              <div className="grid grid-cols-2 gap-4">
+                {mockProviders.map((provider) => {
+                  const isAssigned = assignedTasks.some((t) => t.providerId === provider.id);
+                  return (
+                    <div
+                      key={provider.id}
+                      className={`bg-white rounded-lg border transition-all cursor-pointer ${
+                        isAssigned
+                          ? 'border-green-500 bg-green-50 shadow-md'
+                          : selectedProvider?.id === provider.id
+                          ? 'border-2 shadow-lg border-blue-500'
+                          : 'border-gray-200 hover:shadow-md'
+                      }`}
+                      onClick={() => setSelectedProvider(provider)}
+                    >
+                      <div className="p-4 space-y-3">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-gray-900 text-sm">{provider.name}</h3>
+                            <p className="text-xs text-gray-600">{provider.service}</p>
+                          </div>
+                          {isAssigned && (
+                            <span className="text-xs bg-green-500 text-white px-2 py-1 rounded font-bold">✓</span>
+                          )}
+                        </div>
 
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center gap-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-3 h-3"
-                              style={{
-                                fill: i < Math.floor(provider.rating) ? '#f59e0b' : '#e5e7eb',
-                                color: i < Math.floor(provider.rating) ? '#f59e0b' : '#e5e7eb',
-                              }}
-                            />
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className="w-3 h-3"
+                                style={{
+                                  fill: i < Math.floor(provider.rating) ? '#f59e0b' : '#e5e7eb',
+                                  color: i < Math.floor(provider.rating) ? '#f59e0b' : '#e5e7eb',
+                                }}
+                              />
+                            ))}
+                          </div>
+                          <span className="text-xs font-semibold text-gray-900">{provider.rating}</span>
+                          <span className="text-xs text-gray-500">({provider.reviews})</span>
+                        </div>
+
+                        <div className="bg-blue-50 rounded p-2">
+                          <p className="text-xs text-gray-600">Est. Cost</p>
+                          <p className="text-sm font-bold text-blue-600">{provider.estimate}</p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-1">
+                          {provider.specialties.slice(0, 2).map((spec) => (
+                            <span
+                              key={spec}
+                              className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700"
+                            >
+                              {spec}
+                            </span>
                           ))}
                         </div>
-                        <span className="text-xs font-semibold text-gray-900">{provider.rating}</span>
-                        <span className="text-xs text-gray-500">({provider.reviews})</span>
-                      </div>
 
-                      <div className="space-y-1">
-                        <div className="bg-blue-50 rounded p-1">
-                          <p className="text-xs text-gray-600">Cost</p>
-                          <p className="text-xs font-bold text-blue-600">{provider.estimate}</p>
-                        </div>
-                        <div className="flex items-center gap-1 text-xs text-gray-600">
-                          <Clock size={12} />
-                          <span>{provider.responseTime}</span>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-0.5">
-                        {provider.specialties.slice(0, 1).map((spec) => (
-                          <span
-                            key={spec}
-                            className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-700"
-                          >
-                            {spec}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="space-y-1 pt-1 border-t border-gray-200">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleInvite(provider);
+                            handleAssignSingle(provider);
                           }}
-                          disabled={invitedProviders.includes(provider.id)}
-                          className="w-full py-1.5 px-2 rounded text-white font-medium text-xs transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-1"
+                          disabled={isAssigned}
+                          className="w-full py-2 px-3 rounded-lg text-white font-semibold text-xs transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                           style={{
-                            backgroundColor: invitedProviders.includes(provider.id) ? '#16a34a' : '#3b82f6',
+                            backgroundColor: isAssigned ? '#16a34a' : '#8b5cf6',
                           }}
                         >
-                          {invitedProviders.includes(provider.id) ? (
-                            <>✓</>
+                          {isAssigned ? (
+                            <>✓ Assigned</>
                           ) : (
-                            <>📧</>
+                            <>
+                              <CheckCircle className="w-3 h-3" />
+                              Assign Task
+                            </>
                           )}
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleAssignTask(provider);
-                          }}
-                          className="w-full py-1.5 px-2 rounded bg-purple-500 hover:bg-purple-600 text-white font-medium text-xs transition-all flex items-center justify-center gap-1"
-                        >
-                          <CheckCircle className="w-3 h-3" />
-                          Assign
                         </button>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
