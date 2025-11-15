@@ -1,0 +1,13 @@
+id,lat,lng,category,severity,note,reporter,date,zone,upvotes,verified
+101,12.9716,77.5946,Damaged turf / turf runoff,High,Blackish runoff after weekend game. Fibres visible.,Anita R.,2025-10-12T08:30:00Z,Zone P1,12,true
+102,12.9719,77.5950,Stagnant water,Medium,Stagnant pool near drainage mosquitoes.,Ravi K.,2025-10-11T09:05:00Z,Zone P1,8,true
+103,12.9725,77.5938,Plastic / microplastics,High,Plastic-rich sediment near roadside patch.,School PTA,2025-10-09T16:20:00Z,Zone C2,15,false
+104,12.9700,77.5940,Soil contamination,Low,Dark residue but not sure if harmful.,Jogger,2025-10-15T06:10:00Z,Zone S3,3,false
+105,12.9730,77.5960,Waste dumping,Medium,Household waste dumped behind wall.,Neighbourhood Watch,2025-10-05T12:00:00Z,Zone W1,6,true
+106,12.9705,77.5935,Damaged turf / turf runoff,Medium,Brown patches spreading across practice field.,Sports Coach,2025-10-14T14:45:00Z,Zone P2,5,true
+107,12.9740,77.5955,Stagnant water,High,Large stagnant pool with algae bloom foul smell.,Local Resident,2025-10-13T11:20:00Z,Zone W2,18,false
+108,12.9715,77.5965,Plastic / microplastics,Medium,Microplastics in soil near construction site.,Environmental NGO,2025-10-10T10:30:00Z,Zone C3,9,true
+109,12.9710,77.5920,Waste dumping,High,Dumped industrial containers near residential area.,Concerned Citizen,2025-10-08T13:15:00Z,Zone W3,20,false
+110,12.9745,77.5945,Soil contamination,High,Chemical smell detected soil discoloration.,Lab Assistant,2025-10-07T09:00:00Z,Zone S1,14,true
+111,12.9695,77.5955,Damaged turf / turf runoff,Low,Minor yellowing on edges may recover with rain.,Groundskeeper,2025-10-16T07:30:00Z,Zone P3,2,false
+112,12.9735,77.5930,Other,Low,Unusual discoloration unsure of cause.,Park Visitor,2025-10-06T15:40:00Z,Zone O1,1,false

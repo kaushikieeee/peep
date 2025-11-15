@@ -1,0 +1,257 @@
+[00:00:00.864] Server  LOG      ✓ Ready in 525ms
+[00:00:06.765] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:06.765] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/dashboard","route":"/admin/dashboard"}
+[00:00:06.765] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/admin/dashboard","o":"http://localhost:3000/admin/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170508110}
+[00:00:07.105] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:00:07.106] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:00:07.106] Browser LOG     [LiveMap] Style loaded
+[00:00:07.106] Browser LOG     [LiveMap] Style loaded
+[00:00:07.106] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:00:07.106] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:00:07.106] Browser LOG     [LiveMap] Map loaded successfully
+[00:00:07.106] Browser LOG     [LiveMap] Map loaded successfully
+[00:00:32.021] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:32.021] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:32.021] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170533346}
+[00:00:32.216] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:00:32.216] Browser LOG     [MapPage] Fetching reports from API...
+[00:00:32.216] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:00:32.216] Browser LOG     [MapPage] Fetching reports from API...
+[00:00:32.216] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/user color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user","o":"http://localhost:3000/peep/user","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170533518}
+[00:00:32.216] Browser LOG     [LiveMap] Style loaded
+[00:00:32.216] Browser LOG     [LiveMap] Style loaded
+[00:00:32.216] Browser LOG     [MapPage] Loaded reports: 21
+[00:00:32.216] Browser LOG     [MapPage] Loaded reports: 21
+[00:00:33.031] Browser LOG     [LiveMap] Map loaded successfully
+[00:00:33.032] Browser LOG     [LiveMap] Map loaded successfully
+[00:00:35.004] Browser LOG     [LiveMap] Got user location: [77.0202870084748,11.013560913586264]
+[00:00:35.004] Browser LOG     [LiveMap] Got user location: [77.0202870084748,11.013560913586264]
+[00:00:35.004] Browser LOG     [LiveMap] Adding 21 markers
+[00:00:49.646] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:00:49.646] Browser LOG     [MapPage] Fetching reports from API...
+[00:00:49.646] Browser LOG     [MapPage] Loaded reports: 21
+[00:00:49.646] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:49.646] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/user","route":"/peep/user"}
+[00:00:49.646] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/user color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user","o":"http://localhost:3000/peep/user","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170550986}
+[00:00:51.219] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:51.219] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:00:51.220] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170552566}
+[00:02:08.813] Browser LOG     [LiveMap] Adding 21 markers
+[00:02:09.150] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:09.150] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:09.150] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170630489}
+[00:02:25.316] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:25.316] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:25.316] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170646654}
+[00:02:26.118] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:26.118] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:26.118] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170647457}
+[00:02:26.381] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:26.381] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:26.381] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170647721}
+[00:02:26.614] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:26.614] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:26.614] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170647952}
+[00:02:26.858] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:26.858] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:26.858] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170648197}
+[00:02:27.171] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:27.171] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:27.171] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170648510}
+[00:02:27.441] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:27.441] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:27.441] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170648780}
+[00:02:27.650] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:27.650] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:27.650] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170648989}
+[00:02:27.996] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:27.996] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:27.996] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170649335}
+[00:02:30.301] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:30.301] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:30.301] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170651640}
+[00:02:30.914] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:30.914] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[00:02:30.914] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170652253}
+[00:02:34.207] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:34.208] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/dashboard","route":"/admin/dashboard"}
+[00:02:34.208] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/dashboard?id=6c544d53-16e6-4b36-86f4-ccf853963fc5&vscodeBrowserReqId=1763170655056 color: rgb(120, 120, 120) color: inherit {"dp":"/admin/dashboard","o":"http://localhost:3000/admin/dashboard?id=6c544d53-16e6-4b36-86f4-ccf853963fc5&vscodeBrowserReqId=1763170655056","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170655362}
+[00:02:34.208] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:02:34.208] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:02:34.208] Browser LOG     [LiveMap] Style loaded
+[00:02:34.208] Browser LOG     [LiveMap] Style loaded
+[00:02:34.208] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:02:34.208] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:02:34.208] Browser LOG     [LiveMap] Map loaded successfully
+[00:02:34.208] Browser LOG     [LiveMap] Map loaded successfully
+[00:03:06.891] Browser LOG     [LiveMap] Adding 21 markers
+[00:03:07.125] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/admin/dashboard","o":"http://localhost:3000/admin/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170688353}
+[00:03:07.125] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:03:07.125] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:03:07.125] Browser LOG     [LiveMap] Style loaded
+[00:03:07.125] Browser LOG     [LiveMap] Style loaded
+[00:03:07.325] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/login color: rgb(120, 120, 120) color: inherit {"dp":"/admin/login","o":"http://localhost:3000/admin/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170688663}
+[00:03:07.574] Browser LOG     [LiveMap] Map loaded successfully
+[00:03:07.574] Browser LOG     [LiveMap] Map loaded successfully
+[00:03:12.666] Browser LOG     [LiveMap] Got user location: [77.0202870084748,11.013560913586264]
+[00:03:12.666] Browser LOG     [LiveMap] Got user location: [77.0202870084748,11.013560913586264]
+[00:03:24.506] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/admin/dashboard","o":"http://localhost:3000/admin/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170705793}
+[00:03:24.506] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:03:24.506] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:03:24.958] Browser LOG     [LiveMap] Style loaded
+[00:03:24.958] Browser LOG     [LiveMap] Style loaded
+[00:03:24.958] Browser LOG     [LiveMap] Got user location: [77.0202870084748,11.013560913586264]
+[00:03:24.958] Browser LOG     [LiveMap] Got user location: [77.0202870084748,11.013560913586264]
+[00:03:24.958] Browser LOG     [LiveMap] Map loaded successfully
+[00:03:25.061] Browser LOG     [LiveMap] Map loaded successfully
+[00:03:30.462] Browser LOG     [LiveMap] Adding 21 markers
+[00:03:30.845] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/evidence color: rgb(120, 120, 120) color: inherit {"dp":"/admin/evidence","o":"http://localhost:3000/admin/evidence","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170712182}
+[00:03:34.900] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:03:34.900] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/zones","route":"/admin/zones"}
+[00:03:34.900] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/zones color: rgb(120, 120, 120) color: inherit {"dp":"/admin/zones","o":"http://localhost:3000/admin/zones","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170716238}
+[00:03:46.564] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:03:46.564] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/forwarding","route":"/admin/forwarding"}
+[00:03:46.564] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/forwarding color: rgb(120, 120, 120) color: inherit {"dp":"/admin/forwarding","o":"http://localhost:3000/admin/forwarding","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170727901}
+[00:03:56.894] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:03:56.894] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/marketplace","route":"/admin/marketplace"}
+[00:03:56.894] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/marketplace color: rgb(120, 120, 120) color: inherit {"dp":"/admin/marketplace","o":"http://localhost:3000/admin/marketplace","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170738232}
+[00:04:06.443] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:04:06.443] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/settings","route":"/admin/settings"}
+[00:04:06.443] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170747780}
+[00:04:30.283] Server  LOG      ✓ Compiled in 11ms
+[00:04:31.494] Browser LOG     [LiveMap] Adding 21 markers
+[00:04:31.682] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:04:31.682] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/settings","route":"/admin/settings"}
+[00:04:31.682] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170773019}
+[00:05:02.740] Browser LOG     [LiveMap] Adding 21 markers
+[00:05:03.257] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:05:03.257] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/settings","route":"/admin/settings"}
+[00:05:03.257] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170804593}
+[00:05:20.754] Server  LOG      ✓ Compiled in 5ms
+[00:05:22.077] Browser LOG     [LiveMap] Adding 21 markers
+[00:05:22.208] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:05:22.208] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/settings","route":"/admin/settings"}
+[00:05:22.208] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170823543}
+[00:05:41.431] Browser LOG     [LiveMap] Adding 21 markers
+[00:05:53.245] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:05:53.246] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:05:53.246] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/zones color: rgb(120, 120, 120) color: inherit {"dp":"/admin/zones","o":"http://localhost:3000/admin/zones","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170854560}
+[00:05:53.246] Browser LOG     [LiveMap] Style loaded
+[00:05:53.246] Browser LOG     [LiveMap] Style loaded
+[00:05:53.809] Browser LOG     [LiveMap] Map loaded successfully
+[00:05:53.809] Browser LOG     [LiveMap] Map loaded successfully
+[00:05:55.260] Browser LOG     [LiveMap] Got user location: [77.02027889740877,11.013577430608311]
+[00:05:55.260] Browser LOG     [LiveMap] Got user location: [77.02027889740877,11.013577430608311]
+[00:05:56.479] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/forwarding color: rgb(120, 120, 120) color: inherit {"dp":"/admin/forwarding","o":"http://localhost:3000/admin/forwarding","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170857813}
+[00:05:58.161] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/marketplace color: rgb(120, 120, 120) color: inherit {"dp":"/admin/marketplace","o":"http://localhost:3000/admin/marketplace","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170859495}
+[00:05:59.513] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:05:59.513] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:05:59.513] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/zones color: rgb(120, 120, 120) color: inherit {"dp":"/admin/zones","o":"http://localhost:3000/admin/zones","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763170860636}
+[00:05:59.513] Browser LOG     [LiveMap] Got user location: [77.02027889740877,11.013577430608311]
+[00:05:59.513] Browser LOG     [LiveMap] Got user location: [77.02027889740877,11.013577430608311]
+[00:05:59.513] Browser LOG     [LiveMap] Style loaded
+[00:05:59.513] Browser LOG     [LiveMap] Style loaded
+[00:05:59.513] Browser LOG     [LiveMap] Map loaded successfully
+[00:05:59.513] Browser LOG     [LiveMap] Adding 21 markers
+[00:05:59.513] Browser LOG     [LiveMap] Map loaded successfully
+[00:06:01.988] Browser LOG     [LiveMap] Adding 21 markers
+[00:06:03.124] Browser LOG     [LiveMap] Adding 21 markers
+[00:06:03.288] Browser LOG     [LiveMap] Adding 21 markers
+[00:28:23.934] Server  WARN     ⚠ Cross origin request detected from 192.168.29.9 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+[00:28:25.842] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:25.842] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:28:25.842] Browser LOG     [MapPage] Fetching reports from API...
+[00:28:25.843] Browser LOG     [LiveMap] Style loaded
+[00:28:25.843] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:28:25.843] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:28:25.843] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/user/map","route":"/peep/user/map"}
+[00:28:25.843] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user/map color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user/map","o":"http://192.168.29.9:3000/peep/user/map","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763172207401}
+[00:28:25.965] Browser LOG     [MapPage] Loaded reports: 21
+[00:28:27.325] Browser LOG     [LiveMap] Map loaded successfully
+[00:49:16.239] Server  LOG      ✓ Compiled in 472ms
+[00:50:41.909] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/admin/dashboard","o":"http://localhost:3000/admin/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173543020}
+[00:50:41.909] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:50:41.909] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:50:41.909] Browser LOG     [LiveMap] Style loaded
+[00:50:41.910] Browser LOG     [LiveMap] Style loaded
+[00:50:41.910] Browser LOG     [LiveMap] Got user location: [77.02026903718438,11.013622177334936]
+[00:50:41.910] Browser LOG     [LiveMap] Got user location: [77.02026903718438,11.013622177334936]
+[00:50:42.099] Browser LOG     [LiveMap] Map loaded successfully
+[00:50:42.099] Browser LOG     [LiveMap] Map loaded successfully
+[00:52:45.287] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:52:45.287] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/dashboard","route":"/admin/dashboard"}
+[00:52:45.287] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/admin/dashboard","o":"http://localhost:3000/admin/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173666521}
+[00:52:45.287] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:52:45.287] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:52:45.642] Browser LOG     [LiveMap] Style loaded
+[00:52:45.642] Browser LOG     [LiveMap] Style loaded
+[00:52:45.833] Browser LOG     [LiveMap] Map loaded successfully
+[00:52:45.833] Browser LOG     [LiveMap] Map loaded successfully
+[00:52:48.646] Browser LOG     [LiveMap] Got user location: [77.02026903718438,11.013622177334936]
+[00:52:48.646] Browser LOG     [LiveMap] Got user location: [77.02026903718438,11.013622177334936]
+[00:52:51.123] Browser LOG     [LiveMap] Adding 21 markers
+[00:52:51.241] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/evidence color: rgb(120, 120, 120) color: inherit {"dp":"/admin/evidence","o":"http://localhost:3000/admin/evidence","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173672498}
+[00:52:55.971] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:52:55.971] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/evidence","route":"/admin/evidence"}
+[00:52:55.971] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/evidence color: rgb(120, 120, 120) color: inherit {"dp":"/admin/evidence","o":"http://localhost:3000/admin/evidence","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173677229}
+[00:54:00.812] Server  LOG      ✓ Compiled in 179ms
+[00:54:16.081] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:54:16.081] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:54:16.081] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/zones color: rgb(120, 120, 120) color: inherit {"dp":"/admin/zones","o":"http://localhost:3000/admin/zones","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173757305}
+[00:54:16.081] Browser LOG     [LiveMap] Style loaded
+[00:54:16.081] Browser LOG     [LiveMap] Style loaded
+[00:54:16.653] Browser LOG     [LiveMap] Map loaded successfully
+[00:54:16.653] Browser LOG     [LiveMap] Map loaded successfully
+[00:54:17.774] Browser LOG     [LiveMap] Got user location: [77.02028603088428,11.013574150507424]
+[00:54:17.774] Browser LOG     [LiveMap] Got user location: [77.02028603088428,11.013574150507424]
+[00:54:25.900] Browser LOG     [LiveMap] Adding 21 markers
+[00:54:29.172] Browser LOG     Clicked pin: {"category":"Plastic Waste - Microplastics in Soil","id":220,"lat":11.0405,"lng":77.0305,"note":"High concentration of microplastics detected in farm soil","severity":"Medium"}
+[00:54:29.758] Browser LOG     Clicked pin: {"category":"Plastic Waste - Microplastics in Soil","id":220,"lat":11.0405,"lng":77.0305,"note":"High concentration of microplastics detected in farm soil","severity":"Medium"}
+[00:54:30.971] Browser LOG     Clicked pin: {"category":"Soil Contamination - Industrial Waste","id":203,"lat":11.0405,"lng":77.028,"note":"Chemical drums leaked into soil near residential area","severity":"High"}
+[00:54:31.689] Browser LOG     Clicked pin: {"category":"Soil Contamination - Industrial Waste","id":203,"lat":11.0405,"lng":77.028,"note":"Chemical drums leaked into soil near residential area","severity":"High"}
+[00:54:32.991] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/forwarding color: rgb(120, 120, 120) color: inherit {"dp":"/admin/forwarding","o":"http://localhost:3000/admin/forwarding","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173774245}
+[00:54:37.321] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/marketplace color: rgb(120, 120, 120) color: inherit {"dp":"/admin/marketplace","o":"http://localhost:3000/admin/marketplace","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173778575}
+[00:54:39.804] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/admin/dashboard","o":"http://localhost:3000/admin/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173780872}
+[00:54:39.804] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:54:39.804] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:54:39.804] Browser LOG     [LiveMap] Got user location: [77.02028603088428,11.013574150507424]
+[00:54:39.804] Browser LOG     [LiveMap] Got user location: [77.02028603088428,11.013574150507424]
+[00:54:39.804] Browser LOG     [LiveMap] Style loaded
+[00:54:39.804] Browser LOG     [LiveMap] Style loaded
+[00:54:39.804] Browser LOG     [LiveMap] Map loaded successfully
+[00:54:39.804] Browser LOG     [LiveMap] Map loaded successfully
+[00:54:53.572] Browser LOG     [LiveMap] Adding 21 markers
+[00:54:53.710] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/evidence color: rgb(120, 120, 120) color: inherit {"dp":"/admin/evidence","o":"http://localhost:3000/admin/evidence","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173794964}
+[00:56:26.680] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:56:26.680] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/evidence","route":"/admin/evidence"}
+[00:56:26.680] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/evidence?id=6c544d53-16e6-4b36-86f4-ccf853963fc5&vscodeBrowserReqId=1763173887505 color: rgb(120, 120, 120) color: inherit {"dp":"/admin/evidence","o":"http://localhost:3000/admin/evidence?id=6c544d53-16e6-4b36-86f4-ccf853963fc5&vscodeBrowserReqId=1763173887505","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763173887931}
+[00:58:38.772] Server  LOG      ✓ Compiled in 185ms
+[00:58:47.880] Server  LOG      ✓ Compiled in 121ms
+[00:58:57.578] Server  LOG      ✓ Compiled in 134ms
+[00:59:08.241] Server  LOG      ✓ Compiled in 215ms
+[00:59:23.413] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:59:23.413] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/evidence","route":"/admin/evidence"}
+[00:59:23.413] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/evidence color: rgb(120, 120, 120) color: inherit {"dp":"/admin/evidence","o":"http://localhost:3000/admin/evidence","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763174064662}
+[01:00:20.490] Browser LOG     [LiveMap] Initializing Maplibre GL
+[01:00:20.490] Browser LOG     [LiveMap] Initializing Maplibre GL
+[01:00:20.490] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/zones color: rgb(120, 120, 120) color: inherit {"dp":"/admin/zones","o":"http://localhost:3000/admin/zones","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763174121348}
+[01:00:20.490] Browser LOG     [LiveMap] Style loaded
+[01:00:20.490] Browser LOG     [LiveMap] Style loaded
+[01:00:20.786] Browser LOG     [LiveMap] Map loaded successfully
+[01:00:20.786] Browser LOG     [LiveMap] Map loaded successfully
+[01:00:21.990] Browser LOG     [LiveMap] Got user location: [77.02025988697316,11.013577295958228]
+[01:00:21.990] Browser LOG     [LiveMap] Got user location: [77.02025988697316,11.013577295958228]
+[01:01:24.831] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:01:25.455] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:01:25.455] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/admin","route":"/peep/admin"}
+[01:01:25.455] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/admin color: rgb(120, 120, 120) color: inherit {"dp":"/peep/admin","o":"http://localhost:3000/peep/admin","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763174186349}
+[01:01:25.455] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/admin/dashboard","o":"http://localhost:3000/admin/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763174186351}
+[01:01:25.455] Browser LOG     [LiveMap] Initializing Maplibre GL
+[01:01:25.455] Browser LOG     [LiveMap] Initializing Maplibre GL
+[01:01:25.455] Browser LOG     [LiveMap] Style loaded
+[01:01:25.455] Browser LOG     [LiveMap] Style loaded
+[01:01:25.455] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/login color: rgb(120, 120, 120) color: inherit {"dp":"/admin/login","o":"http://localhost:3000/admin/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763174186654}
+[01:01:25.630] Browser LOG     [LiveMap] Map loaded successfully
+[01:01:25.630] Browser LOG     [LiveMap] Map loaded successfully
+[01:01:27.118] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location

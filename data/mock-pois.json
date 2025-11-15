@@ -1,0 +1,12 @@
+[
+  { "name": "School Gate", "lat": 12.9716, "lng": 77.5946, "zone": "Zone P1" },
+  { "name": "Park North", "lat": 12.9740, "lng": 77.5955, "zone": "Zone W2" },
+  { "name": "Sports Field", "lat": 12.9705, "lng": 77.5935, "zone": "Zone P2" },
+  { "name": "Drainage Area", "lat": 12.9719, "lng": 77.5950, "zone": "Zone P1" },
+  { "name": "Construction Site", "lat": 12.9715, "lng": 77.5965, "zone": "Zone C3" },
+  { "name": "Residential Corner", "lat": 12.9710, "lng": 77.5920, "zone": "Zone W3" },
+  { "name": "Industrial Zone", "lat": 12.9745, "lng": 77.5945, "zone": "Zone S1" },
+  { "name": "Local Market", "lat": 12.9695, "lng": 77.5955, "zone": "Zone P3" },
+  { "name": "Park South", "lat": 12.9735, "lng": 77.5930, "zone": "Zone O1" },
+  { "name": "Walking Trail", "lat": 12.9725, "lng": 77.5938, "zone": "Zone C2" }
+]
