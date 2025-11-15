@@ -338,24 +338,14 @@ function LiveMap({ pins, onPinClick }) {
                         markerEl.style.letterSpacing = '-0.3em';
                         markerEl.style.fontSize = '20px';
                     }
-                    // Add popup
-                    const popup = new __TURBOPACK__imported__module__$5b$project$5d2f$Downloads$2f$code$2f$node_modules$2f2e$pnpm$2f$maplibre$2d$gl$40$5$2e$13$2e$0$2f$node_modules$2f$maplibre$2d$gl$2f$dist$2f$maplibre$2d$gl$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].Popup({
-                        offset: 25
-                    }).setHTML(`
-        <div style="min-width: 150px;">
-          <p style="font-weight: bold; margin: 0 0 5px 0;">Case #${pin.id}</p>
-          <p style="font-size: 12px; color: #666; margin: 0 0 5px 0;">${pin.category}</p>
-          <p style="font-size: 12px; color: #333; margin: 0;">${pin.note || 'No details'}</p>
-        </div>
-      `);
-                    // Create marker
+                    // Create marker (without popup - use card instead)
                     const marker = new __TURBOPACK__imported__module__$5b$project$5d2f$Downloads$2f$code$2f$node_modules$2f2e$pnpm$2f$maplibre$2d$gl$40$5$2e$13$2e$0$2f$node_modules$2f$maplibre$2d$gl$2f$dist$2f$maplibre$2d$gl$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].Marker({
                         element: markerEl
                     }).setLngLat([
                         pin.lng,
                         pin.lat
-                    ]).setPopup(popup).addTo(map.current);
-                    // Add click handler
+                    ]).addTo(map.current);
+                    // Add click handler to show card
                     markerEl.addEventListener('click', {
                         "LiveMap.useEffect": ()=>{
                             onPinClick?.(pin);
@@ -444,12 +434,12 @@ function LiveMap({ pins, onPinClick }) {
             }
         }, void 0, false, {
             fileName: "[project]/Downloads/code/components/peep/live-map.tsx",
-            lineNumber: 221,
+            lineNumber: 211,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/Downloads/code/components/peep/live-map.tsx",
-        lineNumber: 220,
+        lineNumber: 210,
         columnNumber: 5
     }, this);
 }
