@@ -141,22 +141,12 @@ export default function LiveMap({ pins, onPinClick }: LiveMapProps) {
         markerEl.style.fontSize = '20px';
       }
 
-      // Add popup
-      const popup = new maplibregl.Popup({ offset: 25 }).setHTML(`
-        <div style="min-width: 150px;">
-          <p style="font-weight: bold; margin: 0 0 5px 0;">Case #${pin.id}</p>
-          <p style="font-size: 12px; color: #666; margin: 0 0 5px 0;">${pin.category}</p>
-          <p style="font-size: 12px; color: #333; margin: 0;">${pin.note || 'No details'}</p>
-        </div>
-      `);
-
-      // Create marker
+      // Create marker (without popup - use card instead)
       const marker = new maplibregl.Marker({ element: markerEl })
         .setLngLat([pin.lng, pin.lat])
-        .setPopup(popup)
         .addTo(map.current!);
 
-      // Add click handler
+      // Add click handler to show card
       markerEl.addEventListener('click', () => {
         onPinClick?.(pin);
       });
