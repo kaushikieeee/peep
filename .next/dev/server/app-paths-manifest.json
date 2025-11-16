@@ -1,6 +1,6 @@
 {
+  "/admin/evidence/page": "app/admin/evidence/page.js",
   "/api/data/reports/route": "app/api/data/reports/route.js",
   "/api/evidence/route": "app/api/evidence/route.js",
-  "/peep/user/map/page": "app/peep/user/map/page.js",
-  "/peep/user/page": "app/peep/user/page.js"
+  "/peep/user/map/page": "app/peep/user/map/page.js"
 }
