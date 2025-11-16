@@ -70,10 +70,11 @@ export default function SelectCategoryPage() {
             <button
               key={category}
               onClick={() => handleSelect(category)}
-              className="w-full p-3 rounded-lg border-2 text-left font-medium transition-all text-white"
+              className="w-full p-3 rounded-lg border-2 text-left font-medium transition-all"
               style={{
                 borderColor: selected === category ? 'var(--peep-primary)' : 'rgba(255, 255, 255, 0.2)',
                 backgroundColor: selected === category ? 'rgba(74, 150, 110, 0.25)' : 'rgba(255, 255, 255, 0.03)',
+                color: 'rgb(255, 255, 255)',
               }}
             >
               {category}
