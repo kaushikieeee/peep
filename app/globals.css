@@ -167,18 +167,3 @@ html {
   --foreground: #ffffff;
 }
 
-/* Override ALL text colors including Tailwind classes */
-:is(p, span, label, div, button, a, h1, h2, h3, h4, h5, h6)[class*="text-gray"],
-:is(p, span, label, div, button, a, h1, h2, h3, h4, h5, h6)[class*="text-"] {
-  color: #ffffff !important;
-}
-
-/* Force white on every element with text */
-* {
-  color: inherit !important;
-}
-
-body, body * {
-  color: #ffffff !important;
-}
-
