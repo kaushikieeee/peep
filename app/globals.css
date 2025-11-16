@@ -167,3 +167,8 @@ html {
   --foreground: #ffffff;
 }
 
+/* Override all gray text to white */
+p, span, label, div, button, a, h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+}
+
