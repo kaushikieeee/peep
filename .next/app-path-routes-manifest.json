@@ -18,6 +18,7 @@
   "/page": "/",
   "/peep/admin/page": "/peep/admin",
   "/peep/user/map/page": "/peep/user/map",
+  "/peep/user/new-report/page": "/peep/user/new-report",
   "/peep/user/page": "/peep/user",
   "/peep/user/profile/page": "/peep/user/profile",
   "/peep/user/report-flow/add-title/page": "/peep/user/report-flow/add-title",

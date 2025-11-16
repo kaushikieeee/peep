@@ -250,14 +250,13 @@ export default function MapPage() {
 
       {/* Start Report Button - Fixed at bottom */}
       <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 z-40 transition-all duration-300 ${showReportSheet ? 'translate-y-full' : 'translate-y-0'}`}>
-        <button
-          onClick={() => setShowReportSheet(true)}
-          className="w-full py-3 px-6 rounded-2xl font-bold text-white shadow-lg transition-all active:scale-95"
+        <Link
+          href="/peep/user/new-report"
+          className="w-full py-3 px-6 rounded-2xl font-bold text-white shadow-lg transition-all active:scale-95 block text-center"
           style={{ backgroundColor: 'var(--peep-primary)' }}
-          aria-label="Start a new pollution report"
         >
           Start Report
-        </button>
+        </Link>
       </div>
 
       {/* Reporting Sheet */}

@@ -18,6 +18,7 @@
   "/page": "app/page.js",
   "/peep/admin/page": "app/peep/admin/page.js",
   "/peep/user/map/page": "app/peep/user/map/page.js",
+  "/peep/user/new-report/page": "app/peep/user/new-report/page.js",
   "/peep/user/page": "app/peep/user/page.js",
   "/peep/user/profile/page": "app/peep/user/profile/page.js",
   "/peep/user/report-flow/add-title/page": "app/peep/user/report-flow/add-title/page.js",

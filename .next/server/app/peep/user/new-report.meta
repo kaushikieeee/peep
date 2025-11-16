@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/peep/layout,_N_T_/peep/user/layout,_N_T_/peep/user/new-report/layout,_N_T_/peep/user/new-report/page,_N_T_/peep/user/new-report"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/peep/user/new-report/__PAGE__",
+    "/peep/user/new-report",
+    "/peep/user",
+    "/peep",
+    "/_index",
+    "/_head"
+  ]
+}

@@ -15,23 +15,5 @@
    - Environments: .env.local
 
  ✓ Starting...
- ✓ Ready in 353ms
-[Evidence Submit] Received request: {
-  lat: 12.9716,
-  lng: 77.5946,
-  category: 'Test Category',
-  severity: 'Medium',
-  hasImages: false,
-  imageCount: 0,
-  reporter: 'Curl Tester'
-}
-✓ Evidence saved to Google Sheets: {
-  id: 'E1763261875398',
-  reporter: 'Curl Tester',
-  category: 'Test Category',
-  severity: 'Medium',
-  hasImage: false,
-  lat: 12.9716,
-  lng: 77.5946
-}
- POST /api/evidence/submit 201 in 3.6s (compile: 2.5s, render: 1154ms)
+ ✓ Ready in 345ms
+ GET /peep/user/new-report 200 in 1250ms (compile: 1143ms, render: 107ms)
