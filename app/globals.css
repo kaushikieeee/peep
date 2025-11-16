@@ -167,8 +167,3 @@ html {
   --foreground: #ffffff;
 }
 
-/* Override gray text to white (but not colored elements like severity buttons) */
-[class*="text-gray"] {
-  color: #ffffff !important;
-}
-

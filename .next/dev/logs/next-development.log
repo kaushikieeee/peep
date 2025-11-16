@@ -227,3 +227,4 @@ Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allow
 [01:08:40.420] Browser LOG     [LiveMap] Adding 0 markers
 [01:08:40.522] Browser LOG     [MapPage] Loaded reports: 0
 [01:08:40.522] Browser LOG     [LiveMap] Adding 0 markers
+[01:13:00.558] Server  LOG      ✓ Compiled in 652ms
