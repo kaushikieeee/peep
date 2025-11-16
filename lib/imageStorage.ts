@@ -1,84 +1,70 @@
 'use server';
 
 /**
- * Image Storage Solution: Cloudinary API (Free, Fast, Reliable)
+ * Image Storage Solution: ImgBB API (Free, 32MB limit)
  * 
- * Setup (2 minutes):
- * 1. Go to https://cloudinary.com/users/register/free
- * 2. Sign up (free account, no credit card)
- * 3. Copy your Cloud Name
- * 4. Add to .env.local: NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
+ * Setup:
+ * 1. Get API key: b6632d88e03b63947083f55f13930ff6
+ * 2. Add to .env.local: NEXT_PUBLIC_IMGBB_API_KEY=b6632d88e03b63947083f55f13930ff6
  * 
  * Images upload automatically when users submit evidence
  */
 
 /**
- * Upload image to Cloudinary (unsigned upload)
- * Uses an unsigned upload preset for client-side uploads without API key exposure
+ * Upload image to ImgBB
  * Returns the image URL or base64 if upload fails
  */
-async function uploadToCloudinary(base64Image: string): Promise<string> {
+async function uploadToImgBB(base64Image: string): Promise<string> {
   try {
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
 
-    // If no Cloudinary config, return base64 (fallback)
-    if (!cloudName) {
-      console.log('Cloudinary not configured, storing image as base64');
+    // If no ImgBB config, return base64 (fallback)
+    if (!apiKey) {
+      console.log('ImgBB not configured, storing image as base64');
       return base64Image;
     }
 
-    // Create FormData from base64
-    const formData = new FormData();
-    
-    // Convert base64 to Blob
+    // Remove data URL prefix
     const base64Data = base64Image.replace(/^data:image\/\w+;base64,/, '');
-    const binaryString = atob(base64Data);
-    const bytes = new Uint8Array(binaryString.length);
-    for (let i = 0; i < binaryString.length; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
-    const blob = new Blob([bytes], { type: 'image/jpeg' });
+
+    // Create FormData
+    const formData = new FormData();
+    formData.append('key', apiKey);
+    formData.append('image', base64Data);
+    formData.append('name', `evidence_${Date.now()}`);
     
-    // Generate unique public ID: evidence_[timestamp]_[random]
-    const publicId = `evidence_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
-    // Append to form
-    formData.append('file', blob);
-    formData.append('upload_preset', 'peep_evidence');
-    formData.append('public_id', publicId); // Use generated public ID
-    formData.append('unique_filename', 'false'); // Disable unique suffix
-    
-    // Upload to Cloudinary
-    const uploadResponse = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
+    // Upload to ImgBB
+    const uploadResponse = await fetch('https://api.imgbb.com/1/upload', {
+      method: 'POST',
+      body: formData,
+    });
 
     if (!uploadResponse.ok) {
-      console.warn('Cloudinary upload failed:', uploadResponse.status);
+      console.warn('ImgBB upload failed:', uploadResponse.status);
       return base64Image;
     }
 
     const data = await uploadResponse.json();
-    if (data.secure_url) {
-      console.log('✓ Image uploaded to Cloudinary:', data.secure_url);
-      console.log('  Public ID:', data.public_id);
-      return data.secure_url;
+    
+    if (data.success && data.data?.url) {
+      console.log('✓ Image uploaded to ImgBB:', data.data.url);
+      return data.data.url;
+    }
+
+    if (data.error) {
+      console.warn('ImgBB error:', data.error.message);
     }
 
     return base64Image;
   } catch (error) {
-    console.warn('Error uploading to Cloudinary, falling back to base64:', error);
+    console.warn('Error uploading to ImgBB, falling back to base64:', error);
     return base64Image;
   }
 }
 
 /**
  * Process image for submission
- * Tries Cloudinary first, falls back to base64
+ * Tries ImgBB first, falls back to base64
  */
 export async function processImageForSubmission(base64Image: string | null): Promise<string[]> {
   if (!base64Image) {
@@ -86,7 +72,7 @@ export async function processImageForSubmission(base64Image: string | null): Pro
   }
 
   try {
-    const imageUrl = await uploadToCloudinary(base64Image);
+    const imageUrl = await uploadToImgBB(base64Image);
     return [imageUrl];
   } catch (error) {
     console.error('Error processing image:', error);
