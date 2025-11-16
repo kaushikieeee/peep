@@ -65,16 +65,19 @@ export default function UserProfilePage() {
   const [view, setView] = useState<'stats' | 'reports'>('stats');
 
   useEffect(() => {
-    // Load mock data
-    fetch('/data/mock-reports.json')
+    // Load evidence from API (which now fetches from Google Sheets)
+    fetch('/api/data/reports')
       .then((res) => res.json())
       .then((data) => {
         setReports(data);
-        // Mock: simulate user's own reports
+        // Simulate user's own reports - use first 3 items
         setUserReports(data.slice(0, 3));
       })
       .catch(() => {
-        console.error('Failed to load mock data');
+        console.error('Failed to load evidence data');
+        // No fallback data - empty state
+        setReports([]);
+        setUserReports([]);
       });
   }, []);
 

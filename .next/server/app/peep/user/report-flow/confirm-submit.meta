@@ -1,0 +1,18 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/peep/layout,_N_T_/peep/user/layout,_N_T_/peep/user/report-flow/layout,_N_T_/peep/user/report-flow/confirm-submit/layout,_N_T_/peep/user/report-flow/confirm-submit/page,_N_T_/peep/user/report-flow/confirm-submit"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/peep/user/report-flow/confirm-submit/__PAGE__",
+    "/peep/user/report-flow/confirm-submit",
+    "/peep/user/report-flow",
+    "/peep/user",
+    "/peep",
+    "/_index",
+    "/_head"
+  ]
+}

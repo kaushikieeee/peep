@@ -2,170 +2,82 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { LogOut, Star, CheckCircle, Clock, RefreshCw } from 'lucide-react';
+import { LogOut, Star, CheckCircle, Clock, RefreshCw, Plus, Edit2 } from 'lucide-react';
 import AdminSidebar from '@/components/admin/sidebar';
+import ProviderEditor from '@/components/admin/provider-editor';
+import ProblemEditor from '@/components/admin/problem-editor';
 import { fetchProvidersFromSheets, fetchProblemsFromSheets } from '@/lib/googleSheets';
+import { ProviderData, ProblemData } from '@/lib/sheetClientAPI';
+import { useAdminAuth, clearAdminSession } from '@/hooks/useAdminAuth';
 
-interface Provider {
-  id: number;
-  name: string;
-  service: string;
-  rating: number;
-  reviews: number;
-  estimate: string;
-  specialties: string[];
-  responseTime?: string;
-  availability?: string;
+interface Provider extends ProviderData {
+  rowIndex?: number;
 }
 
-const mockProviders: Provider[] = [
-  {
-    id: 1,
-    name: 'GreenFix Turfcare',
-    service: 'Turf restoration & cleanup',
-    rating: 4.8,
-    reviews: 124,
-    estimate: '₹2,05,000 - ₹4,10,000',
-    specialties: ['Turf restoration', 'Soil remediation', 'Land cleanup'],
-    responseTime: '2-4 hours',
-    availability: 'Mon-Sat, 7AM-6PM',
-  },
-  {
-    id: 2,
-    name: 'DrainWell Solutions',
-    service: 'Water drainage & treatment',
-    rating: 4.6,
-    reviews: 87,
-    estimate: '₹1,23,000 - ₹2,87,000',
-    specialties: ['Water treatment', 'Drainage systems', 'Stagnant water'],
-    responseTime: '4-6 hours',
-    availability: '24/7 Emergency',
-  },
-  {
-    id: 3,
-    name: 'CleanSoil Labs',
-    service: 'Soil testing & remediation',
-    rating: 4.9,
-    reviews: 156,
-    estimate: '₹2,46,000 - ₹6,56,000',
-    specialties: ['Soil analysis', 'Contamination testing', 'Remediation'],
-    responseTime: '1-2 hours',
-    availability: 'Mon-Sun, 8AM-8PM',
-  },
-];
-
-interface AssignmentRecord {
-  providerId: number;
-  providerName: string;
-  problemId: string;
-  problemTitle: string;
-  timestamp: string;
-  status: 'assigned' | 'in-progress' | 'completed';
-}
-
-interface PollutionProblem {
-  id: string;
-  title: string;
-  location: string;
-  severity: 'Low' | 'Medium' | 'High';
-  category: string;
+interface Problem extends ProblemData {
+  rowIndex?: number;
 }
 
 export default function MarketplacePage() {
   const router = useRouter();
+  useAdminAuth(); // Check authentication
   const [providers, setProviders] = useState<Provider[]>([]);
-  const [problems, setProblems] = useState<PollutionProblem[]>([]);
+  const [problems, setProblems] = useState<Problem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
-  const [assignedTasks, setAssignedTasks] = useState<AssignmentRecord[]>([]);
-  const [showAssignConfirm, setShowAssignConfirm] = useState(false);
-  const [showProblemModal, setShowProblemModal] = useState(false);
-  const [selectedProblem, setSelectedProblem] = useState<PollutionProblem | null>(null);
-  const [providerForAssignment, setProviderForAssignment] = useState<Provider | null>(null);
+  const [showProviderEditor, setShowProviderEditor] = useState(false);
+  const [showProblemEditor, setShowProblemEditor] = useState(false);
+  const [editingProvider, setEditingProvider] = useState<Provider | null>(null);
+  const [editingProblem, setEditingProblem] = useState<Problem | null>(null);
+  const [tab, setTab] = useState<'providers' | 'problems'>('providers');
 
   useEffect(() => {
-    const isAuth = localStorage.getItem('admin-auth');
-    if (!isAuth) {
-      router.push('/admin/login');
-    }
-  }, [router]);
-
-  // Fetch providers and problems from Google Sheets
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const [fetchedProviders, fetchedProblems] = await Promise.all([
-          fetchProvidersFromSheets(),
-          fetchProblemsFromSheets(),
-        ]);
-        setProviders(fetchedProviders);
-        setProblems(fetchedProblems);
-      } catch (error) {
-        console.error('Error loading data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     loadData();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('admin-auth');
-    router.push('/admin/login');
-  };
-
-  const handleRefreshData = async () => {
+  const loadData = async () => {
     try {
       setLoading(true);
       const [fetchedProviders, fetchedProblems] = await Promise.all([
         fetchProvidersFromSheets(),
         fetchProblemsFromSheets(),
       ]);
-      setProviders(fetchedProviders);
-      setProblems(fetchedProblems);
+      setProviders(fetchedProviders as Provider[]);
+      setProblems(fetchedProblems as Problem[]);
     } catch (error) {
-      console.error('Error refreshing data:', error);
-      alert('Failed to refresh data. Please try again.');
+      console.error('Error loading data:', error);
     } finally {
       setLoading(false);
     }
-  }
-
-  const handleOpenProblemModal = (provider: Provider) => {
-    setProviderForAssignment(provider);
-    setShowProblemModal(true);
   };
 
-  const handleAssignProblem = (problem: PollutionProblem) => {
-    if (!providerForAssignment) return;
+  const handleLogout = () => {
+    clearAdminSession();
+    router.push('/admin/login');
+  };
 
-    const isAlreadyAssigned = assignedTasks.some(
-      (t) => t.providerId === providerForAssignment.id && t.problemId === problem.id
-    );
+  const handleEditProvider = (provider: Provider) => {
+    setEditingProvider(provider);
+    setShowProviderEditor(true);
+  };
 
-    if (isAlreadyAssigned) {
-      alert('This problem is already assigned to this provider');
-      return;
-    }
+  const handleNewProvider = () => {
+    setEditingProvider(null);
+    setShowProviderEditor(true);
+  };
 
-    const newTask: AssignmentRecord = {
-      providerId: providerForAssignment.id,
-      providerName: providerForAssignment.name,
-      problemId: problem.id,
-      problemTitle: problem.title,
-      timestamp: new Date().toLocaleString(),
-      status: 'assigned',
-    };
+  const handleEditProblem = (problem: Problem) => {
+    setEditingProblem(problem);
+    setShowProblemEditor(true);
+  };
 
-    setAssignedTasks([...assignedTasks, newTask]);
-    setShowAssignConfirm(true);
-    setShowProblemModal(false);
-    setSelectedProblem(null);
-    setProviderForAssignment(null);
+  const handleNewProblem = () => {
+    setEditingProblem(null);
+    setShowProblemEditor(true);
+  };
 
-    setTimeout(() => setShowAssignConfirm(false), 3000);
+  const handleSave = () => {
+    loadData();
   };
 
   return (
@@ -173,11 +85,12 @@ export default function MarketplacePage() {
       <AdminSidebar open={true} onClose={() => {}} />
 
       <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Header */}
         <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between sticky top-0 z-20">
-          <h1 className="text-2xl font-bold text-gray-900">Service Provider Marketplace</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Admin Panel</h1>
           <div className="flex items-center gap-2">
             <button
-              onClick={handleRefreshData}
+              onClick={loadData}
               disabled={loading}
               className="flex items-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-all disabled:opacity-50"
               title="Refresh data from Google Sheets"
@@ -202,192 +115,218 @@ export default function MarketplacePage() {
           </div>
         )}
 
-        {/* Success Message */}
-        {showAssignConfirm && (
-          <div className="bg-green-50 border-b border-green-200 px-6 py-3 flex items-center gap-3 text-green-700 animate-pulse">
-            <CheckCircle size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">✓ Task assigned successfully!</span>
-          </div>
-        )}
+        {/* Tabs */}
+        <div className="bg-white border-b border-gray-200 px-6 flex gap-8">
+          <button
+            onClick={() => setTab('providers')}
+            className={`py-4 px-2 font-medium border-b-2 transition-all ${
+              tab === 'providers'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Service Providers ({providers.length})
+          </button>
+          <button
+            onClick={() => setTab('problems')}
+            className={`py-4 px-2 font-medium border-b-2 transition-all ${
+              tab === 'problems'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Pollution Problems ({problems.length})
+          </button>
+        </div>
 
-        {/* Problem Selection Modal */}
-        {showProblemModal && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full mx-4">
-              <div className="p-6 border-b border-gray-200">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Select a Problem to Assign
-                </h2>
-                <p className="text-sm text-gray-600 mt-1">
-                  Assigning to: <span className="font-semibold">{providerForAssignment?.name}</span>
-                </p>
-              </div>
-
-              <div className="max-h-96 overflow-y-auto p-6 space-y-3">
-                {problems.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">No problems found. Please configure your Google Sheet.</p>
-                ) : (
-                  problems.map((problem: PollutionProblem) => (
-                    <div
-                      key={problem.id}
-                      className="p-4 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer transition"
-                      onClick={() => handleAssignProblem(problem)}
-                    >
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-gray-900">{problem.title}</h3>
-                          <p className="text-sm text-gray-600">{problem.location}</p>
-                          <p className="text-xs text-gray-500 mt-1">{problem.category}</p>
-                        </div>
-                        <div className="text-right">
-                          <span
-                            className={`text-xs font-bold px-3 py-1 rounded ${
-                              problem.severity === 'High'
-                                ? 'bg-red-100 text-red-700'
-                                : problem.severity === 'Medium'
-                                ? 'bg-yellow-100 text-yellow-700'
-                                : 'bg-green-100 text-green-700'
-                            }`}
-                          >
-                            {problem.severity}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-
-              <div className="p-6 border-t border-gray-200 flex justify-end gap-2">
+        {/* Content */}
+        <div className="flex-1 overflow-auto p-6">
+          {tab === 'providers' && (
+            <div className="space-y-4">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-lg font-bold text-gray-900">Service Providers</h2>
                 <button
-                  onClick={() => {
-                    setShowProblemModal(false);
-                    setProviderForAssignment(null);
-                  }}
-                  className="px-4 py-2 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg font-medium transition"
+                  onClick={handleNewProvider}
+                  className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all"
                 >
-                  Cancel
+                  <Plus size={20} />
+                  Add Provider
                 </button>
               </div>
-            </div>
-          </div>
-        )}
 
-        <div className="flex-1 overflow-auto p-6">
-          <div className="grid grid-cols-3 gap-6">
-            {/* Left: Task list */}
-            <div className="col-span-1">
-              <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4 sticky top-24 max-h-[calc(100vh-200px)] overflow-y-auto">
-                <h2 className="text-lg font-bold text-gray-900">
-                  Assigned Tasks ({assignedTasks.length})
-                </h2>
-
-                {assignedTasks.length === 0 ? (
-                  <p className="text-sm text-gray-500 italic">No tasks assigned yet. Select a provider and problem to begin.</p>
-                ) : (
-                  <div className="space-y-2">
-                    {assignedTasks.map((task, idx) => (
-                      <div
-                        key={idx}
-                        className="p-3 rounded-lg bg-green-50 border border-green-200"
-                      >
-                        <p className="text-xs font-semibold text-green-800">{task.providerName}</p>
-                        <p className="text-xs text-gray-700 mt-1">{task.problemTitle}</p>
-                        <p className="text-xs text-green-600 mt-1">Task ID: #{1000 + idx}</p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <span className="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded font-semibold">
-                            ✓ Assigned
-                          </span>
-                          <span className="text-xs text-gray-600">{task.timestamp.split(',')[0]}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Right: Provider cards (2 columns) */}
-            <div className="col-span-2">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Service Providers ({providers.length})</h2>
-              <div className="grid grid-cols-2 gap-4">
-                {providers.map((provider) => {
-                  const providerTaskCount = assignedTasks.filter((t) => t.providerId === provider.id).length;
-                  return (
+              {providers.length === 0 ? (
+                <div className="text-center py-12 text-gray-500">
+                  <p>No providers found. Create one to get started.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {providers.map((provider, idx) => (
                     <div
-                      key={provider.id}
-                      className={`bg-white rounded-lg border transition-all cursor-pointer ${
-                        selectedProvider?.id === provider.id
-                          ? 'border-2 shadow-lg border-blue-500'
-                          : 'border-gray-200 hover:shadow-md'
-                      }`}
-                      onClick={() => setSelectedProvider(provider)}
+                      key={idx}
+                      className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-lg transition-all"
                     >
-                      <div className="p-4 space-y-3">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-gray-900 text-sm">{provider.name}</h3>
-                            <p className="text-xs text-gray-600">{provider.service}</p>
-                          </div>
-                          {providerTaskCount > 0 && (
-                            <span className="text-xs bg-blue-500 text-white px-2 py-1 rounded font-bold">
-                              {providerTaskCount}
-                            </span>
-                          )}
+                      <div className="flex justify-between items-start mb-3">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-900">{provider.name}</h3>
+                          <p className="text-sm text-gray-600">{provider.service}</p>
                         </div>
+                        <button
+                          onClick={() => handleEditProvider(provider)}
+                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                        >
+                          <Edit2 size={18} />
+                        </button>
+                      </div>
 
+                      <div className="space-y-2 text-sm">
                         <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className="w-3 h-3"
-                                style={{
-                                  fill: i < Math.floor(provider.rating) ? '#f59e0b' : '#e5e7eb',
-                                  color: i < Math.floor(provider.rating) ? '#f59e0b' : '#e5e7eb',
-                                }}
-                              />
-                            ))}
-                          </div>
-                          <span className="text-xs font-semibold text-gray-900">{provider.rating}</span>
-                          <span className="text-xs text-gray-500">({provider.reviews})</span>
+                          <Star className="w-4 h-4 text-yellow-500" />
+                          <span className="font-medium">{provider.rating}</span>
+                          <span className="text-gray-600">({provider.reviews} reviews)</span>
                         </div>
-
-                        <div className="bg-blue-50 rounded p-2">
-                          <p className="text-xs text-gray-600">Est. Cost</p>
-                          <p className="text-sm font-bold text-blue-600">{provider.estimate}</p>
-                        </div>
-
-                        <div className="flex flex-wrap gap-1">
-                          {provider.specialties.slice(0, 2).map((spec) => (
+                        <p className="text-gray-700">
+                          <span className="font-medium">Est. Cost:</span> {provider.estimate}
+                        </p>
+                        {provider.email && (
+                          <p className="text-gray-700">
+                            <span className="font-medium">Email:</span> {provider.email}
+                          </p>
+                        )}
+                        {provider.phone && (
+                          <p className="text-gray-700">
+                            <span className="font-medium">Phone:</span> {provider.phone}
+                          </p>
+                        )}
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {provider.specialties?.slice(0, 2).map((spec) => (
                             <span
                               key={spec}
-                              className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700"
+                              className="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-700"
                             >
                               {spec}
                             </span>
                           ))}
                         </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
 
+          {tab === 'problems' && (
+            <div className="space-y-4">
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h2 className="text-lg font-bold text-gray-900">Pollution Problems</h2>
+                  <p className="text-sm text-gray-500 mt-1">Problems are created by escalating unresolved evidence items</p>
+                </div>
+              </div>
+
+              {problems.length === 0 ? (
+                <div className="text-center py-12 text-gray-500">
+                  <p>No problems yet. Escalate unresolved evidence to create problems.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {problems.map((problem, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="font-semibold text-gray-900">{problem.title}</h3>
+                            <span
+                              className={`text-xs font-bold px-3 py-1 rounded ${
+                                problem.severity === 'Critical'
+                                  ? 'bg-red-100 text-red-700'
+                                  : problem.severity === 'High'
+                                  ? 'bg-orange-100 text-orange-700'
+                                  : problem.severity === 'Medium'
+                                  ? 'bg-yellow-100 text-yellow-700'
+                                  : 'bg-green-100 text-green-700'
+                              }`}
+                            >
+                              {problem.severity}
+                            </span>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-2">{problem.location}</p>
+                          {problem.description && (
+                            <p className="text-sm text-gray-700 mb-2">{problem.description}</p>
+                          )}
+                          <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                            {problem.category && (
+                              <span>
+                                <span className="font-medium">Category:</span> {problem.category}
+                              </span>
+                            )}
+                            {problem.status && (
+                              <span>
+                                <span className="font-medium">Status:</span> {problem.status}
+                              </span>
+                            )}
+                            {problem.reportedBy && (
+                              <span>
+                                <span className="font-medium">Reported by:</span> {problem.reportedBy}
+                              </span>
+                            )}
+                          </div>
+                          {problem.tags && problem.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-3">
+                              {problem.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="text-xs px-2 py-1 rounded-full bg-purple-100 text-purple-700"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleOpenProblemModal(provider);
-                          }}
-                          className="w-full py-2 px-3 rounded-lg bg-purple-500 hover:bg-purple-600 text-white font-semibold text-xs transition-all flex items-center justify-center gap-2"
+                          onClick={() => handleEditProblem(problem)}
+                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition flex-shrink-0"
                         >
-                          <CheckCircle className="w-3 h-3" />
-                          Assign Task
+                          <Edit2 size={18} />
                         </button>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
+          )}
         </div>
       </div>
+
+      {/* Editors */}
+      {showProviderEditor && (
+        <ProviderEditor
+          provider={editingProvider || undefined}
+          onClose={() => {
+            setShowProviderEditor(false);
+            setEditingProvider(null);
+          }}
+          onSave={handleSave}
+          isNew={!editingProvider}
+        />
+      )}
+
+      {showProblemEditor && (
+        <ProblemEditor
+          problem={editingProblem || undefined}
+          onClose={() => {
+            setShowProblemEditor(false);
+            setEditingProblem(null);
+          }}
+          onSave={handleSave}
+          isNew={!editingProblem}
+        />
+      )}
     </div>
   );
 }

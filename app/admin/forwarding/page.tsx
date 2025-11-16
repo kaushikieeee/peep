@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LogOut, Send, CheckCircle2 } from 'lucide-react';
 import AdminSidebar from '@/components/admin/sidebar';
+import { useAdminAuth, clearAdminSession } from '@/hooks/useAdminAuth';
 
 interface Report {
   id: number;
@@ -29,6 +30,7 @@ const departments = [
 
 export default function ForwardingPage() {
   const router = useRouter();
+  useAdminAuth(); // Check authentication
   const [reports, setReports] = useState<Report[]>([]);
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [selectedDept, setSelectedDept] = useState('');

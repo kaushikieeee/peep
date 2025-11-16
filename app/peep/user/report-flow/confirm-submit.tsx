@@ -3,12 +3,15 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, CheckCircle2, Share2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Share2, AlertCircle } from 'lucide-react';
 
 export default function ConfirmSubmitStep() {
   const [reportData, setReportData] = useState<any>(null);
   const [severityScore, setSeverityScore] = useState(65);
   const [submitted, setSubmitted] = useState(false);
+  const [reporterName, setReporterName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -28,18 +31,51 @@ export default function ConfirmSubmitStep() {
   }, []);
 
   const handleSubmit = async () => {
-    // Mock submit to API or database
-    console.log('Submitting report:', reportData);
-    
-    // Clear session storage
-    sessionStorage.removeItem('peep-report-photo');
-    sessionStorage.removeItem('peep-report-category');
-    sessionStorage.removeItem('peep-report-severity');
-    sessionStorage.removeItem('peep-report-description');
-    sessionStorage.removeItem('peep-report-lat');
-    sessionStorage.removeItem('peep-report-lng');
+    try {
+      setIsSubmitting(true);
+      setError('');
 
-    setSubmitted(true);
+      // Prepare evidence data for submission
+      const evidenceData = {
+        lat: parseFloat(reportData.lat) || 0,
+        lng: parseFloat(reportData.lng) || 0,
+        category: reportData.category || '',
+        severity: reportData.severity || 'Low',
+        note: reportData.description || '',
+        reporter: reporterName || 'Anonymous',
+        date: new Date().toISOString().split('T')[0],
+        zone: 'User Submitted',
+        upvotes: 0,
+        verified: false,
+        status: 'Open',
+        images: reportData.photo ? [reportData.photo] : [],
+      };
+
+      // Submit to API endpoint
+      const response = await fetch('/api/evidence/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(evidenceData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit report');
+      }
+
+      // Clear session storage
+      sessionStorage.removeItem('peep-report-photo');
+      sessionStorage.removeItem('peep-report-category');
+      sessionStorage.removeItem('peep-report-severity');
+      sessionStorage.removeItem('peep-report-description');
+      sessionStorage.removeItem('peep-report-lat');
+      sessionStorage.removeItem('peep-report-lng');
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Error submitting report:', err);
+      setError('Failed to submit report. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -138,20 +174,43 @@ export default function ConfirmSubmitStep() {
           </div>
           <p className="text-xs text-blue-700 mt-2">Based on category and severity level</p>
         </div>
+
+        {/* Reporter Name (Optional) */}
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <label className="text-sm font-medium text-gray-700">Your Name (Optional)</label>
+          <p className="text-xs text-gray-500 mb-2">Share your name or report anonymously</p>
+          <input
+            type="text"
+            placeholder="Enter your name or leave blank"
+            value={reporterName}
+            onChange={(e) => setReporterName(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          />
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex gap-2">
+            <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+            <p className="text-sm text-red-700">{error}</p>
+          </div>
+        )}
       </div>
 
       {/* Bottom CTA */}
       <div className="px-4 py-4 bg-white border-t border-gray-200 space-y-2">
         <button
           onClick={handleSubmit}
-          className="w-full py-3 px-4 rounded-2xl font-semibold text-white transition-all active:scale-95"
+          disabled={isSubmitting}
+          className="w-full py-3 px-4 rounded-2xl font-semibold text-white transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
           style={{ backgroundColor: 'var(--peep-primary)' }}
         >
-          Submit Report
+          {isSubmitting ? 'Submitting...' : 'Submit Report'}
         </button>
         <button
           onClick={() => router.back()}
-          className="w-full py-2 px-4 rounded-lg border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm"
+          disabled={isSubmitting}
+          className="w-full py-2 px-4 rounded-lg border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Back
         </button>

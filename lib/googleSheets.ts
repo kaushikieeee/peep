@@ -1,21 +1,11 @@
 /**
  * Google Sheets Database Integration
  * 
- * Setup:
- * 1. Create a Google Sheet with tabs:
- *    - "providers" - Service provider data
- *    - "problems" - Pollution problems data
- * 
- * 2. Make the sheet "Viewer" accessible to anyone with the link
- * 
- * 3. Your sheet URL should look like:
- *    https://docs.google.com/spreadsheets/d/{SHEET_ID}/edit
- * 
- * 4. Set NEXT_PUBLIC_GOOGLE_SHEETS_ID in your .env.local:
- *    NEXT_PUBLIC_GOOGLE_SHEETS_ID=your_sheet_id_here
+ * Note: This now uses API endpoints for authentication:
+ * - /api/providers - fetches providers from Google Sheets
+ * - /api/problems - fetches problems from Google Sheets
+ * - /api/evidence - fetches evidence from Google Sheets
  */
-
-const SHEET_ID = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID;
 
 export interface Provider {
   id: number;
@@ -62,46 +52,24 @@ export interface PollutionProblem {
  * Headers: id, name, service, rating, reviews, estimate, specialties, responseTime, availability, email, phone, location, experience, certification, insurance, portfolio, successRate
  */
 export async function fetchProvidersFromSheets(): Promise<Provider[]> {
-  if (!SHEET_ID) {
-    console.warn('NEXT_PUBLIC_GOOGLE_SHEETS_ID not configured, using fallback data');
-    return getFallbackProviders();
-  }
-
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/query?tq=SELECT%20*%20FROM%20'providers'&tqx=out:json`;
-    const response = await fetch(url);
-    const text = await response.text();
+    const response = await fetch('/api/providers', { cache: 'no-store' });
     
-    // Parse Google Visualization API response
-    const jsonString = text.substring(47).slice(0, -2);
-    const json = JSON.parse(jsonString);
+    if (!response.ok) {
+      console.warn('Failed to fetch providers from API:', response.status);
+      return getFallbackProviders();
+    }
     
-    const providers = json.table.rows.map((row: any, idx: number) => {
-      const cols = row.c;
-      return {
-        id: cols[0]?.v || idx + 1,
-        name: cols[1]?.v || '',
-        service: cols[2]?.v || '',
-        rating: parseFloat(cols[3]?.v) || 4.5,
-        reviews: parseInt(cols[4]?.v) || 0,
-        estimate: cols[5]?.v || '₹0',
-        specialties: (cols[6]?.v || '').split(',').map((s: string) => s.trim()).filter((s: string) => s),
-        responseTime: cols[7]?.v || '',
-        availability: cols[8]?.v || '',
-        email: cols[9]?.v || '',
-        phone: cols[10]?.v || '',
-        location: cols[11]?.v || '',
-        experience: parseInt(cols[12]?.v) || 0,
-        certification: cols[13]?.v || '',
-        insurance: cols[14]?.v?.toLowerCase() === 'yes' || cols[14]?.v?.toLowerCase() === 'true',
-        portfolio: cols[15]?.v || '',
-        successRate: parseFloat(cols[16]?.v) || 0,
-      };
-    });
+    const providers: Provider[] = await response.json();
+    
+    if (!providers || providers.length === 0) {
+      return getFallbackProviders();
+    }
 
+    console.log(`✓ Fetched ${providers.length} providers`);
     return providers;
   } catch (error) {
-    console.error('Error fetching providers from Google Sheets:', error);
+    console.error('Error fetching providers:', error);
     return getFallbackProviders();
   }
 }
@@ -112,45 +80,24 @@ export async function fetchProvidersFromSheets(): Promise<Provider[]> {
  * Headers: id, title, location, latitude, longitude, severity, category, description, reportedBy, reportedDate, status, priority, estimatedCost, deadline, images, tags
  */
 export async function fetchProblemsFromSheets(): Promise<PollutionProblem[]> {
-  if (!SHEET_ID) {
-    console.warn('NEXT_PUBLIC_GOOGLE_SHEETS_ID not configured, using fallback data');
-    return getFallbackProblems();
-  }
-
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/query?tq=SELECT%20*%20FROM%20'problems'&tqx=out:json`;
-    const response = await fetch(url);
-    const text = await response.text();
+    const response = await fetch('/api/problems', { cache: 'no-store' });
     
-    // Parse Google Visualization API response
-    const jsonString = text.substring(47).slice(0, -2);
-    const json = JSON.parse(jsonString);
+    if (!response.ok) {
+      console.warn('Failed to fetch problems from API:', response.status);
+      return getFallbackProblems();
+    }
     
-    const problems = json.table.rows.map((row: any, idx: number) => {
-      const cols = row.c;
-      return {
-        id: cols[0]?.v || `P${idx + 1}`,
-        title: cols[1]?.v || '',
-        location: cols[2]?.v || '',
-        latitude: parseFloat(cols[3]?.v) || undefined,
-        longitude: parseFloat(cols[4]?.v) || undefined,
-        severity: cols[5]?.v || 'Medium',
-        category: cols[6]?.v || '',
-        description: cols[7]?.v || '',
-        reportedBy: cols[8]?.v || '',
-        reportedDate: cols[9]?.v || '',
-        status: cols[10]?.v || 'Open',
-        priority: cols[11]?.v || 'Medium',
-        estimatedCost: cols[12]?.v || '',
-        deadline: cols[13]?.v || '',
-        images: (cols[14]?.v || '').split('|').map((s: string) => s.trim()).filter((s: string) => s),
-        tags: (cols[15]?.v || '').split(',').map((s: string) => s.trim()).filter((s: string) => s),
-      };
-    });
+    const problems: PollutionProblem[] = await response.json();
+    
+    if (!problems || problems.length === 0) {
+      return getFallbackProblems();
+    }
 
+    console.log(`✓ Fetched ${problems.length} problems`);
     return problems;
   } catch (error) {
-    console.error('Error fetching problems from Google Sheets:', error);
+    console.error('Error fetching problems:', error);
     return getFallbackProblems();
   }
 }

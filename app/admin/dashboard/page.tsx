@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { LogOut, BarChart3, AlertTriangle, Clock, CheckCircle2, Menu, X } from 'lucide-react';
 import AdminSidebar from '@/components/admin/sidebar';
 import LiveMap from '@/components/peep/live-map';
+import { useAdminAuth, clearAdminSession } from '@/hooks/useAdminAuth';
 
 interface Report {
   id: number;
@@ -24,32 +25,30 @@ interface Report {
 
 export default function AdminDashboard() {
   const router = useRouter();
+  useAdminAuth(); // Check authentication and redirect if not logged in
   const [reports, setReports] = useState<Report[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Check authentication
-    const isAuth = localStorage.getItem('admin-auth');
-    if (!isAuth) {
-      router.push('/admin/login');
+  const loadReports = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/data/reports');
+      const data = await response.json();
+      setReports(data);
+    } catch (err) {
+      console.error('Failed to load reports:', err);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    // Load reports
-    fetch('/api/data/reports')
-      .then(r => r.json())
-      .then(data => {
-        setReports(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to load reports:', err);
-        setLoading(false);
-      });
-  }, [router]);
+  useEffect(() => {
+    loadReports();
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('admin-auth');
+    clearAdminSession();
     router.push('/admin/login');
   };
 
@@ -57,7 +56,7 @@ export default function AdminDashboard() {
   const totalReports = reports.length;
   const redZoneCases = reports.filter(r => r.severity === 'High').length;
   const pendingVerifications = reports.filter(r => !r.verified).length;
-  const assignedToAuthorities = Math.floor(reports.length * 0.3); // Mock data
+  const assignedToAuthorities = 0; // No assignment tracking in current schema
 
   const recentReports = reports.slice(0, 10);
 
@@ -186,58 +185,64 @@ export default function AdminDashboard() {
 
               {/* Table */}
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-gray-200">
-                      <th className="text-left py-3 px-4 font-semibold text-gray-700">ID</th>
-                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Category</th>
-                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Severity</th>
-                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Location</th>
-                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Reporter</th>
-                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
-                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
-                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentReports.map((report) => (
-                      <tr key={report.id} className="border-b border-gray-200 hover:bg-gray-50">
-                        <td className="py-3 px-4 text-gray-900 font-medium">#{report.id}</td>
-                        <td className="py-3 px-4 text-gray-700">{report.category}</td>
-                        <td className="py-3 px-4">
-                          <span
-                            className="px-3 py-1 rounded-full text-xs font-bold"
-                            style={{
-                              backgroundColor: report.severity === 'High' ? '#fca5a5' : report.severity === 'Medium' ? '#fcd34d' : '#c6f6d5',
-                              color: report.severity === 'High' ? '#7f1d1d' : report.severity === 'Medium' ? '#78350f' : '#15803d',
-                            }}
-                          >
-                            {report.severity}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4 text-gray-700">{report.zone}</td>
-                        <td className="py-3 px-4 text-gray-700">{report.reporter}</td>
-                        <td className="py-3 px-4 text-gray-700">{report.date}</td>
-                        <td className="py-3 px-4">
-                          <span
-                            className="px-3 py-1 rounded-full text-xs font-medium"
-                            style={{
-                              backgroundColor: report.verified ? '#dbeafe' : '#fef3c7',
-                              color: report.verified ? '#1e40af' : '#92400e',
-                            }}
-                          >
-                            {report.verified ? 'Verified' : 'New'}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4">
-                          <button className="text-blue-600 hover:text-blue-700 font-medium text-xs">
-                            View
-                          </button>
-                        </td>
+                {recentReports.length === 0 ? (
+                  <div className="text-center py-12 text-gray-500">
+                    <p>No reports found. Add evidence to get started.</p>
+                  </div>
+                ) : (
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">ID</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Category</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Severity</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Location</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Reporter</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Action</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {recentReports.map((report) => (
+                        <tr key={report.id} className="border-b border-gray-200 hover:bg-gray-50">
+                          <td className="py-3 px-4 text-gray-900 font-medium">#{report.id}</td>
+                          <td className="py-3 px-4 text-gray-700">{report.category}</td>
+                          <td className="py-3 px-4">
+                            <span
+                              className="px-3 py-1 rounded-full text-xs font-bold"
+                              style={{
+                                backgroundColor: report.severity === 'High' ? '#fca5a5' : report.severity === 'Medium' ? '#fcd34d' : '#c6f6d5',
+                                color: report.severity === 'High' ? '#7f1d1d' : report.severity === 'Medium' ? '#78350f' : '#15803d',
+                              }}
+                            >
+                              {report.severity}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4 text-gray-700">{report.zone}</td>
+                          <td className="py-3 px-4 text-gray-700">{report.reporter}</td>
+                          <td className="py-3 px-4 text-gray-700">{report.date}</td>
+                          <td className="py-3 px-4">
+                            <span
+                              className="px-3 py-1 rounded-full text-xs font-medium"
+                              style={{
+                                backgroundColor: report.verified ? '#dbeafe' : '#fef3c7',
+                                color: report.verified ? '#1e40af' : '#92400e',
+                              }}
+                            >
+                              {report.verified ? 'Verified' : 'New'}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <button className="text-blue-600 hover:text-blue-700 font-medium text-xs">
+                              View
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
           </div>

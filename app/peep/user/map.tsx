@@ -27,43 +27,14 @@ export default function UserMapPage() {
   const [view, setView] = useState<'map' | 'list'>('map');
 
   useEffect(() => {
-    // Load mock data
-    fetch('/data/mock-reports.json')
+    // Load evidence from API (which now fetches from Google Sheets)
+    fetch('/api/data/reports')
       .then((res) => res.json())
       .then((data) => setReports(data))
       .catch(() => {
-        // Fallback mock data if JSON fails
-        const mockReports: Report[] = [
-          {
-            id: 101,
-            lat: 12.9716,
-            lng: 77.5946,
-            category: 'Damaged turf / turf runoff',
-            severity: 'High',
-            note: 'Blackish runoff after weekend game.',
-            reporter: 'Anita R.',
-            date: '2025-10-12T08:30:00Z',
-            zone: 'Zone P1',
-            upvotes: 12,
-            verified: true,
-            imagePlaceholder: '/turf.jpg',
-          },
-          {
-            id: 102,
-            lat: 12.9719,
-            lng: 77.595,
-            category: 'Stagnant water',
-            severity: 'Medium',
-            note: 'Stagnant pool near drainage.',
-            reporter: 'Ravi K.',
-            date: '2025-10-11T09:05:00Z',
-            zone: 'Zone P1',
-            upvotes: 8,
-            verified: true,
-            imagePlaceholder: '/clear-water-ripples.png',
-          },
-        ];
-        setReports(mockReports);
+        // No fallback data - empty state
+        console.error('Failed to load evidence data');
+        setReports([]);
       });
   }, []);
 

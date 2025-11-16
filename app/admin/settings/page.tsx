@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LogOut, Save, RotateCcw } from 'lucide-react';
 import AdminSidebar from '@/components/admin/sidebar';
+import { useAdminAuth, clearAdminSession } from '@/hooks/useAdminAuth';
 
 export default function SettingsPage() {
   const router = useRouter();
+  useAdminAuth(); // Check authentication
   const [settings, setSettings] = useState({
     publicVisibility: true,
     enableNotifications: true,
@@ -23,15 +25,8 @@ export default function SettingsPage() {
     'Chemical Spills',
   ]);
 
-  useEffect(() => {
-    const isAuth = localStorage.getItem('admin-auth');
-    if (!isAuth) {
-      router.push('/admin/login');
-    }
-  }, [router]);
-
   const handleLogout = () => {
-    localStorage.removeItem('admin-auth');
+    clearAdminSession();
     router.push('/admin/login');
   };
 

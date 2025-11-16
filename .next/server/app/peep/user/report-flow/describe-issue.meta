@@ -1,0 +1,18 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/peep/layout,_N_T_/peep/user/layout,_N_T_/peep/user/report-flow/layout,_N_T_/peep/user/report-flow/describe-issue/layout,_N_T_/peep/user/report-flow/describe-issue/page,_N_T_/peep/user/report-flow/describe-issue"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/peep/user/report-flow/describe-issue/__PAGE__",
+    "/peep/user/report-flow/describe-issue",
+    "/peep/user/report-flow",
+    "/peep/user",
+    "/peep",
+    "/_index",
+    "/_head"
+  ]
+}

@@ -1,15 +1,12 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { fetchEvidenceFromSheets } from '@/lib/evidenceSheets';
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'public/data/mock-reports.json');
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const mockReports = JSON.parse(fileContents);
-    return NextResponse.json(mockReports);
+    const evidence = await fetchEvidenceFromSheets();
+    return NextResponse.json(evidence);
   } catch (error) {
-    console.error('Error reading mock reports:', error);
+    console.error('Error fetching evidence from sheets:', error);
     return NextResponse.json([], { status: 500 });
   }
 }

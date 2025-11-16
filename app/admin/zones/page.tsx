@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { LogOut, Plus, Trash2, Edit2, X } from 'lucide-react';
 import AdminSidebar from '@/components/admin/sidebar';
 import LiveMap from '@/components/peep/live-map';
+import { useAdminAuth, clearAdminSession } from '@/hooks/useAdminAuth';
 
 interface Zone {
   id: string;
@@ -22,6 +23,7 @@ const mockZones: Zone[] = [
 
 export default function ZonesPage() {
   const router = useRouter();
+  useAdminAuth(); // Check authentication
   const [zones, setZones] = useState<Zone[]>(mockZones);
   const [selectedZone, setSelectedZone] = useState<Zone | null>(null);
   const [showForm, setShowForm] = useState(false);
@@ -29,11 +31,6 @@ export default function ZonesPage() {
   const [reports, setReports] = useState<any[]>([]);
 
   useEffect(() => {
-    const isAuth = localStorage.getItem('admin-auth');
-    if (!isAuth) {
-      router.push('/admin/login');
-    }
-
     fetch('/api/data/reports')
       .then(r => r.json())
       .then(data => {
@@ -47,10 +44,10 @@ export default function ZonesPage() {
         })));
       })
       .catch(err => console.error('Failed to load reports:', err));
-  }, [router]);
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('admin-auth');
+    clearAdminSession();
     router.push('/admin/login');
   };
 
