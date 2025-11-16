@@ -23,6 +23,15 @@ export default function ConfirmSubmitStep() {
     const lat = sessionStorage.getItem('peep-report-lat');
     const lng = sessionStorage.getItem('peep-report-lng');
 
+    console.log('[ConfirmSubmit] Loaded report data from sessionStorage:', {
+      hasPhoto: !!photo,
+      category,
+      severity,
+      lat,
+      lng,
+      descriptionLength: description?.length || 0,
+    });
+
     setReportData({ photo, category, severity, description, lat, lng });
 
     // Mock severity score calculation
@@ -51,6 +60,16 @@ export default function ConfirmSubmitStep() {
         images: reportData.photo ? [reportData.photo] : [],
       };
 
+      console.log('[ConfirmSubmit] Submitting evidence:', {
+        id: `E${Date.now()}`,
+        lat: evidenceData.lat,
+        lng: evidenceData.lng,
+        category: evidenceData.category,
+        severity: evidenceData.severity,
+        hasPhoto: !!reportData.photo,
+        description: evidenceData.note.substring(0, 50),
+      });
+
       // Submit to API endpoint
       const response = await fetch('/api/evidence/submit', {
         method: 'POST',
@@ -59,8 +78,12 @@ export default function ConfirmSubmitStep() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit report');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to submit report');
       }
+
+      const result = await response.json();
+      console.log('[ConfirmSubmit] Success:', result);
 
       // Clear session storage
       sessionStorage.removeItem('peep-report-photo');
@@ -72,8 +95,8 @@ export default function ConfirmSubmitStep() {
 
       setSubmitted(true);
     } catch (err) {
-      console.error('Error submitting report:', err);
-      setError('Failed to submit report. Please try again.');
+      console.error('[ConfirmSubmit] Error submitting report:', err);
+      setError(err instanceof Error ? err.message : 'Failed to submit report. Please try again.');
       setIsSubmitting(false);
     }
   };

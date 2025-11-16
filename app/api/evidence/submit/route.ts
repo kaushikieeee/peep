@@ -6,8 +6,23 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
+    console.log('[Evidence Submit] Received request:', {
+      lat: body.lat,
+      lng: body.lng,
+      category: body.category,
+      severity: body.severity,
+      hasImages: !!body.images?.length,
+      imageCount: body.images?.length || 0,
+      reporter: body.reporter,
+    });
+
     // Validate required fields
     if (!body.lat || !body.lng || !body.category) {
+      console.warn('[Evidence Submit] Missing required fields:', {
+        lat: !!body.lat,
+        lng: !!body.lng,
+        category: !!body.category,
+      });
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -55,7 +70,9 @@ export async function POST(request: NextRequest) {
       reporter: body.reporter || 'Anonymous',
       category: body.category, 
       severity: body.severity,
-      hasImage: processedImages.length > 0
+      hasImage: processedImages.length > 0,
+      lat: body.lat,
+      lng: body.lng,
     });
 
     return NextResponse.json(
@@ -67,9 +84,9 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (error) {
-    console.error('Error submitting evidence:', error);
+    console.error('[Evidence Submit] Error submitting evidence:', error);
     return NextResponse.json(
-      { error: 'Failed to submit report' },
+      { error: error instanceof Error ? error.message : 'Failed to submit report' },
       { status: 500 }
     );
   }

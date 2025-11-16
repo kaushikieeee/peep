@@ -1,5 +1,1 @@
-{
-  "/api/admin/sheets/route": "app/api/admin/sheets/route.js",
-  "/api/evidence/route": "app/api/evidence/route.js",
-  "/api/evidence/submit/route": "app/api/evidence/submit/route.js"
-}
+{}
