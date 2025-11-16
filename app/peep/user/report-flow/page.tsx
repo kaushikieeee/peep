@@ -42,7 +42,8 @@ export default function ReportFlowPage() {
             const { latitude, longitude } = position.coords;
             setLocation({ lat: latitude, lng: longitude });
             // Store location in session storage for the report
-            sessionStorage.setItem('peep-report-location', JSON.stringify({ lat: latitude, lng: longitude }));
+            sessionStorage.setItem('peep-report-lat', latitude.toString());
+            sessionStorage.setItem('peep-report-lng', longitude.toString());
             setIsLoading(false);
           },
           (err) => {
@@ -72,7 +73,8 @@ export default function ReportFlowPage() {
 
   const handleSelectLocation = (poi: POI) => {
     setLocation({ lat: poi.lat, lng: poi.lng });
-    sessionStorage.setItem('peep-report-location', JSON.stringify({ lat: poi.lat, lng: poi.lng }));
+    sessionStorage.setItem('peep-report-lat', poi.lat.toString());
+    sessionStorage.setItem('peep-report-lng', poi.lng.toString());
     setSearchQuery('');
     setSearchResults([]);
     setUseManualSearch(false);

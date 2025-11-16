@@ -1,0 +1,85 @@
+
+> my-v0-project@0.1.0 dev
+> next dev
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/kaushikieee/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/kaushikieee/Downloads/code/pnpm-lock.yaml
+
+   ▲ Next.js 16.0.3 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.29.9:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 399ms
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763260010023',
+  reporter: 'Test User',
+  category: 'Air Pollution',
+  severity: 'High',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 3.8s (compile: 2.7s, render: 1097ms)
+✓ Image uploaded to ImgBB: https://i.ibb.co/sJdP9jsp/evidence-1763260019772.png
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763260020557',
+  reporter: 'Image Tester',
+  category: 'Water Pollution',
+  severity: 'Medium',
+  hasImage: true
+}
+ POST /api/evidence/submit 201 in 1607ms (compile: 11ms, render: 1596ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763260128107',
+  reporter: 'Test User',
+  category: 'Air Pollution',
+  severity: 'High',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 946ms (compile: 93ms, render: 853ms)
+✓ Image uploaded to ImgBB: https://i.ibb.co/sJdP9jsp/evidence-1763260019772.png
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763260129669',
+  reporter: 'Image Tester',
+  category: 'Water Pollution',
+  severity: 'Medium',
+  hasImage: true
+}
+ POST /api/evidence/submit 201 in 1367ms (compile: 15ms, render: 1352ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763260130348',
+  reporter: 'Complete Tester',
+  category: 'Soil contamination',
+  severity: 'Low',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 611ms (compile: 10ms, render: 601ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763260138501',
+  reporter: 'Test User',
+  category: 'Air Pollution',
+  severity: 'High',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 651ms (compile: 6ms, render: 645ms)
+✓ Image uploaded to ImgBB: https://i.ibb.co/sJdP9jsp/evidence-1763260019772.png
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763260139874',
+  reporter: 'Image Tester',
+  category: 'Water Pollution',
+  severity: 'Medium',
+  hasImage: true
+}
+ POST /api/evidence/submit 201 in 1309ms (compile: 4ms, render: 1304ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763260140529',
+  reporter: 'Complete Tester',
+  category: 'Soil contamination',
+  severity: 'Low',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 624ms (compile: 9ms, render: 615ms)
