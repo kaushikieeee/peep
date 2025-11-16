@@ -31,7 +31,7 @@ export default function SelectCategoryPage() {
   return (
     <div className="min-h-screen bg-black flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-white/20 backdrop-blur-xl bg-white/5">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-white/20 backdrop-blur-xl bg-white/5">
         <Link href="/peep/user/report-flow/add-title" className="p-2 hover:bg-white/10 rounded-lg">
           <ChevronLeft className="w-5 h-5 text-white" />
         </Link>
@@ -40,7 +40,7 @@ export default function SelectCategoryPage() {
       </div>
 
       {/* Progress Stepper */}
-      <div className="px-4 py-3 bg-white/5 flex justify-between items-center text-xs font-semibold overflow-x-auto gap-1 border-b border-white/20">
+      <div className="px-4 py-2 bg-white/5 flex justify-between items-center text-xs font-semibold overflow-x-auto gap-1 border-b border-white/20">
         <div className="flex flex-col items-center flex-shrink-0">
           <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs" style={{ backgroundColor: 'var(--peep-primary)' }}>✓</div>
           <p className="mt-1 text-white/60 text-xs">Photo</p>
@@ -63,18 +63,18 @@ export default function SelectCategoryPage() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 px-4 py-6 flex flex-col">
-        <h2 className="text-base font-semibold text-white mb-4">Choose what sort of problem this is:</h2>
+      <div className="flex-1 px-4 py-4 flex flex-col">
+        <h2 className="text-base font-semibold text-white mb-3">Choose what sort of problem this is:</h2>
         <div className="space-y-2 flex-1 overflow-y-auto">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleSelect(category)}
-              className="w-full p-4 rounded-lg border-2 text-left font-medium transition-all"
+              className="w-full p-3 rounded-lg border-2 text-left font-medium transition-all"
               style={{
                 borderColor: selected === category ? 'var(--peep-primary)' : 'rgba(255, 255, 255, 0.2)',
-                backgroundColor: selected === category ? 'rgba(74, 150, 110, 0.25)' : 'transparent',
-                color: 'white',
+                backgroundColor: selected === category ? 'rgba(74, 150, 110, 0.25)' : 'rgba(255, 255, 255, 0.03)',
+                color: '#ffffff',
               }}
             >
               {category}
@@ -84,7 +84,7 @@ export default function SelectCategoryPage() {
         </div>
 
         {/* Navigation buttons */}
-        <div className="mt-6 space-y-2">
+        <div className="mt-4 space-y-2">
           <Link
             href={selected ? '/peep/user/report-flow/set-severity' : '#'}
             onClick={(e) => !selected && e.preventDefault()}

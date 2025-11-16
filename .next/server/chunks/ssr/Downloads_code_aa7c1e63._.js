@@ -1,3 +1,0 @@
-module.exports=[66556,(a,b,c)=>{"use strict";b.exports=a.r(55932).vendored["react-ssr"].ReactJsxRuntime},32132,a=>{"use strict";var b=a.i(66556),c=a.i(95820),d=a.i(19887);function e(){let a=(0,d.useRouter)();return(0,c.useEffect)(()=>{a.push("/admin/dashboard")},[a]),(0,b.jsx)("div",{className:"flex items-center justify-center min-h-screen",children:(0,b.jsx)("p",{className:"text-gray-600",children:"Redirecting to admin dashboard..."})})}a.s(["default",()=>e])}];
-
-//# sourceMappingURL=Downloads_code_aa7c1e63._.js.map

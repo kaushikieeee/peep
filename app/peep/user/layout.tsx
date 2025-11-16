@@ -19,7 +19,7 @@ export default function UserLayout({
       <PeepLoadingAnimation />
       
       {/* Mobile header */}
-      <header className="sticky top-0 z-50 bg-black border-b border-gray-800 px-4 py-3">
+      <header className="sticky top-0 z-50 bg-black border-b border-gray-800 px-4 py-2">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-yellow-400">PEEP</h1>
           <button
@@ -57,7 +57,7 @@ export default function UserLayout({
       </header>
 
       {/* Main content */}
-      <main className="flex-1 overflow-y-auto pb-24 text-white">{children}</main>
+      <main className="flex-1 overflow-y-auto pb-16 text-white">{children}</main>
 
       {/* About Us Modal */}
       <AboutUsModal isOpen={aboutUsOpen} onClose={() => setAboutUsOpen(false)} />
