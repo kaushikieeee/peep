@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { LogOut, Send, Star, CheckCircle, Clock } from 'lucide-react';
+import { LogOut, Star, CheckCircle, Clock, RefreshCw } from 'lucide-react';
 import AdminSidebar from '@/components/admin/sidebar';
+import { fetchProvidersFromSheets, fetchProblemsFromSheets } from '@/lib/googleSheets';
 
 interface Provider {
   id: number;
@@ -70,46 +71,11 @@ interface PollutionProblem {
   category: string;
 }
 
-const mockProblems: PollutionProblem[] = [
-  {
-    id: 'P001',
-    title: 'Stagnant water at Market Street',
-    location: 'Market Street, Downtown',
-    severity: 'High',
-    category: 'Water Pollution',
-  },
-  {
-    id: 'P002',
-    title: 'Soil contamination near Industrial Zone',
-    location: 'Industrial Area, East Side',
-    severity: 'High',
-    category: 'Soil Pollution',
-  },
-  {
-    id: 'P003',
-    title: 'Air quality degradation at Main Road',
-    location: 'Main Road Junction',
-    severity: 'Medium',
-    category: 'Air Pollution',
-  },
-  {
-    id: 'P004',
-    title: 'Plastic waste accumulation in Park',
-    location: 'Central Park',
-    severity: 'Medium',
-    category: 'Waste Pollution',
-  },
-  {
-    id: 'P005',
-    title: 'Heavy metal residue at Abandoned Factory',
-    location: 'Old Industrial Factory',
-    severity: 'High',
-    category: 'Chemical Pollution',
-  },
-];
-
 export default function MarketplacePage() {
   const router = useRouter();
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const [problems, setProblems] = useState<PollutionProblem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
   const [assignedTasks, setAssignedTasks] = useState<AssignmentRecord[]>([]);
   const [showAssignConfirm, setShowAssignConfirm] = useState(false);
@@ -124,10 +90,48 @@ export default function MarketplacePage() {
     }
   }, [router]);
 
+  // Fetch providers and problems from Google Sheets
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const [fetchedProviders, fetchedProblems] = await Promise.all([
+          fetchProvidersFromSheets(),
+          fetchProblemsFromSheets(),
+        ]);
+        setProviders(fetchedProviders);
+        setProblems(fetchedProblems);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('admin-auth');
     router.push('/admin/login');
   };
+
+  const handleRefreshData = async () => {
+    try {
+      setLoading(true);
+      const [fetchedProviders, fetchedProblems] = await Promise.all([
+        fetchProvidersFromSheets(),
+        fetchProblemsFromSheets(),
+      ]);
+      setProviders(fetchedProviders);
+      setProblems(fetchedProblems);
+    } catch (error) {
+      console.error('Error refreshing data:', error);
+      alert('Failed to refresh data. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const handleOpenProblemModal = (provider: Provider) => {
     setProviderForAssignment(provider);
@@ -171,14 +175,32 @@ export default function MarketplacePage() {
       <div className="flex-1 flex flex-col overflow-hidden">
         <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between sticky top-0 z-20">
           <h1 className="text-2xl font-bold text-gray-900">Service Provider Marketplace</h1>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-all"
-          >
-            <LogOut className="w-5 h-5" />
-            Logout
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleRefreshData}
+              disabled={loading}
+              className="flex items-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-all disabled:opacity-50"
+              title="Refresh data from Google Sheets"
+            >
+              <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+              Refresh
+            </button>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-all"
+            >
+              <LogOut className="w-5 h-5" />
+              Logout
+            </button>
+          </div>
         </div>
+
+        {loading && (
+          <div className="bg-blue-50 border-b border-blue-200 px-6 py-3 flex items-center gap-3 text-blue-700">
+            <RefreshCw size={20} className="animate-spin flex-shrink-0" />
+            <span className="text-sm font-medium">Loading data from Google Sheets...</span>
+          </div>
+        )}
 
         {/* Success Message */}
         {showAssignConfirm && (
@@ -202,34 +224,38 @@ export default function MarketplacePage() {
               </div>
 
               <div className="max-h-96 overflow-y-auto p-6 space-y-3">
-                {mockProblems.map((problem) => (
-                  <div
-                    key={problem.id}
-                    className="p-4 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer transition"
-                    onClick={() => handleAssignProblem(problem)}
-                  >
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900">{problem.title}</h3>
-                        <p className="text-sm text-gray-600">{problem.location}</p>
-                        <p className="text-xs text-gray-500 mt-1">{problem.category}</p>
-                      </div>
-                      <div className="text-right">
-                        <span
-                          className={`text-xs font-bold px-3 py-1 rounded ${
-                            problem.severity === 'High'
-                              ? 'bg-red-100 text-red-700'
-                              : problem.severity === 'Medium'
-                              ? 'bg-yellow-100 text-yellow-700'
-                              : 'bg-green-100 text-green-700'
-                          }`}
-                        >
-                          {problem.severity}
-                        </span>
+                {problems.length === 0 ? (
+                  <p className="text-center text-gray-500 py-8">No problems found. Please configure your Google Sheet.</p>
+                ) : (
+                  problems.map((problem: PollutionProblem) => (
+                    <div
+                      key={problem.id}
+                      className="p-4 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer transition"
+                      onClick={() => handleAssignProblem(problem)}
+                    >
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-900">{problem.title}</h3>
+                          <p className="text-sm text-gray-600">{problem.location}</p>
+                          <p className="text-xs text-gray-500 mt-1">{problem.category}</p>
+                        </div>
+                        <div className="text-right">
+                          <span
+                            className={`text-xs font-bold px-3 py-1 rounded ${
+                              problem.severity === 'High'
+                                ? 'bg-red-100 text-red-700'
+                                : problem.severity === 'Medium'
+                                ? 'bg-yellow-100 text-yellow-700'
+                                : 'bg-green-100 text-green-700'
+                            }`}
+                          >
+                            {problem.severity}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
 
               <div className="p-6 border-t border-gray-200 flex justify-end gap-2">
@@ -283,9 +309,9 @@ export default function MarketplacePage() {
 
             {/* Right: Provider cards (2 columns) */}
             <div className="col-span-2">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Service Providers ({mockProviders.length})</h2>
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Service Providers ({providers.length})</h2>
               <div className="grid grid-cols-2 gap-4">
-                {mockProviders.map((provider) => {
+                {providers.map((provider) => {
                   const providerTaskCount = assignedTasks.filter((t) => t.providerId === provider.id).length;
                   return (
                     <div
