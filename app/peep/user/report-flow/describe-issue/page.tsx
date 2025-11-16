@@ -56,7 +56,7 @@ export default function DescribeIssuePage() {
           onChange={(e) => handleChange(e.target.value)}
           placeholder="e.g., Dark runoff from field after heavy rain, seen since last week..."
           className="flex-1 p-4 border-2 rounded-lg focus:outline-none resize-none bg-white/10 text-white placeholder-white/40"
-          style={{ borderColor: 'rgba(255, 255, 255, 0.2)' }}
+          style={{ borderColor: 'rgba(255, 255, 255, 0.2)', color: '#ffffff' }}
         />
 
         {/* Word count */}
