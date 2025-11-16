@@ -47,26 +47,26 @@ export default function DescribeIssuePage() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 px-4 py-4 flex flex-col">
-        <h2 className="text-lg font-semibold text-white mb-1">Add more details</h2>
-        <p className="text-sm text-white/60 mb-3">Describe what you see and when it started (optional but helpful).</p>
+      <div className="flex-1 px-4 py-2 flex flex-col">
+        <h2 className="text-sm font-semibold text-white mb-1">Add more details</h2>
+        <p className="text-xs text-white/60 mb-2">Describe what you see and when it started (optional but helpful).</p>
         
         <textarea
           value={description}
           onChange={(e) => handleChange(e.target.value)}
           placeholder="e.g., Dark runoff from field after heavy rain, seen since last week..."
-          className="flex-1 p-4 border-2 rounded-lg focus:outline-none resize-none bg-white/10 placeholder-white/40"
+          className="flex-1 p-3 border-2 rounded-lg focus:outline-none resize-none bg-white/10 placeholder-white/40 text-sm"
           style={{ borderColor: 'rgba(255, 255, 255, 0.2)', color: 'rgb(255, 255, 255)' }}
         />
 
         {/* Word count */}
-        <p className="text-xs text-white/60 mt-2">{description.length}/500 characters</p>
+        <p className="text-xs text-white/60 mt-1">{description.length}/500 characters</p>
 
         {/* Navigation buttons */}
-        <div className="mt-4 space-y-2">
+        <div className="mt-2 space-y-1">
           <Link
             href="/peep/user/report-flow/confirm-submit"
-            className="block w-full py-3 px-4 rounded-lg font-semibold text-white text-center"
+            className="block w-full py-2 px-4 rounded-lg font-semibold text-white text-center text-sm"
             style={{ backgroundColor: 'var(--peep-primary)' }}
           >
             Next: Review & Submit

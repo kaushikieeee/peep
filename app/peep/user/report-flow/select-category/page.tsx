@@ -63,14 +63,14 @@ export default function SelectCategoryPage() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 px-4 py-4 flex flex-col">
-        <h2 className="text-base font-semibold text-white mb-3">Choose what sort of problem this is:</h2>
-        <div className="space-y-2 flex-1 overflow-y-auto">
+      <div className="flex-1 px-4 py-2 flex flex-col">
+        <h2 className="text-sm font-semibold text-white mb-2">Choose what sort of problem this is:</h2>
+        <div className="space-y-1 flex-1 overflow-y-auto">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleSelect(category)}
-              className="w-full p-3 rounded-lg border-2 text-left font-medium transition-all"
+              className="w-full p-2 rounded-lg border-2 text-left text-sm font-medium transition-all"
               style={{
                 borderColor: selected === category ? 'var(--peep-primary)' : 'rgba(255, 255, 255, 0.2)',
                 backgroundColor: selected === category ? 'rgba(74, 150, 110, 0.25)' : 'rgba(255, 255, 255, 0.03)',
@@ -84,11 +84,11 @@ export default function SelectCategoryPage() {
         </div>
 
         {/* Navigation buttons */}
-        <div className="mt-4 space-y-2">
+        <div className="mt-2 space-y-1">
           <Link
             href={selected ? '/peep/user/report-flow/set-severity' : '#'}
             onClick={(e) => !selected && e.preventDefault()}
-            className="block w-full py-3 px-4 rounded-lg font-semibold text-white text-center"
+            className="block w-full py-2 px-4 rounded-lg font-semibold text-white text-center text-sm"
             style={{ backgroundColor: selected ? 'var(--peep-primary)' : 'rgba(255, 255, 255, 0.2)' }}
           >
             Next: How Bad?
