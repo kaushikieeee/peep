@@ -6816,6 +6816,12 @@ html {
   --foreground: #fff;
 }
 
+input, textarea, select {
+  color: #fff !important;
+  background-color: #1a1a1a !important;
+  border-color: #333 !important;
+}
+
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;

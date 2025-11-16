@@ -26,8 +26,14 @@ export interface Evidence {
  */
 export async function fetchEvidenceFromSheets(): Promise<Evidence[]> {
   try {
-    // Use relative URL to work in both development and production
-    const response = await fetch(`/api/evidence`, { cache: 'no-store' });
+    // Use absolute URL with fallback for server-side calls
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const url = `${baseUrl}/api/evidence`;
+    
+    const response = await fetch(url, { 
+      cache: 'no-store',
+      headers: { 'Accept': 'application/json' }
+    });
     
     if (!response.ok) {
       console.warn('Failed to fetch evidence from API:', response.status);
