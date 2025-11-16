@@ -1,109 +1,93 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 
 export default function AddTitlePage() {
   const [title, setTitle] = useState('');
-  const [savedTitle, setSavedTitle] = useState('');
+  const maxLength = 100;
+  const router = useRouter();
 
-  useEffect(() => {
-    const saved = sessionStorage.getItem('peep-report-title');
-    if (saved) {
-      setTitle(saved);
-      setSavedTitle(saved);
-    }
-  }, []);
-
-  const handleSave = () => {
+  const handleContinue = () => {
     if (title.trim()) {
       sessionStorage.setItem('peep-report-title', title);
-      setSavedTitle(title);
+      router.push('/peep/user/report-flow/select-category');
     }
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        <Link href="/peep/user/report-flow/capture-photo" className="p-2 hover:bg-gray-100 rounded-lg">
-          <ChevronLeft className="w-5 h-5" />
-        </Link>
-        <h1 className="text-lg font-semibold">Give It a Title</h1>
-        <div className="w-10" />
+    <div className="min-h-screen flex flex-col bg-black">
+      {/* Header - Glassmorphism */}
+      <div className="backdrop-blur-xl bg-white/10 border-b border-white/10 px-4 py-4 flex items-center gap-2">
+        <button onClick={() => router.back()} className="p-1 text-white hover:text-gray-300 transition">
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <h1 className="text-lg font-semibold text-white">Report Pollution</h1>
       </div>
 
-      {/* Progress Stepper */}
-      <div className="px-4 py-3 bg-gray-50 flex justify-between items-center text-xs font-semibold">
-        <div className="flex flex-col items-center">
-          <div className="w-6 h-6 rounded-full flex items-center justify-center text-white" style={{ backgroundColor: 'var(--peep-primary)' }}>✓</div>
-          <p className="mt-1 text-gray-600">Photo</p>
+      {/* Progress - Glassmorphism */}
+      <div className="backdrop-blur-xl bg-white/5 px-4 py-3 border-b border-white/10">
+        <div className="flex justify-between items-center gap-2">
+          {[1, 2, 3, 4, 5, 6, 7].map((step) => (
+            <div
+              key={step}
+              className="flex-1 h-2 rounded-full"
+              style={{
+                backgroundColor: step <= 3 ? 'var(--peep-primary)' : 'rgba(255,255,255,0.1)',
+              }}
+            />
+          ))}
         </div>
-        <div className="flex-1 h-0.5 mx-1 bg-gray-300 mt-3" />
-        <div className="flex flex-col items-center">
-          <div className="w-6 h-6 rounded-full flex items-center justify-center text-white" style={{ backgroundColor: 'var(--peep-primary)' }}>2</div>
-          <p className="mt-1 text-gray-600">Title</p>
-        </div>
-        <div className="flex-1 h-0.5 mx-1 bg-gray-300 mt-3" />
-        <div className="flex flex-col items-center opacity-50">
-          <div className="w-6 h-6 rounded-full flex items-center justify-center bg-gray-300 text-gray-600">3</div>
-          <p className="mt-1 text-gray-600">Details</p>
-        </div>
+        <p className="text-xs text-gray-400 mt-2">Step 3 of 7</p>
       </div>
 
       {/* Content */}
-      <div className="flex-1 px-4 py-8 flex flex-col">
-        <div className="max-w-md mx-auto w-full space-y-6">
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">Report Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g., Dark soil runoff near field"
-              maxLength={80}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-0"
-              style={{ focusRingColor: 'var(--peep-primary)' }}
-            />
-            <p className="text-xs text-gray-500 mt-1">{title.length}/80 characters</p>
-          </div>
+      <div className="flex-1 flex flex-col px-4 py-6">
+        <h2 className="text-xl font-semibold mb-2 text-balance text-white">Give it a title</h2>
+        <p className="text-sm text-gray-400 mb-6">A short, clear title for your report.</p>
 
-          <div className="space-y-2">
-            <p className="text-xs text-gray-600 font-semibold">Suggestions:</p>
-            {['Turf runoff with dark sediment', 'Stagnant water pooling', 'Plastic waste near drain', 'Chemical residue on soil'].map((suggestion) => (
-              <button
-                key={suggestion}
-                onClick={() => setTitle(suggestion)}
-                className="w-full text-left px-3 py-2 text-sm text-gray-700 border border-gray-200 rounded hover:bg-gray-50"
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
+        {/* Input - Glassmorphism */}
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value.slice(0, maxLength))}
+          placeholder="e.g. Pollution near school entrance..."
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2 text-white placeholder-gray-500"
+        />
 
-          <div className="flex-1" />
-
-          <div className="space-y-2">
-            <button
-              onClick={handleSave}
-              className="w-full py-3 px-4 rounded-lg font-semibold text-white transition-all active:scale-95"
-              style={{ backgroundColor: title.trim() ? 'var(--peep-primary)' : '#ccc' }}
-              disabled={!title.trim()}
-            >
-              Save Title
-            </button>
-            {savedTitle && (
-              <Link
-                href="/peep/user/report-flow/select-category"
-                className="block w-full py-3 px-4 rounded-lg font-semibold text-white text-center"
-                style={{ backgroundColor: 'var(--peep-primary)' }}
-              >
-                Next: Select Category
-              </Link>
-            )}
-          </div>
+        {/* Character count */}
+        <div className="text-xs text-gray-400 mb-6 text-right">
+          {title.length}/{maxLength} characters
         </div>
+
+        {/* Info - Glassmorphism */}
+        <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-3 text-xs text-gray-300 mb-6">
+          <p className="font-semibold mb-1 text-white">Good examples:</p>
+          <ul className="space-y-1 list-disc list-inside">
+            <li>"Stagnant water pooling near park"</li>
+            <li>"Chemical spill on main road"</li>
+            <li>"Plastic waste dumping site"</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom CTA - Glassmorphism */}
+      <div className="backdrop-blur-xl bg-white/5 border-t border-white/10 px-4 py-4 space-y-2">
+        <button
+          onClick={handleContinue}
+          disabled={!title.trim()}
+          className="w-full py-3 px-4 rounded-2xl font-semibold text-white transition-all active:scale-95 disabled:opacity-50"
+          style={{ backgroundColor: 'var(--peep-primary)' }}
+        >
+          Continue
+        </button>
+        <button
+          onClick={() => router.back()}
+          className="w-full py-2 px-4 rounded-lg border border-white/20 hover:bg-white/10 text-gray-300 text-sm transition"
+        >
+          Back
+        </button>
       </div>
     </div>
   );

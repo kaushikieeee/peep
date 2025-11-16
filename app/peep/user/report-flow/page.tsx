@@ -47,7 +47,7 @@ export default function ReportFlowPage() {
             setIsLoading(false);
           },
           (err) => {
-            console.log('[v0] Geolocation error:', err.message);
+            console.log('[Report Flow] Geolocation error:', err.message);
             setError('Unable to access your location. Please enable location permissions.');
             setIsLoading(false);
           }
@@ -81,14 +81,30 @@ export default function ReportFlowPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        <Link href="/peep/user" className="p-2 hover:bg-gray-100 rounded-lg">
+      <div className="flex items-center justify-between p-4 border-b border-white/10 backdrop-blur-xl bg-white/5">
+        <Link href="/peep/user" className="p-2 hover:bg-white/10 rounded-lg transition text-white">
           <ChevronLeft className="w-5 h-5" />
         </Link>
-        <h1 className="text-lg font-semibold">New Report</h1>
+        <h1 className="text-lg font-semibold text-white">New Report</h1>
         <div className="w-10" />
+      </div>
+
+      {/* Progress Bar */}
+      <div className="backdrop-blur-xl bg-white/5 px-4 py-3 border-b border-white/10">
+        <div className="flex justify-between items-center gap-2">
+          {[1, 2, 3, 4, 5, 6, 7].map((step) => (
+            <div
+              key={step}
+              className="flex-1 h-2 rounded-full"
+              style={{
+                backgroundColor: step <= 1 ? 'var(--peep-primary)' : 'rgba(255,255,255,0.1)',
+              }}
+            />
+          ))}
+        </div>
+        <p className="text-xs text-gray-400 mt-2">Step 1 of 7</p>
       </div>
 
       {/* Content */}
@@ -98,11 +114,11 @@ export default function ReportFlowPage() {
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto animate-pulse" style={{ backgroundColor: 'var(--peep-primary)' }}>
               <MapPin className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-lg font-semibold text-gray-900">Finding your location...</h2>
-            <p className="text-sm text-gray-600">This helps us pinpoint where the issue is.</p>
+            <h2 className="text-lg font-semibold text-gray-100">Finding your location...</h2>
+            <p className="text-sm text-gray-400">This helps us pinpoint where the issue is.</p>
             <button
               onClick={() => setUseManualSearch(true)}
-              className="text-sm font-semibold"
+              className="text-sm font-semibold transition hover:text-yellow-300"
               style={{ color: 'var(--peep-primary)' }}
             >
               Search location instead
@@ -110,11 +126,11 @@ export default function ReportFlowPage() {
           </div>
         ) : error && !useManualSearch ? (
           <div className="w-full max-w-sm text-center space-y-4">
-            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto bg-red-100">
-              <AlertCircle className="w-8 h-8 text-red-600" />
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto bg-red-500/20 border border-red-500/30">
+              <AlertCircle className="w-8 h-8 text-red-400" />
             </div>
-            <h2 className="text-lg font-semibold text-gray-900">Location Access Required</h2>
-            <p className="text-sm text-gray-600">{error}</p>
+            <h2 className="text-lg font-semibold text-gray-100">Location Access Required</h2>
+            <p className="text-sm text-gray-400">{error}</p>
             <p className="text-xs text-gray-500">Please enable location in your browser settings and refresh.</p>
             <div className="flex gap-2">
               <button
@@ -126,7 +142,7 @@ export default function ReportFlowPage() {
               </button>
               <button
                 onClick={() => setUseManualSearch(true)}
-                className="flex-1 py-3 px-4 rounded-lg font-semibold border-2"
+                className="flex-1 py-3 px-4 rounded-lg font-semibold border-2 transition"
                 style={{ borderColor: 'var(--peep-primary)', color: 'var(--peep-primary)' }}
               >
                 Search Instead
@@ -135,10 +151,10 @@ export default function ReportFlowPage() {
           </div>
         ) : useManualSearch ? (
           <div className="w-full max-w-sm space-y-4">
-            <h2 className="text-lg font-semibold text-gray-900">Search Location</h2>
+            <h2 className="text-lg font-semibold text-gray-100">Search Location</h2>
             
             <div className="relative">
-              <div className="flex items-center gap-2 px-3 py-2 border-2 border-gray-300 rounded-lg focus-within:border-2" style={{ 'focusWithinBorderColor': 'var(--peep-primary)' }}>
+              <div className="flex items-center gap-2 px-3 py-2 border-2 border-white/20 rounded-lg focus-within:border-2 transition backdrop-blur-xl bg-white/10" style={{ focusWithinBorderColor: 'var(--peep-primary)' }}>
                 <Search className="w-5 h-5 text-gray-400" />
                 <input
                   type="text"
@@ -146,7 +162,7 @@ export default function ReportFlowPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
-                  className="flex-1 outline-none text-sm"
+                  className="flex-1 outline-none text-sm bg-transparent text-white placeholder-gray-500"
                 />
                 {searchQuery && (
                   <button
@@ -154,7 +170,7 @@ export default function ReportFlowPage() {
                       setSearchQuery('');
                       setSearchResults([]);
                     }}
-                    className="p-1 hover:bg-gray-100 rounded"
+                    className="p-1 hover:bg-white/10 rounded transition"
                   >
                     <X className="w-4 h-4 text-gray-400" />
                   </button>
@@ -162,37 +178,37 @@ export default function ReportFlowPage() {
               </div>
 
               {searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-black border border-white/20 rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto backdrop-blur-xl bg-black/80">
                   {searchResults.map((poi) => (
                     <button
                       key={`${poi.lat}-${poi.lng}`}
                       onClick={() => handleSelectLocation(poi)}
-                      className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0 transition-colors"
+                      className="w-full text-left px-4 py-3 hover:bg-white/10 border-b border-white/10 last:border-0 transition-colors"
                     >
-                      <p className="font-medium text-gray-900 text-sm">{poi.name}</p>
-                      <p className="text-xs text-gray-600 mt-0.5">{poi.zone}</p>
+                      <p className="font-medium text-gray-100 text-sm">{poi.name}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{poi.zone}</p>
                     </button>
                   ))}
                 </div>
               )}
 
               {searchQuery && searchResults.length === 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-300 rounded-lg p-4 text-center text-sm text-gray-600 z-50">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-black border border-white/20 rounded-lg p-4 text-center text-sm text-gray-400 z-50 backdrop-blur-xl bg-black/80">
                   No locations found. Try another name.
                 </div>
               )}
             </div>
 
-            <div className="space-y-2 text-xs text-gray-600">
-              <p className="font-semibold text-gray-700">Suggested locations:</p>
+            <div className="space-y-2 text-xs text-gray-400">
+              <p className="font-semibold text-gray-300">Suggested locations:</p>
               <div className="grid grid-cols-2 gap-2">
                 {MOCK_POIS.slice(0, 6).map((poi) => (
                   <button
                     key={`${poi.lat}-${poi.lng}`}
                     onClick={() => handleSelectLocation(poi)}
-                    className="p-2 text-left rounded border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all"
+                    className="p-2 text-left rounded border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all"
                   >
-                    <p className="text-sm font-medium text-gray-900">{poi.name}</p>
+                    <p className="text-sm font-medium text-gray-100">{poi.name}</p>
                     <p className="text-xs text-gray-500">{poi.zone}</p>
                   </button>
                 ))}
@@ -217,11 +233,11 @@ export default function ReportFlowPage() {
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto" style={{ backgroundColor: 'var(--peep-primary)' }}>
               <MapPin className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-lg font-semibold text-gray-900">Location Captured</h2>
-            <p className="text-sm text-gray-600">
+            <h2 className="text-lg font-semibold text-gray-100">Location Captured</h2>
+            <p className="text-sm text-gray-400">
               Lat: {location?.lat.toFixed(4)}, Lng: {location?.lng.toFixed(4)}
             </p>
-            <p className="text-xs text-gray-500">Ready to document the issue?</p>
+            <p className="text-xs text-gray-500">Ready to capture evidence?</p>
             <div className="flex gap-2">
               <Link
                 href="/peep/user/report-flow/capture-photo"
@@ -235,7 +251,7 @@ export default function ReportFlowPage() {
                   setUseManualSearch(true);
                   setLocation(null);
                 }}
-                className="flex-1 py-3 px-4 rounded-lg font-semibold border-2"
+                className="flex-1 py-3 px-4 rounded-lg font-semibold border-2 transition"
                 style={{ borderColor: 'var(--peep-primary)', color: 'var(--peep-primary)' }}
               >
                 Change Location

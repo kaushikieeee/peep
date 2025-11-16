@@ -27,48 +27,48 @@ export default function SelectCategoryStep() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--peep-neutral-1)' }}>
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-4 py-4 flex items-center gap-2">
-        <button onClick={() => router.back()} className="p-1">
+    <div className="min-h-screen flex flex-col bg-black">
+      {/* Header - Glassmorphism */}
+      <div className="backdrop-blur-xl bg-white/10 border-b border-white/10 px-4 py-4 flex items-center gap-2">
+        <button onClick={() => router.back()} className="p-1 text-white hover:text-gray-300 transition">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-lg font-semibold">Report Pollution</h1>
+        <h1 className="text-lg font-semibold text-white">Report Pollution</h1>
       </div>
 
-      {/* Progress */}
-      <div className="bg-white px-4 py-3 border-b border-gray-200">
+      {/* Progress - Glassmorphism */}
+      <div className="backdrop-blur-xl bg-white/5 px-4 py-3 border-b border-white/10">
         <div className="flex justify-between items-center gap-2">
-          {[1, 2, 3, 4, 5].map((step) => (
+          {[1, 2, 3, 4, 5, 6, 7].map((step) => (
             <div
               key={step}
               className="flex-1 h-2 rounded-full"
               style={{
-                backgroundColor: step <= 2 ? 'var(--peep-primary)' : '#e5e7eb',
+                backgroundColor: step <= 4 ? 'var(--peep-primary)' : 'rgba(255,255,255,0.1)',
               }}
             />
           ))}
         </div>
-        <p className="text-xs text-gray-600 mt-2">Step 2 of 5</p>
+        <p className="text-xs text-gray-400 mt-2">Step 4 of 7</p>
       </div>
 
       {/* Content */}
       <div className="flex-1 flex flex-col px-4 py-6">
-        <h2 className="text-xl font-semibold mb-2 text-balance">What type of pollution?</h2>
-        <p className="text-sm text-gray-600 mb-6">Select the category that best describes the issue.</p>
+        <h2 className="text-xl font-semibold mb-2 text-balance text-white">What type of pollution?</h2>
+        <p className="text-sm text-gray-400 mb-6">Select the category that best describes the issue.</p>
 
-        {/* Dropdown */}
+        {/* Dropdown - Glassmorphism */}
         <div className="relative mb-6">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-left font-medium flex items-center justify-between hover:border-gray-400"
+            className="w-full px-4 py-3 rounded-2xl backdrop-blur-xl bg-white/10 border border-white/20 text-white text-left font-medium flex items-center justify-between hover:bg-white/15 transition"
           >
             {category || 'Select category...'}
-            <ChevronDown className="w-5 h-5 text-gray-600" />
+            <ChevronDown className="w-5 h-5 text-gray-300" />
           </button>
 
           {dropdownOpen && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+            <div className="absolute top-full left-0 right-0 mt-2 backdrop-blur-xl bg-black border border-white/20 rounded-2xl shadow-2xl z-10 overflow-hidden">
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -76,7 +76,7 @@ export default function SelectCategoryStep() {
                     setCategory(cat);
                     setDropdownOpen(false);
                   }}
-                  className="w-full px-4 py-3 text-left hover:bg-gray-100 border-b border-gray-100 last:border-b-0"
+                  className="w-full px-4 py-3 text-left text-white hover:bg-white/10 border-b border-white/10 last:border-b-0 transition"
                 >
                   {cat}
                 </button>
@@ -85,16 +85,16 @@ export default function SelectCategoryStep() {
           )}
         </div>
 
-        {/* Description */}
+        {/* Description - Glassmorphism */}
         {category && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-900">
+          <div className="backdrop-blur-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/10 border border-yellow-400/30 rounded-2xl p-3 text-sm text-yellow-300">
             Selected: <span className="font-semibold">{category}</span>
           </div>
         )}
       </div>
 
-      {/* Bottom CTA */}
-      <div className="px-4 py-4 bg-white border-t border-gray-200 space-y-2">
+      {/* Bottom CTA - Glassmorphism */}
+      <div className="backdrop-blur-xl bg-white/5 border-t border-white/10 px-4 py-4 space-y-2">
         <button
           onClick={handleContinue}
           disabled={!category}
@@ -105,7 +105,7 @@ export default function SelectCategoryStep() {
         </button>
         <button
           onClick={() => router.back()}
-          className="w-full py-2 px-4 rounded-lg border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm"
+          className="w-full py-2 px-4 rounded-lg border border-white/20 hover:bg-white/10 text-gray-300 text-sm transition"
         >
           Back
         </button>

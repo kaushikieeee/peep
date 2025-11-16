@@ -109,6 +109,8 @@
     --color-green-50: #f0fdf4;
     --color-green-100: #dcfce7;
     --color-green-200: #b9f8cf;
+    --color-green-400: #05df72;
+    --color-green-500: #00c758;
     --color-green-600: #00a544;
     --color-green-700: #008138;
     --color-green-800: #016630;
@@ -127,6 +129,8 @@
     --color-indigo-600: #4f39f6;
     --color-purple-50: #faf5ff;
     --color-purple-100: #f3e8ff;
+    --color-purple-400: #c07eff;
+    --color-purple-500: #ac4bff;
     --color-purple-600: #9810fa;
     --color-purple-700: #8200da;
     --color-purple-900: #59168b;
@@ -212,6 +216,8 @@
       --color-green-50: lab(98.1563% -5.60117 2.75915);
       --color-green-100: lab(96.1861% -13.8464 6.52365);
       --color-green-200: lab(92.4222% -26.4702 12.9427);
+      --color-green-400: lab(78.503% -64.9265 39.7492);
+      --color-green-500: lab(70.5521% -66.5147 45.8073);
       --color-green-600: lab(59.0978% -58.6621 41.2579);
       --color-green-700: lab(47.0329% -47.0239 31.4788);
       --color-green-800: lab(37.4616% -36.7971 22.9692);
@@ -230,6 +236,8 @@
       --color-indigo-600: lab(38.4009% 52.6132 -92.3857);
       --color-purple-50: lab(97.1627% 2.99937 -4.13398);
       --color-purple-100: lab(93.3333% 6.97437 -9.83434);
+      --color-purple-400: lab(63.6946% 47.6127 -59.2066);
+      --color-purple-500: lab(52.0183% 66.11 -78.2316);
       --color-purple-600: lab(43.0295% 75.21 -86.5669);
       --color-purple-700: lab(36.1758% 69.8525 -80.0381);
       --color-purple-900: lab(24.9401% 45.2703 -51.2728);
@@ -2019,12 +2027,20 @@
     border-color: var(--color-green-200);
   }
 
+  .border-green-500 {
+    border-color: var(--color-green-500);
+  }
+
   .border-input {
     border-color: var(--input);
   }
 
   .border-primary {
     border-color: var(--primary);
+  }
+
+  .border-purple-500 {
+    border-color: var(--color-purple-500);
   }
 
   .border-red-200 {
@@ -2049,6 +2065,10 @@
 
   .border-yellow-200 {
     border-color: var(--color-yellow-200);
+  }
+
+  .border-yellow-400 {
+    border-color: var(--color-yellow-400);
   }
 
   .border-t-transparent {
@@ -2133,6 +2153,14 @@
     background-color: var(--color-gray-300);
   }
 
+  .bg-gray-700 {
+    background-color: var(--color-gray-700);
+  }
+
+  .bg-gray-800 {
+    background-color: var(--color-gray-800);
+  }
+
   .bg-gray-900 {
     background-color: var(--color-gray-900);
   }
@@ -2143,6 +2171,10 @@
 
   .bg-green-100 {
     background-color: var(--color-green-100);
+  }
+
+  .bg-green-500 {
+    background-color: var(--color-green-500);
   }
 
   .bg-green-600 {
@@ -2195,6 +2227,10 @@
 
   .bg-purple-100 {
     background-color: var(--color-purple-100);
+  }
+
+  .bg-purple-500 {
+    background-color: var(--color-purple-500);
   }
 
   .bg-red-50 {
@@ -2664,6 +2700,10 @@
     color: var(--background);
   }
 
+  .text-black {
+    color: var(--color-black);
+  }
+
   .text-blue-600 {
     color: var(--color-blue-600);
   }
@@ -2714,6 +2754,10 @@
     }
   }
 
+  .text-gray-200 {
+    color: var(--color-gray-200);
+  }
+
   .text-gray-300 {
     color: var(--color-gray-300);
   }
@@ -2740,6 +2784,10 @@
 
   .text-gray-900 {
     color: var(--color-gray-900);
+  }
+
+  .text-green-400 {
+    color: var(--color-green-400);
   }
 
   .text-green-600 {
@@ -2784,6 +2832,10 @@
 
   .text-primary-foreground {
     color: var(--primary-foreground);
+  }
+
+  .text-purple-400 {
+    color: var(--color-purple-400);
   }
 
   .text-purple-600 {
@@ -3534,6 +3586,12 @@
   }
 
   @media (hover: hover) {
+    .hover\:border-gray-700:hover {
+      border-color: var(--color-gray-700);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:bg-accent:hover {
       background-color: var(--accent);
     }
@@ -3590,6 +3648,12 @@
   @media (hover: hover) {
     .hover\:bg-gray-400:hover {
       background-color: var(--color-gray-400);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-gray-600:hover {
+      background-color: var(--color-gray-600);
     }
   }
 
@@ -3702,6 +3766,12 @@
   }
 
   @media (hover: hover) {
+    .hover\:bg-yellow-500:hover {
+      background-color: var(--color-yellow-500);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:text-accent-foreground:hover {
       color: var(--accent-foreground);
     }
@@ -3770,6 +3840,12 @@
   @media (hover: hover) {
     .hover\:text-white:hover {
       color: var(--color-white);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:text-yellow-400:hover {
+      color: var(--color-yellow-400);
     }
   }
 
@@ -3858,6 +3934,10 @@
 
   .focus\:z-10:focus {
     z-index: 10;
+  }
+
+  .focus\:border-yellow-400:focus {
+    border-color: var(--color-yellow-400);
   }
 
   .focus\:bg-accent:focus {
