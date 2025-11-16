@@ -44,20 +44,37 @@ export default function ConfirmSubmitStep() {
       setIsSubmitting(true);
       setError('');
 
+      // Get fresh data from sessionStorage (don't rely on state)
+      const photo = sessionStorage.getItem('peep-report-photo');
+      const category = sessionStorage.getItem('peep-report-category');
+      const severity = sessionStorage.getItem('peep-report-severity');
+      const description = sessionStorage.getItem('peep-report-description');
+      const lat = sessionStorage.getItem('peep-report-lat');
+      const lng = sessionStorage.getItem('peep-report-lng');
+
+      console.log('[ConfirmSubmit] Submitting with fresh sessionStorage data:', {
+        hasPhoto: !!photo,
+        category,
+        severity,
+        lat,
+        lng,
+        hasDescription: !!description,
+      });
+
       // Prepare evidence data for submission
       const evidenceData = {
-        lat: parseFloat(reportData.lat) || 0,
-        lng: parseFloat(reportData.lng) || 0,
-        category: reportData.category || '',
-        severity: reportData.severity || 'Low',
-        note: reportData.description || '',
+        lat: parseFloat(lat || '0') || 0,
+        lng: parseFloat(lng || '0') || 0,
+        category: category || '',
+        severity: severity || 'Low',
+        note: description || '',
         reporter: reporterName || 'Anonymous',
         date: new Date().toISOString().split('T')[0],
         zone: 'User Submitted',
         upvotes: 0,
         verified: false,
         status: 'Open',
-        images: reportData.photo ? [reportData.photo] : [],
+        images: photo ? [photo] : [],
       };
 
       console.log('[ConfirmSubmit] Submitting evidence:', {
@@ -66,9 +83,16 @@ export default function ConfirmSubmitStep() {
         lng: evidenceData.lng,
         category: evidenceData.category,
         severity: evidenceData.severity,
-        hasPhoto: !!reportData.photo,
+        hasPhoto: !!photo,
         description: evidenceData.note.substring(0, 50),
       });
+
+      // Validate required fields
+      if (!evidenceData.lat || !evidenceData.lng || !evidenceData.category) {
+        throw new Error(`Missing required fields: lat=${evidenceData.lat}, lng=${evidenceData.lng}, category=${evidenceData.category}`);
+      }
+
+      console.log('[ConfirmSubmit] Making fetch request to /api/evidence/submit');
 
       // Submit to API endpoint
       const response = await fetch('/api/evidence/submit', {
@@ -77,9 +101,11 @@ export default function ConfirmSubmitStep() {
         body: JSON.stringify(evidenceData),
       });
 
+      console.log('[ConfirmSubmit] Got response:', { status: response.status, ok: response.ok });
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Failed to submit report');
+        throw new Error(errorData.error || `Failed to submit report (${response.status})`);
       }
 
       const result = await response.json();

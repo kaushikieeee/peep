@@ -329,8 +329,22 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Downloads$2f$code$2f$lib$2f$
 async function POST(request) {
     try {
         const body = await request.json();
+        console.log('[Evidence Submit] Received request:', {
+            lat: body.lat,
+            lng: body.lng,
+            category: body.category,
+            severity: body.severity,
+            hasImages: !!body.images?.length,
+            imageCount: body.images?.length || 0,
+            reporter: body.reporter
+        });
         // Validate required fields
         if (!body.lat || !body.lng || !body.category) {
+            console.warn('[Evidence Submit] Missing required fields:', {
+                lat: !!body.lat,
+                lng: !!body.lng,
+                category: !!body.category
+            });
             return __TURBOPACK__imported__module__$5b$project$5d2f$Downloads$2f$code$2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: 'Missing required fields'
             }, {
@@ -370,7 +384,9 @@ async function POST(request) {
             reporter: body.reporter || 'Anonymous',
             category: body.category,
             severity: body.severity,
-            hasImage: processedImages.length > 0
+            hasImage: processedImages.length > 0,
+            lat: body.lat,
+            lng: body.lng
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$Downloads$2f$code$2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: true,
@@ -380,9 +396,9 @@ async function POST(request) {
             status: 201
         });
     } catch (error) {
-        console.error('Error submitting evidence:', error);
+        console.error('[Evidence Submit] Error submitting evidence:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$Downloads$2f$code$2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: 'Failed to submit report'
+            error: error instanceof Error ? error.message : 'Failed to submit report'
         }, {
             status: 500
         });
