@@ -6816,6 +6816,10 @@ html {
   --foreground: #fff;
 }
 
+[class*="text-gray"] {
+  color: #fff !important;
+}
+
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
