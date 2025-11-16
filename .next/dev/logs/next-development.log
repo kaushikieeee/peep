@@ -25,3 +25,74 @@ Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allow
 [00:00:46.069] Server  LOG     Google Sheets evidence table is empty
 [00:00:46.077] Server  LOG     No evidence items found
 [00:00:46.295] Browser LOG     [ProfilePage] Loaded reports: 0
+[00:19:09.806] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:19:09.806] Browser LOG     [ProfilePage] Fetching reports from API...
+[00:19:09.806] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:19:09.806] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/user/profile","route":"/peep/user/profile"}
+[00:19:09.806] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user/profile color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user/profile","o":"http://192.168.29.9:3000/peep/user/profile","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763266030969}
+[00:19:10.843] Server  LOG     Google Sheets evidence table is empty
+[00:19:10.852] Server  LOG     No evidence items found
+[00:19:11.056] Browser LOG     [ProfilePage] Loaded reports: 0
+[00:19:21.200] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:19:21.200] Browser LOG     [MapPage] Fetching reports from API...
+[00:19:21.200] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:19:21.200] Browser LOG     [MapPage] Fetching reports from API...
+[00:19:21.200] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user","o":"http://192.168.29.9:3000/peep/user","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763266042225}
+[00:19:21.200] Browser LOG     [LiveMap] Style loaded
+[00:19:21.200] Browser LOG     [LiveMap] Style loaded
+[00:19:21.200] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:19:21.200] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:19:21.358] Browser LOG     [LiveMap] Map loaded successfully
+[00:19:21.358] Browser LOG     [LiveMap] Map loaded successfully
+[00:19:21.864] Server  LOG     Google Sheets evidence table is empty
+[00:19:21.870] Server  LOG     No evidence items found
+[00:19:21.992] Browser LOG     [MapPage] Loaded reports: 0
+[00:19:21.992] Browser LOG     [LiveMap] Adding 0 markers
+[00:19:22.514] Server  LOG     Google Sheets evidence table is empty
+[00:19:22.520] Server  LOG     No evidence items found
+[00:19:22.643] Browser LOG     [MapPage] Loaded reports: 0
+[00:19:22.643] Browser LOG     [LiveMap] Adding 0 markers
+[00:19:27.035] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:19:27.305] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:19:27.305] Browser LOG     [MapPage] Fetching reports from API...
+[00:19:27.305] Browser LOG     [LiveMap] Style loaded
+[00:19:27.305] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:19:27.305] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:19:27.305] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/user","route":"/peep/user"}
+[00:19:27.305] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user","o":"http://192.168.29.9:3000/peep/user","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763266048362}
+[00:19:27.305] Browser LOG     [LiveMap] Map loaded successfully
+[00:19:27.697] Server  LOG     Google Sheets evidence table is empty
+[00:19:27.702] Server  LOG     No evidence items found
+[00:19:27.925] Browser LOG     [MapPage] Loaded reports: 0
+[00:19:27.925] Browser LOG     [LiveMap] Adding 0 markers
+[00:19:32.842] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user/new-report color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user/new-report","o":"http://192.168.29.9:3000/peep/user/new-report","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763266053913}
+[00:19:32.842] Browser LOG     [NewReport] Geolocation error: Only secure origins are allowed (see: https://goo.gl/Y0ZkNV).
+[00:19:32.842] Browser LOG     [NewReport] Geolocation error: Only secure origins are allowed (see: https://goo.gl/Y0ZkNV).
+[00:19:35.585] Browser LOG     [NewReport] Geolocation error: Only secure origins are allowed (see: https://goo.gl/Y0ZkNV).
+[00:20:29.991] Browser LOG     [NewReport] Submitting evidence directly without sessionStorage: {"category":"Damaged turf / turf runoff","description":"Dyjdkydhk","hasPhoto":true,"lat":12.9705,"lng":77.5935,"reporter":"Dgjgdjjyd","severity":"High"}
+[00:20:31.588] Server  LOG     [Evidence Submit] Received request: {}
+[00:20:32.773] Server  LOG     ✓ Image uploaded to ImgBB: "https://i.ibb.co/HDYz8Lk1/evidence-1763266112970.jpg"
+[00:20:33.547] Server  LOG     ✓ Evidence saved to Google Sheets: {}
+[00:20:33.878] Browser LOG     [NewReport] API response: {"ok":true,"status":201}
+[00:20:33.878] Browser LOG     [NewReport] Submission successful: {"id":"E1763266114154","message":"Report submitted successfully","success":true}
+[00:21:12.747] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:21:12.747] Browser LOG     [MapPage] Fetching reports from API...
+[00:21:12.747] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:21:12.747] Browser LOG     [MapPage] Fetching reports from API...
+[00:21:12.747] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user","o":"http://192.168.29.9:3000/peep/user","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763266153702}
+[00:21:12.747] Browser LOG     [LiveMap] Style loaded
+[00:21:12.747] Browser LOG     [LiveMap] Style loaded
+[00:21:12.747] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:21:12.747] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:21:12.747] Browser LOG     [LiveMap] Map loaded successfully
+[00:21:12.747] Browser LOG     [LiveMap] Map loaded successfully
+[00:21:13.669] Server  LOG     ✓ Fetched 1 evidence items from Google Sheets
+[00:21:13.677] Server  LOG     ✓ Fetched 1 evidence items
+[00:21:13.696] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user/new-report color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user/new-report","o":"http://192.168.29.9:3000/peep/user/new-report","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763266154753}
+[00:21:13.696] Browser LOG     [NewReport] Geolocation error: Only secure origins are allowed (see: https://goo.gl/Y0ZkNV).
+[00:21:13.697] Browser LOG     [NewReport] Geolocation error: Only secure origins are allowed (see: https://goo.gl/Y0ZkNV).
+[00:21:13.801] Browser LOG     [MapPage] Loaded reports: 1
+[00:21:14.403] Server  LOG     ✓ Fetched 1 evidence items from Google Sheets
+[00:21:14.408] Server  LOG     ✓ Fetched 1 evidence items
+[00:21:14.619] Browser LOG     [MapPage] Loaded reports: 1
+[00:21:16.174] Browser LOG     [NewReport] Geolocation error: Only secure origins are allowed (see: https://goo.gl/Y0ZkNV).
