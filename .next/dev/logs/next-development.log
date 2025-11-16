@@ -1,1 +1,15 @@
 [00:00:00.709] Server  LOG      ✓ Ready in 432ms
+[00:07:22.793] Server  LOG     Google Sheets evidence table is empty
+[00:07:36.754] Server  LOG     ✓ Evidence saved to Google Sheets: {}
+[00:07:48.887] Server  LOG     ✓ Fetched 1 evidence items from Google Sheets
+[00:09:19.190] Server  LOG     ✓ Image uploaded to ImgBB: "https://i.ibb.co/sJdP9jsp/evidence-1763260019772.png"
+[00:09:19.968] Server  LOG     ✓ Evidence saved to Google Sheets: {}
+[00:09:20.508] Server  LOG     ✓ Evidence saved to Google Sheets: {}
+[00:09:21.128] Server  LOG     ✓ Evidence saved to Google Sheets: {}
+[00:09:21.653] Server  LOG     ✓ Fetched 4 evidence items from Google Sheets
+[00:09:27.443] Server  LOG     ✓ Image uploaded to ImgBB: "https://i.ibb.co/sJdP9jsp/evidence-1763260019772.png"
+[00:09:28.120] Server  LOG     ✓ Evidence saved to Google Sheets: {}
+[00:09:28.737] Server  LOG     ✓ Evidence saved to Google Sheets: {}
+[00:09:29.253] Server  LOG     ✓ Evidence saved to Google Sheets: {}
+[00:09:29.963] Server  LOG     ✓ Fetched 7 evidence items from Google Sheets
+[00:09:46.026] Server  LOG     ✓ Fetched 7 evidence items from Google Sheets

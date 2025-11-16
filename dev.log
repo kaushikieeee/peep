@@ -17,3 +17,71 @@
  ✓ Starting...
  ✓ Ready in 432ms
  POST /api/admin/sheets 200 in 4.1s (compile: 2.6s, render: 1500ms)
+Google Sheets evidence table is empty
+ GET /api/evidence 200 in 3.6s (compile: 2.3s, render: 1277ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763261253238',
+  reporter: 'Test User',
+  category: 'Air Pollution',
+  severity: 'High',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 1451ms (compile: 604ms, render: 847ms)
+✓ Fetched 1 evidence items from Google Sheets
+ GET /api/evidence 200 in 834ms (compile: 5ms, render: 829ms)
+✓ Image uploaded to ImgBB: https://i.ibb.co/sJdP9jsp/evidence-1763260019772.png
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763261356501',
+  reporter: 'Water Test',
+  category: 'Water Pollution',
+  severity: 'Medium',
+  hasImage: true
+}
+ POST /api/evidence/submit 201 in 1681ms (compile: 33ms, render: 1648ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763261357316',
+  reporter: 'Soil Tester',
+  category: 'Soil contamination',
+  severity: 'Low',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 517ms (compile: 7ms, render: 510ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763261357856',
+  reporter: 'Waste Observer',
+  category: 'Waste dumping',
+  severity: 'High',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 594ms (compile: 5ms, render: 590ms)
+✓ Fetched 4 evidence items from Google Sheets
+ GET /api/evidence 200 in 497ms (compile: 4ms, render: 493ms)
+✓ Image uploaded to ImgBB: https://i.ibb.co/sJdP9jsp/evidence-1763260019772.png
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763261364755',
+  reporter: 'Water Test',
+  category: 'Water Pollution',
+  severity: 'Medium',
+  hasImage: true
+}
+ POST /api/evidence/submit 201 in 1457ms (compile: 5ms, render: 1452ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763261365460',
+  reporter: 'Soil Tester',
+  category: 'Soil contamination',
+  severity: 'Low',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 598ms (compile: 5ms, render: 594ms)
+✓ Evidence saved to Google Sheets: {
+  id: 'E1763261366078',
+  reporter: 'Waste Observer',
+  category: 'Waste dumping',
+  severity: 'High',
+  hasImage: false
+}
+ POST /api/evidence/submit 201 in 495ms (compile: 5ms, render: 490ms)
+✓ Fetched 7 evidence items from Google Sheets
+ GET /api/evidence 200 in 694ms (compile: 7ms, render: 687ms)
+✓ Fetched 7 evidence items from Google Sheets
+ GET /api/evidence 200 in 978ms (compile: 7ms, render: 971ms)
