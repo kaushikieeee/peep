@@ -86,7 +86,12 @@ export default function MapPage() {
       .then(r => r.json())
       .then(reportsData => {
         console.log('[MapPage] Loaded reports:', reportsData.length);
-        setReports(reportsData);
+        // Map the data to include imagePlaceholder from images array
+        const mappedData = reportsData.map((report: any) => ({
+          ...report,
+          imagePlaceholder: report.images && report.images[0] ? report.images[0] : '/data/mock-reports.json'
+        }));
+        setReports(mappedData);
       })
       .catch(err => console.error('[MapPage] Failed to load data:', err));
   }, []);
@@ -218,12 +223,23 @@ export default function MapPage() {
         {selectedPin && (
           <div className="absolute bottom-20 left-4 right-4 bg-white rounded-lg border border-gray-200 shadow-lg overflow-hidden max-w-sm z-50">
             {/* Image */}
-            <div className="w-full h-48 bg-gray-200 overflow-hidden">
-              <img 
-                src={selectedPin.imagePlaceholder} 
-                alt={selectedPin.category}
-                className="w-full h-full object-cover"
-              />
+            <div className="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden flex items-center justify-center">
+              {selectedPin.imagePlaceholder ? (
+                <img 
+                  src={selectedPin.imagePlaceholder} 
+                  alt={selectedPin.category}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback to gray background if image fails to load
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center text-gray-400">
+                  <AlertCircle className="w-8 h-8 mb-2" />
+                  <p className="text-xs">No image</p>
+                </div>
+              )}
             </div>
             
             {/* Content */}

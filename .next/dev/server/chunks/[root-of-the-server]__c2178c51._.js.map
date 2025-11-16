@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 58, "column": 0}, "map": {"version":3,"sources":["file:///Users/kaushikieee/Downloads/code/app/api/data/reports/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\nimport fs from 'fs';\nimport path from 'path';\n\nexport async function GET() {\n  try {\n    const filePath = path.join(process.cwd(), 'public/data/mock-reports.json');\n    const fileContents = fs.readFileSync(filePath, 'utf8');\n    const mockReports = JSON.parse(fileContents);\n    return NextResponse.json(mockReports);\n  } catch (error) {\n    console.error('Error reading mock reports:', error);\n    return NextResponse.json([], { status: 500 });\n  }\n}\n"],"names":[],"mappings":";;;;AAAA;AACA;AACA;;;;AAEO,eAAe;IACpB,IAAI;QACF,MAAM,WAAW,4GAAI,CAAC,IAAI,CAAC,QAAQ,GAAG,IAAI;QAC1C,MAAM,eAAe,wGAAE,CAAC,YAAY,CAAC,UAAU;QAC/C,MAAM,cAAc,KAAK,KAAK,CAAC;QAC/B,OAAO,oSAAY,CAAC,IAAI,CAAC;IAC3B,EAAE,OAAO,OAAO;QACd,QAAQ,KAAK,CAAC,+BAA+B;QAC7C,OAAO,oSAAY,CAAC,IAAI,CAAC,EAAE,EAAE;YAAE,QAAQ;QAAI;IAC7C;AACF"}}]
-}

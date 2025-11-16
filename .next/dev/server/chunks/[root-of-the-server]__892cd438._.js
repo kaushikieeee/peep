@@ -46,72 +46,30 @@ module.exports = mod;
 
 /**
  * Evidence/Report data management
- * All data comes from Google Sheets "evidence" tab
+ * Fetches data from the API endpoint /api/evidence which connects to Google Sheets
  */ __turbopack_context__.s([
     "fetchEvidenceFromSheets",
     ()=>fetchEvidenceFromSheets
 ]);
 async function fetchEvidenceFromSheets() {
-    const SHEET_ID = ("TURBOPACK compile-time value", "1IRDxPqcjRroM6TkAONKuiTWjeLCBtK-vlrHCcLsHnxw");
-    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-    ;
     try {
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/query?tq=SELECT%20*%20FROM%20'evidence'&tqx=out:json`;
-        const response = await fetch(url);
-        const text = await response.text();
-        console.log('Google Sheets response length:', text.length, 'First 100 chars:', text.substring(0, 100));
-        // Google Sheets response format: )]}' followed by JSON
-        let jsonString = text.trim();
-        // Remove the Google Sheets security prefix if present
-        if (jsonString.startsWith(')]}\'')) {
-            jsonString = jsonString.substring(4);
-        }
-        // Try to parse the JSON
-        let json;
-        try {
-            json = JSON.parse(jsonString);
-        } catch (parseError) {
-            // If direct parse fails, try to extract JSON object from the string
-            const jsonMatch = jsonString.match(/\{[\s\S]*\}/);
-            if (!jsonMatch) {
-                console.warn('Could not extract JSON from Google Sheets response:', text.substring(0, 200));
-                return [];
-            }
-            try {
-                json = JSON.parse(jsonMatch[0]);
-            } catch (e) {
-                console.warn('Extracted JSON is still invalid:', jsonMatch[0].substring(0, 100));
-                return [];
-            }
-        }
-        // If table is empty or no rows, return empty array
-        if (!json.table || !json.table.rows || json.table.rows.length === 0) {
-            console.log('Google Sheets table is empty');
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+        const response = await fetch(`${baseUrl}/api/evidence`, {
+            cache: 'no-store'
+        });
+        if (!response.ok) {
+            console.warn('Failed to fetch evidence from API:', response.status);
             return [];
         }
-        const evidence = json.table.rows.map((row, idx)=>{
-            const cols = row.c || [];
-            return {
-                id: cols[0]?.v || `E${idx + 1}`,
-                lat: parseFloat(cols[1]?.v) || 0,
-                lng: parseFloat(cols[2]?.v) || 0,
-                category: cols[3]?.v || '',
-                severity: cols[4]?.v || 'Low',
-                note: cols[5]?.v || '',
-                reporter: cols[6]?.v || '',
-                date: cols[7]?.v || new Date().toISOString().split('T')[0],
-                zone: cols[8]?.v || '',
-                upvotes: parseInt(cols[9]?.v) || 0,
-                verified: cols[10]?.v?.toString().toLowerCase() === 'yes' || cols[10]?.v?.toString().toLowerCase() === 'true',
-                status: cols[11]?.v || 'Open',
-                images: (cols[12]?.v || '').split('|').filter((s)=>s.trim()),
-                assignedTo: cols[13]?.v || '',
-                assignedDate: cols[14]?.v || ''
-            };
-        });
+        const evidence = await response.json();
+        if (!evidence || evidence.length === 0) {
+            console.log('No evidence items found');
+            return [];
+        }
+        console.log(`✓ Fetched ${evidence.length} evidence items`);
         return evidence;
     } catch (error) {
-        console.error('Error fetching evidence from Google Sheets:', error);
+        console.error('Error fetching evidence:', error);
         return [];
     }
 }

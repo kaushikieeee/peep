@@ -26,7 +26,8 @@ export interface Evidence {
  */
 export async function fetchEvidenceFromSheets(): Promise<Evidence[]> {
   try {
-    const response = await fetch('/api/evidence', { cache: 'no-store' });
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/evidence`, { cache: 'no-store' });
     
     if (!response.ok) {
       console.warn('Failed to fetch evidence from API:', response.status);

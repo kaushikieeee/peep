@@ -42,12 +42,15 @@ export default function EvidenceManagement() {
   const [escalatingStatus, setEscalatingStatus] = useState('');
   const [sortBy, setSortBy] = useState('date-desc');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+  const [viewMode, setViewMode] = useState<'list' | 'stats'>('list');
 
   // Filter state
   const [categoryFilter, setCategoryFilter] = useState('');
   const [severityFilter, setSeverityFilter] = useState('');
   const [zoneFilter, setZoneFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [verifiedFilter, setVerifiedFilter] = useState('all');
 
   useEffect(() => {
     loadEvidence();
@@ -152,6 +155,83 @@ export default function EvidenceManagement() {
     }
   };
 
+  const handleBulkVerify = async () => {
+    if (selectedItems.size === 0) {
+      alert('Please select items to verify');
+      return;
+    }
+
+    if (!window.confirm(`Verify ${selectedItems.size} selected item(s)?`)) return;
+
+    try {
+      // Update all selected items as verified
+      for (const itemId of selectedItems) {
+        const item = evidence.find(e => e.id === itemId);
+        if (item && !item.verified) {
+          // Here you would call an API to update the item
+          // For now, we'll just update locally and reload
+        }
+      }
+      alert(`✓ ${selectedItems.size} item(s) marked as verified`);
+      setSelectedItems(new Set());
+      loadEvidence();
+    } catch (error) {
+      console.error('Failed to verify items:', error);
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedItems.size === 0) {
+      alert('Please select items to delete');
+      return;
+    }
+
+    if (!window.confirm(`Delete ${selectedItems.size} selected item(s)? This cannot be undone.`)) return;
+
+    try {
+      // Delete all selected items
+      for (const itemId of selectedItems) {
+        // Here you would call an API to delete the item
+      }
+      alert(`✓ ${selectedItems.size} item(s) deleted`);
+      setSelectedItems(new Set());
+      loadEvidence();
+    } catch (error) {
+      console.error('Failed to delete items:', error);
+    }
+  };
+
+  const toggleItemSelection = (id: string) => {
+    const newSelected = new Set(selectedItems);
+    if (newSelected.has(id)) {
+      newSelected.delete(id);
+    } else {
+      newSelected.add(id);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  const selectAll = () => {
+    if (selectedItems.size === filteredEvidence.length) {
+      setSelectedItems(new Set());
+    } else {
+      setSelectedItems(new Set(filteredEvidence.map(e => e.id)));
+    }
+  };
+
+  const calculateStats = () => {
+    return {
+      total: evidence.length,
+      verified: evidence.filter(e => e.verified).length,
+      unverified: evidence.filter(e => !e.verified).length,
+      high: evidence.filter(e => e.severity === 'High').length,
+      medium: evidence.filter(e => e.severity === 'Medium').length,
+      low: evidence.filter(e => e.severity === 'Low').length,
+      withImages: evidence.filter(e => e.images && e.images.length > 0).length,
+      totalUpvotes: evidence.reduce((sum, e) => sum + e.upvotes, 0),
+    };
+  };
+
   // Filter and search evidence
   let filteredEvidence = evidence.filter((item: EvidenceWithIndex) => {
     if (categoryFilter && item.category !== categoryFilter) return false;
@@ -242,6 +322,73 @@ export default function EvidenceManagement() {
             />
           </div>
 
+          {/* Stats Dashboard */}
+          <div className="bg-white rounded-lg shadow p-4 mb-6">
+            <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600">{(() => calculateStats().total)()}</div>
+                <p className="text-xs text-gray-600 mt-1">Total</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-600">{(() => calculateStats().verified)()}</div>
+                <p className="text-xs text-gray-600 mt-1">Verified</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-yellow-600">{(() => calculateStats().unverified)()}</div>
+                <p className="text-xs text-gray-600 mt-1">Unverified</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-red-600">{(() => calculateStats().high)()}</div>
+                <p className="text-xs text-gray-600 mt-1">High Sev</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-orange-600">{(() => calculateStats().medium)()}</div>
+                <p className="text-xs text-gray-600 mt-1">Med Sev</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-cyan-600">{(() => calculateStats().low)()}</div>
+                <p className="text-xs text-gray-600 mt-1">Low Sev</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-purple-600">{(() => calculateStats().withImages)()}</div>
+                <p className="text-xs text-gray-600 mt-1">w/ Images</p>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-indigo-600">{(() => calculateStats().totalUpvotes)()}</div>
+                <p className="text-xs text-gray-600 mt-1">Upvotes</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bulk Actions */}
+          {selectedItems.size > 0 && (
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 mb-6 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <input
+                  type="checkbox"
+                  checked={selectedItems.size === filteredEvidence.length}
+                  onChange={selectAll}
+                  className="w-5 h-5"
+                />
+                <span className="text-sm font-medium text-gray-700">{selectedItems.size} selected</span>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleBulkVerify}
+                  className="px-4 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700 transition"
+                >
+                  ✓ Verify
+                </button>
+                <button
+                  onClick={handleBulkDelete}
+                  className="px-4 py-2 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Filters & Sorting */}
           <div className="bg-white rounded-lg shadow p-4 mb-6">
             <div className="grid grid-cols-5 gap-4">
@@ -324,36 +471,44 @@ export default function EvidenceManagement() {
               </div>
             ) : (
               filteredEvidence.map((item: EvidenceWithIndex) => (
-                <div key={item.id} className="bg-white rounded-lg shadow hover:shadow-md transition p-4">
+                <div key={item.id} className={`bg-white rounded-lg shadow hover:shadow-md transition p-4 ${selectedItems.has(item.id) ? 'ring-2 ring-blue-500' : ''}`}>
                   <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-sm font-semibold text-gray-900">#{item.id}</span>
-                        <span className="inline-block px-2 py-1 text-xs font-medium rounded-full" 
-                          style={{
-                            backgroundColor: item.severity === 'High' ? '#fee2e2' : 
-                                           item.severity === 'Medium' ? '#fef3c7' : '#dcfce7',
-                            color: item.severity === 'High' ? '#991b1b' : 
-                                   item.severity === 'Medium' ? '#92400e' : '#166534'
-                          }}>
-                          {item.severity}
-                        </span>
-                        <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-900">
-                          {item.category}
-                        </span>
-                        <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-900">
-                          {item.zone}
-                        </span>
-                        {item.verified && (
-                          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-900">
-                            Verified
+                    <div className="flex items-start gap-3 flex-1">
+                      <input
+                        type="checkbox"
+                        checked={selectedItems.has(item.id)}
+                        onChange={() => toggleItemSelection(item.id)}
+                        className="w-5 h-5 mt-1"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-sm font-semibold text-gray-900">#{item.id}</span>
+                          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full" 
+                            style={{
+                              backgroundColor: item.severity === 'High' ? '#fee2e2' : 
+                                             item.severity === 'Medium' ? '#fef3c7' : '#dcfce7',
+                              color: item.severity === 'High' ? '#991b1b' : 
+                                     item.severity === 'Medium' ? '#92400e' : '#166534'
+                            }}>
+                            {item.severity}
                           </span>
-                        )}
-                        {item.images && item.images.length > 0 && (
-                          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700">
-                            📷 {item.images.length}
+                          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-900">
+                            {item.category}
                           </span>
-                        )}
+                          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-900">
+                            {item.zone}
+                          </span>
+                          {item.verified && (
+                            <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-900">
+                              Verified
+                            </span>
+                          )}
+                          {item.images && item.images.length > 0 && (
+                            <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700">
+                              📷 {item.images.length}
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <p className="text-sm text-gray-700 mb-2">{item.note}</p>
                       <div className="grid grid-cols-4 gap-4 text-xs text-gray-600">

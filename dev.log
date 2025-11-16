@@ -2,6 +2,7 @@
 > my-v0-project@0.1.0 dev
 > next dev
 
+ ⚠ Port 3000 is in use by process 2376, using available port 3001 instead.
  ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of /Users/kaushikieee/package-lock.json as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -10,10 +11,12 @@
    * /Users/kaushikieee/Downloads/code/pnpm-lock.yaml
 
    ▲ Next.js 16.0.3 (Turbopack)
-   - Local:         http://localhost:3000
-   - Network:       http://192.168.29.9:3000
+   - Local:         http://localhost:3001
+   - Network:       http://192.168.29.9:3001
    - Environments: .env.local
 
  ✓ Starting...
- ✓ Ready in 345ms
- GET /peep/user/new-report 200 in 1250ms (compile: 1143ms, render: 107ms)
+ ⨯ Unable to ac GET /admin/evidence?id=163bc2b2-6e85-4004-a2ec-363279bb9fcb&vscodeBrowserReqId=1763262812379 200 in 583ms (compile: 482ms, render: 102ms)
+✓ Fetched 2 evidence items from Google Sheets
+ GET /api/evidence 200 in 4.1s (compile: 2.9s, render: 1127ms)
+[?25h

@@ -47,8 +47,13 @@ export default function NewReportPage() {
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isLoadingLocation, setIsLoadingLocation] = useState(true);
   const [useManualSearch, setUseManualSearch] = useState(false);
+  const [useCustomAddress, setUseCustomAddress] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<POI[]>([]);
+  const [customAddress, setCustomAddress] = useState('');
+  const [customLat, setCustomLat] = useState('');
+  const [customLng, setCustomLng] = useState('');
+  const [mapsLinkError, setMapsLinkError] = useState('');
 
   // Form state
   const [category, setCategory] = useState('');
@@ -108,6 +113,75 @@ export default function NewReportPage() {
     setSearchQuery('');
     setSearchResults([]);
     setUseManualSearch(false);
+  };
+
+  const extractCoordsFromGoogleMapsLink = (link: string) => {
+    setMapsLinkError('');
+    try {
+      // Format: https://www.google.com/maps/place/12.9716,77.5946
+      // Or: https://maps.google.com/?q=12.9716,77.5946
+      // Or: https://www.google.com/maps/search/12.9716,77.5946
+      
+      const urlObj = new URL(link.trim());
+      let lat: number | null = null;
+      let lng: number | null = null;
+
+      // Try to extract from path (place/lat,lng format)
+      const pathMatch = urlObj.pathname.match(/place\/([\d.-]+),([\d.-]+)/);
+      if (pathMatch) {
+        lat = parseFloat(pathMatch[1]);
+        lng = parseFloat(pathMatch[2]);
+      }
+
+      // Try to extract from query parameters
+      if (!lat || !lng) {
+        const qParam = urlObj.searchParams.get('q');
+        if (qParam) {
+          const coords = qParam.match(/([\d.-]+),([\d.-]+)/);
+          if (coords) {
+            lat = parseFloat(coords[1]);
+            lng = parseFloat(coords[2]);
+          }
+        }
+      }
+
+      if (lat && lng && !isNaN(lat) && !isNaN(lng)) {
+        setLocation({ lat, lng, name: `Custom Location (${lat.toFixed(4)}, ${lng.toFixed(4)})` });
+        setCustomAddress('');
+        setCustomLat('');
+        setCustomLng('');
+        setUseCustomAddress(false);
+        return;
+      }
+
+      setMapsLinkError('Could not extract coordinates from the Google Maps link. Try copying the full link from the address bar.');
+    } catch (e) {
+      setMapsLinkError('Invalid URL. Please paste a valid Google Maps link.');
+    }
+  };
+
+  const handleCustomCoordinates = () => {
+    setMapsLinkError('');
+    const lat = parseFloat(customLat);
+    const lng = parseFloat(customLng);
+
+    if (isNaN(lat) || isNaN(lng)) {
+      setMapsLinkError('Please enter valid latitude and longitude numbers');
+      return;
+    }
+
+    if (lat < -90 || lat > 90) {
+      setMapsLinkError('Latitude must be between -90 and 90');
+      return;
+    }
+
+    if (lng < -180 || lng > 180) {
+      setMapsLinkError('Longitude must be between -180 and 180');
+      return;
+    }
+
+    setLocation({ lat, lng, name: customAddress || `Custom Location (${lat.toFixed(4)}, ${lng.toFixed(4)})` });
+    setUseCustomAddress(false);
   };
 
   const handlePhotoCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -319,16 +393,118 @@ export default function NewReportPage() {
           {location ? (
             <div className="bg-green-50 border border-green-200 rounded-lg p-3 space-y-2">
               <p className="text-sm font-medium text-green-900">{location.name || `${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setLocation(null);
-                  setUseManualSearch(true);
-                }}
-                className="text-xs text-green-700 hover:text-green-900 font-semibold"
-              >
-                Change Location
-              </button>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLocation(null);
+                    setUseManualSearch(true);
+                  }}
+                  className="text-xs text-green-700 hover:text-green-900 font-semibold"
+                >
+                  Change Location
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLocation(null);
+                    setUseCustomAddress(true);
+                  }}
+                  className="text-xs text-green-700 hover:text-green-900 font-semibold"
+                >
+                  Use Custom Address
+                </button>
+              </div>
+            </div>
+          ) : useCustomAddress ? (
+            <div className="space-y-3 bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="font-semibold text-sm text-blue-900">Custom Location</h3>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setUseCustomAddress(false);
+                    setCustomAddress('');
+                    setCustomLat('');
+                    setCustomLng('');
+                    setMapsLinkError('');
+                  }}
+                  className="text-xs text-blue-700 hover:text-blue-900 font-semibold"
+                >
+                  Back
+                </button>
+              </div>
+
+              {/* Google Maps Link */}
+              <div>
+                <label className="block text-xs font-semibold text-blue-900 mb-2">Google Maps Link</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="Paste Google Maps link (e.g., https://maps.google.com/...)"
+                    className="flex-1 px-3 py-2 border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    onPaste={(e) => {
+                      const pastedText = e.clipboardData.getData('text');
+                      if (pastedText.includes('google.com/maps') || pastedText.includes('maps.google')) {
+                        extractCoordsFromGoogleMapsLink(pastedText);
+                      }
+                    }}
+                  />
+                </div>
+                <p className="text-xs text-blue-700 mt-1">💡 Copy the full link from Google Maps address bar and paste it here</p>
+              </div>
+
+              {/* Manual Coordinates */}
+              <div className="border-t border-blue-200 pt-3">
+                <p className="text-xs font-semibold text-blue-900 mb-2">Or enter coordinates manually</p>
+                <div>
+                  <label className="block text-xs font-medium text-blue-900 mb-1">Address (optional)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g., School Gate, Downtown"
+                    value={customAddress}
+                    onChange={(e) => setCustomAddress(e.target.value)}
+                    className="w-full px-3 py-2 border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-xs font-medium text-blue-900 mb-1">Latitude</label>
+                    <input
+                      type="number"
+                      step="0.0001"
+                      placeholder="12.9716"
+                      value={customLat}
+                      onChange={(e) => setCustomLat(e.target.value)}
+                      className="w-full px-3 py-2 border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-blue-900 mb-1">Longitude</label>
+                    <input
+                      type="number"
+                      step="0.0001"
+                      placeholder="77.5946"
+                      value={customLng}
+                      onChange={(e) => setCustomLng(e.target.value)}
+                      className="w-full px-3 py-2 border border-blue-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCustomCoordinates}
+                  className="w-full mt-3 py-2 px-4 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition"
+                >
+                  Confirm Location
+                </button>
+              </div>
+
+              {mapsLinkError && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-2 mt-2">
+                  <p className="text-xs text-red-700">{mapsLinkError}</p>
+                </div>
+              )}
             </div>
           ) : useManualSearch ? (
             <div className="space-y-3">
@@ -390,6 +566,14 @@ export default function NewReportPage() {
                   ))}
                 </div>
               </div>
+
+              <button
+                type="button"
+                onClick={() => setUseCustomAddress(true)}
+                className="w-full mt-2 py-2 px-4 border-2 border-dashed border-gray-300 rounded-lg text-sm font-semibold text-gray-600 hover:border-gray-400 hover:bg-gray-50 transition"
+              >
+                + Use Custom Address or Google Maps Link
+              </button>
             </div>
           ) : null}
         </div>

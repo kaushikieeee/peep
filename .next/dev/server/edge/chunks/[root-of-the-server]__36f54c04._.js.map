@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/Downloads/code/middleware.ts"],"sourcesContent":["// This file has been deprecated and replaced by proxy.ts\n// Next.js 16+ uses the proxy pattern instead of middleware\n// See: https://nextjs.org/docs/messages/middleware-to-proxy\n\n// Authentication is now handled client-side via the useAdminAuth hook\n// No server-side route protection is needed for /admin routes\n// Client validates tokens before rendering protected pages\n"],"names":[],"mappings":"AAAA,yDAAyD;AACzD,2DAA2D;AAC3D,4DAA4D;AAE5D,sEAAsE;AACtE,8DAA8D;AAC9D,2DAA2D"}}]
-}
