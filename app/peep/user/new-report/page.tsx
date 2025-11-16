@@ -302,22 +302,22 @@ export default function NewReportPage() {
   // Location not ready
   if (isLoadingLocation && !useManualSearch) {
     return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <Link href="/peep/user" className="p-2 hover:bg-gray-100 rounded-lg">
+      <div className="min-h-screen bg-black flex flex-col">
+        <div className="flex items-center justify-between p-2 border-b border-white/20">
+          <Link href="/peep/user" className="p-2 hover:bg-white/10 rounded-lg">
             <ChevronLeft className="w-5 h-5" />
           </Link>
-          <h1 className="text-lg font-semibold">New Report</h1>
+          <h1 className="text-lg font-semibold text-white">New Report</h1>
           <div className="w-10" />
         </div>
 
-        <div className="flex-1 px-4 py-8 flex flex-col items-center justify-center">
+        <div className="flex-1 px-3 py-3 flex flex-col items-center justify-center">
           <div className="text-center space-y-4">
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto animate-pulse" style={{ backgroundColor: 'var(--peep-primary)' }}>
               <MapPin className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-lg font-semibold text-gray-900">Finding your location...</h2>
-            <p className="text-sm text-gray-600">This helps us pinpoint where the issue is.</p>
+            <h2 className="text-lg font-semibold text-white">Finding your location...</h2>
+            <p className="text-sm text-white/60">This helps us pinpoint where the issue is.</p>
             <button
               onClick={() => setUseManualSearch(true)}
               className="text-sm font-semibold"
@@ -334,23 +334,23 @@ export default function NewReportPage() {
   // Location error
   if (locationError && !useManualSearch) {
     return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <Link href="/peep/user" className="p-2 hover:bg-gray-100 rounded-lg">
-            <ChevronLeft className="w-5 h-5" />
+      <div className="min-h-screen bg-black flex flex-col">
+        <div className="flex items-center justify-between p-2 border-b border-white/20">
+          <Link href="/peep/user" className="p-2 hover:bg-white/10 rounded-lg">
+            <ChevronLeft className="w-5 h-5 text-white" />
           </Link>
-          <h1 className="text-lg font-semibold">New Report</h1>
+          <h1 className="text-lg font-semibold text-white">New Report</h1>
           <div className="w-10" />
         </div>
 
-        <div className="flex-1 px-4 py-8 flex flex-col items-center justify-center">
+        <div className="flex-1 px-3 py-3 flex flex-col items-center justify-center">
           <div className="w-full max-w-sm text-center space-y-4">
-            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto bg-red-100">
-              <AlertCircle className="w-8 h-8 text-red-600" />
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto bg-red-900/30">
+              <AlertCircle className="w-8 h-8 text-red-400" />
             </div>
-            <h2 className="text-lg font-semibold text-gray-900">Location Access Required</h2>
-            <p className="text-sm text-gray-600">{locationError}</p>
-            <p className="text-xs text-gray-500">Please enable location in your browser settings and refresh.</p>
+            <h2 className="text-lg font-semibold text-white">Location Access Required</h2>
+            <p className="text-sm text-white/80">{locationError}</p>
+            <p className="text-xs text-white/60">Please enable location in your browser settings and refresh.</p>
             <div className="flex gap-2">
               <button
                 onClick={() => window.location.reload()}
@@ -375,24 +375,24 @@ export default function NewReportPage() {
 
   // Main form
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white z-10">
-        <Link href="/peep/user" className="p-2 hover:bg-gray-100 rounded-lg">
-          <ChevronLeft className="w-5 h-5" />
+      <div className="flex items-center justify-between p-2 border-b border-white/20 sticky top-0 bg-black z-10">
+        <Link href="/peep/user" className="p-2 hover:bg-white/10 rounded-lg">
+          <ChevronLeft className="w-5 h-5 text-white" />
         </Link>
-        <h1 className="text-lg font-semibold">New Report</h1>
+        <h1 className="text-lg font-semibold text-white">New Report</h1>
         <div className="w-10" />
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
+      <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
         {/* Location */}
         <div>
-          <label className="block text-sm font-semibold mb-2 text-gray-900">Location *</label>
+          <label className="block text-sm font-semibold mb-2 text-white">Location *</label>
           {location ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 space-y-2">
-              <p className="text-sm font-medium text-green-900">{location.name || `${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`}</p>
+            <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2 space-y-2">
+              <p className="text-sm font-medium text-green-300">{location.name || `${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`}</p>
               <div className="flex gap-2">
                 <button
                   type="button"

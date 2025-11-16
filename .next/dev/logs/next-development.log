@@ -144,3 +144,29 @@ Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allow
 [00:40:16.266] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user/new-report color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user/new-report","o":"http://192.168.29.9:3000/peep/user/new-report","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763267297414}
 [00:40:19.972] Server  LOG      ✓ Compiled in 155ms
 [00:41:39.860] Server  LOG      ✓ Compiled in 1236ms
+[00:42:08.453] Server  ERROR   Error fetching evidence: TypeError: Failed to parse URL from /api/evidence
+[00:42:08.536] Server  ERROR   Error fetching evidence: TypeError: Failed to parse URL from /api/evidence
+[00:42:09.447] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:42:09.447] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:42:09.447] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/?id=163bc2b2-6e85-4004-a2ec-363279bb9fcb&vscodeBrowserReqId=1763267406325 color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/?id=163bc2b2-6e85-4004-a2ec-363279bb9fcb&vscodeBrowserReqId=1763267406325","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763267409324}
+[00:42:09.447] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:42:09.447] Browser LOG     [MapPage] Fetching reports from API...
+[00:42:09.447] Browser LOG     [LiveMap] Initializing Maplibre GL
+[00:42:09.447] Browser LOG     [MapPage] Fetching reports from API...
+[00:42:09.447] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/user color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user","o":"http://localhost:3000/peep/user","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763267409551}
+[00:42:09.447] Browser LOG     [LiveMap] Style loaded
+[00:42:09.447] Browser LOG     [LiveMap] Style loaded
+[00:42:09.447] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:42:09.447] Browser LOG     [LiveMap] Geolocation error: 1 - Using fallback location
+[00:42:09.728] Browser LOG     [MapPage] Loaded reports: 0
+[00:42:09.728] Browser LOG     [MapPage] Loaded reports: 0
+[00:42:09.728] Browser LOG     [LiveMap] Map loaded successfully
+[00:42:09.728] Browser LOG     [LiveMap] Map loaded successfully
+[00:42:14.194] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/user/new-report color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user/new-report","o":"http://localhost:3000/peep/user/new-report","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763267415446}
+[00:42:14.194] Browser LOG     [NewReport] Geolocation error: Geolocation has been disabled in this document by permissions policy.
+[00:42:14.194] Browser LOG     [NewReport] Geolocation error: Geolocation has been disabled in this document by permissions policy.
+[00:50:22.601] Server  LOG      ✓ Compiled in 430ms
+[00:50:37.041] Server  LOG      ✓ Compiled in 356ms
+[00:50:43.799] Server  LOG      ✓ Compiled in 91ms
+[00:50:51.287] Server  LOG      ✓ Compiled in 199ms
+[00:52:07.161] Server  LOG      ✓ Compiled in 459ms
