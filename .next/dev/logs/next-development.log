@@ -228,3 +228,14 @@ Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allow
 [01:08:40.522] Browser LOG     [MapPage] Loaded reports: 0
 [01:08:40.522] Browser LOG     [LiveMap] Adding 0 markers
 [01:13:00.558] Server  LOG      ✓ Compiled in 652ms
+[01:14:13.606] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:14:13.936] Server  ERROR   Error fetching evidence: TypeError: Failed to parse URL from /api/evidence
+[01:14:14.020] Browser LOG     [LiveMap] Initializing Maplibre GL
+[01:14:14.020] Browser LOG     [MapPage] Fetching reports from API...
+[01:14:14.020] Browser LOG     [LiveMap] Style loaded
+[01:14:14.069] Browser LOG     [LiveMap] Map loaded successfully
+[01:14:14.069] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:14:14.069] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/user","route":"/peep/user"}
+[01:14:14.069] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/peep/user color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user","o":"http://localhost:3000/peep/user","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763269335191}
+[01:14:14.069] Browser LOG     [MapPage] Loaded reports: 0
+[01:14:14.069] Browser LOG     [LiveMap] Adding 0 markers

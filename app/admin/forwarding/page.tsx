@@ -31,6 +31,80 @@ const categoryToDepartments: Record<string, string[]> = {
   'Other': ['Municipal Corporation', 'Environmental Protection Department', 'Public Health Department'],
 };
 
+// Mock reports for testing
+const getMockReports = (): Report[] => [
+  {
+    id: 1,
+    lat: 12.9716,
+    lng: 77.5946,
+    category: 'Soil contamination',
+    severity: 'High',
+    note: 'Heavy soil contamination near the school with industrial waste',
+    reporter: 'John Doe',
+    date: '2024-11-16',
+    zone: 'Zone P1',
+    upvotes: 5,
+    verified: false,
+    imagePlaceholder: 'soil-1.jpg',
+  },
+  {
+    id: 2,
+    lat: 12.9740,
+    lng: 77.5955,
+    category: 'Stagnant water',
+    severity: 'Medium',
+    note: 'Stagnant water accumulated in the park causing mosquito breeding',
+    reporter: 'Jane Smith',
+    date: '2024-11-15',
+    zone: 'Zone W2',
+    upvotes: 3,
+    verified: false,
+    imagePlaceholder: 'water-1.jpg',
+  },
+  {
+    id: 3,
+    lat: 12.9705,
+    lng: 77.5935,
+    category: 'Plastic / microplastics',
+    severity: 'Medium',
+    note: 'Plastic debris scattered across the playground area',
+    reporter: 'Ram Kumar',
+    date: '2024-11-14',
+    zone: 'Zone P2',
+    upvotes: 2,
+    verified: true,
+    imagePlaceholder: 'plastic-1.jpg',
+  },
+  {
+    id: 4,
+    lat: 12.9719,
+    lng: 77.5950,
+    category: 'Waste dumping',
+    severity: 'High',
+    note: 'Illegal waste dumping site with hazardous materials',
+    reporter: 'Anonymous',
+    date: '2024-11-13',
+    zone: 'Zone P1',
+    upvotes: 8,
+    verified: false,
+    imagePlaceholder: 'waste-1.jpg',
+  },
+  {
+    id: 5,
+    lat: 12.9715,
+    lng: 77.5965,
+    category: 'Damaged turf / turf runoff',
+    severity: 'Low',
+    note: 'Grass area damaged with water runoff issues',
+    reporter: 'Priya Sharma',
+    date: '2024-11-12',
+    zone: 'Zone C3',
+    upvotes: 1,
+    verified: false,
+    imagePlaceholder: 'turf-1.jpg',
+  },
+];
+
 export default function ForwardingPage() {
   const router = useRouter();
   useAdminAuth(); // Check authentication
@@ -46,9 +120,19 @@ export default function ForwardingPage() {
       router.push('/admin/login');
     }
 
-    fetch('/api/data/reports')
-      .then((res) => res.json())
-      .then((data) => setReports(data.slice(0, 10)));
+    const loadReports = async () => {
+      try {
+        const response = await fetch('/api/data/reports');
+        const data = await response.json();
+        console.log('[Forwarding] Loaded reports:', data.length);
+        setReports(data && data.length > 0 ? data : getMockReports());
+      } catch (err) {
+        console.error('[Forwarding] Error loading reports, using mock data:', err);
+        setReports(getMockReports());
+      }
+    };
+
+    loadReports();
   }, [router]);
 
   const handleLogout = () => {

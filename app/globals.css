@@ -167,3 +167,10 @@ html {
   --foreground: #ffffff;
 }
 
+/* Fix input/textarea fields to have dark background and white text */
+input, textarea, select {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+  border-color: #333333 !important;
+}
+
