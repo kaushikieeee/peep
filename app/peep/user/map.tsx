@@ -26,7 +26,7 @@ export default function UserMapPage() {
   const [selectedPin, setSelectedPin] = useState<Report | null>(null);
   const [view, setView] = useState<'map' | 'list'>('map');
 
-  useEffect(() => {
+  const loadReports = () => {
     // Load evidence from API (which now fetches from Google Sheets)
     fetch('/api/data/reports')
       .then((res) => res.json())
@@ -36,6 +36,13 @@ export default function UserMapPage() {
         console.error('Failed to load evidence data');
         setReports([]);
       });
+  };
+
+  useEffect(() => {
+    loadReports();
+    // Refresh reports every 30 seconds to show new evidence
+    const interval = setInterval(loadReports, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   return (

@@ -21,12 +21,15 @@ interface Report {
   imagePlaceholder: string;
 }
 
-const departments = [
-  'Municipal Sanitation',
-  'Parks & Recreation',
-  'Environmental Health',
-  'Water Management',
-];
+// Map categories to relevant government departments
+const categoryToDepartments: Record<string, string[]> = {
+  'Soil contamination': ['Environmental Protection Department', 'Mining & Geology', 'Agricultural Department'],
+  'Stagnant water': ['Water Management', 'Public Health Department', 'Municipal Corporation'],
+  'Plastic / microplastics': ['Environmental Protection Department', 'Sanitation Department', 'Coastal Authority'],
+  'Damaged turf / turf runoff': ['Parks & Recreation', 'Urban Development', 'Drainage Department'],
+  'Waste dumping': ['Sanitation Department', 'Environmental Protection Department', 'Municipal Corporation'],
+  'Other': ['Municipal Corporation', 'Environmental Protection Department', 'Public Health Department'],
+};
 
 export default function ForwardingPage() {
   const router = useRouter();
@@ -56,8 +59,9 @@ export default function ForwardingPage() {
   const handleSelectReport = (report: Report) => {
     setSelectedReport(report);
     setSelectedDept('');
+    const relevantDepts = categoryToDepartments[report.category] || categoryToDepartments['Other'];
     setMessage(
-      `Case #${report.id} needs attention. Location: ${report.lat.toFixed(4)}, ${report.lng.toFixed(4)}. Evidence attached. Please verify and respond with action taken.`
+      `Case #${report.id} - ${report.category}\nSeverity: ${report.severity}\nLocation: ${report.lat.toFixed(4)}, ${report.lng.toFixed(4)}\nZone: ${report.zone}\n\nDescription: ${report.note}\n\nReporter: ${report.reporter || 'Anonymous'}\nDate: ${report.date}\n\nPlease verify this report and take appropriate action.`
     );
   };
 
@@ -147,13 +151,16 @@ export default function ForwardingPage() {
 
                   <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-2">
                     <label className="text-sm font-semibold text-gray-900">Forward to Department</label>
+                    <p className="text-xs text-gray-600 mb-2">
+                      Recommended for {selectedReport.category}:
+                    </p>
                     <select
                       value={selectedDept}
                       onChange={(e) => setSelectedDept(e.target.value)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
                     >
                       <option value="">Select department...</option>
-                      {departments.map((dept) => (
+                      {(categoryToDepartments[selectedReport.category] || categoryToDepartments['Other']).map((dept) => (
                         <option key={dept} value={dept}>
                           {dept}
                         </option>
