@@ -155,8 +155,8 @@
   overflow: hidden !important;
 }
 
-/* Force dark mode globally - ALL ELEMENTS */
-html, body, * {
+/* Force dark mode globally */
+html, body {
   background-color: #000000 !important;
   color: #ffffff !important;
 }
@@ -165,10 +165,5 @@ html, body, * {
 html {
   --background: #000000;
   --foreground: #ffffff;
-}
-
-/* Force white text on everything */
-* {
-  color: #ffffff !important;
 }
 
