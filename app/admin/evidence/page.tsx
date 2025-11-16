@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { LogOut, Edit2, Plus, AlertTriangle } from 'lucide-react';
+import { LogOut, Edit2, Plus, AlertTriangle, X, ChevronLeft, ChevronRight, Eye, Send } from 'lucide-react';
 import AdminSidebar from '@/components/admin/sidebar';
 import EvidenceEditor from '@/components/admin/evidence-editor';
 import { fetchEvidenceFromSheets, Evidence } from '@/lib/evidenceSheets';
@@ -13,6 +13,19 @@ interface EvidenceWithIndex extends Evidence {
   rowIndex?: number;
 }
 
+interface EscalationData {
+  evidenceId: string;
+  category: string;
+  severity: string;
+  note: string;
+  reporter: string;
+  lat: number;
+  lng: number;
+  zone: string;
+  date: string;
+  images: string[];
+}
+
 export default function EvidenceManagement() {
   const router = useRouter();
   useAdminAuth(); // Check authentication
@@ -21,6 +34,14 @@ export default function EvidenceManagement() {
   const [loading, setLoading] = useState(true);
   const [showEditor, setShowEditor] = useState(false);
   const [editingEvidence, setEditingEvidence] = useState<EvidenceWithIndex | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [imagePreviewItem, setImagePreviewItem] = useState<EvidenceWithIndex | null>(null);
+  const [escalatingItem, setEscalatingItem] = useState<EscalationData | null>(null);
+  const [selectedAuthority, setSelectedAuthority] = useState('');
+  const [escalationMessage, setEscalationMessage] = useState('');
+  const [escalatingStatus, setEscalatingStatus] = useState('');
+  const [sortBy, setSortBy] = useState('date-desc');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Filter state
   const [categoryFilter, setCategoryFilter] = useState('');
@@ -65,50 +86,100 @@ export default function EvidenceManagement() {
   };
 
   const handleEscalateEvidence = async (item: EvidenceWithIndex) => {
-    // Create a problem from this evidence item
-    const confirmed = window.confirm(
-      `Escalate "${item.note}" to a problem for remediation?\n\nThis will create a new problem entry linked to this evidence.`
-    );
+    // Open escalation modal
+    const escalationData: EscalationData = {
+      evidenceId: item.id,
+      category: item.category,
+      severity: item.severity,
+      note: item.note,
+      reporter: item.reporter,
+      lat: item.lat,
+      lng: item.lng,
+      zone: item.zone,
+      date: item.date,
+      images: item.images || [],
+    };
     
-    if (!confirmed) return;
+    setEscalatingItem(escalationData);
+    setSelectedAuthority('');
+    setEscalationMessage(
+      `Escalated Evidence Report:\n\nCategory: ${item.category}\nSeverity: ${item.severity}\nLocation: ${item.zone}\nDescription: ${item.note}\n\nPlease review and take appropriate action.`
+    );
+  };
+
+  const handleConfirmEscalation = async () => {
+    if (!escalatingItem || !selectedAuthority || !escalationMessage.trim()) {
+      alert('Please select an authority and add a message');
+      return;
+    }
 
     try {
+      setEscalatingStatus('creating');
+      
+      // Create a problem from this evidence item
       const problemData = {
         id: `PROB-${Date.now()}`,
-        title: `Problem: ${item.category}`,
-        location: item.zone,
-        latitude: item.lat,
-        longitude: item.lng,
-        severity: (item.severity === 'High' ? 'Critical' : item.severity) as 'Low' | 'Medium' | 'High' | 'Critical',
-        category: item.category,
-        description: `Escalated from evidence #${item.id}:\n${item.note}`,
-        reportedBy: item.reporter,
-        reportedDate: item.date,
+        title: `Problem: ${escalatingItem.category}`,
+        location: escalatingItem.zone,
+        latitude: escalatingItem.lat,
+        longitude: escalatingItem.lng,
+        severity: (escalatingItem.severity === 'High' ? 'Critical' : escalatingItem.severity) as 'Low' | 'Medium' | 'High' | 'Critical',
+        category: escalatingItem.category,
+        description: escalatingItem.note,
+        reportedBy: escalatingItem.reporter,
+        reportedDate: escalatingItem.date,
         status: 'Open' as const,
-        priority: (item.severity === 'High' ? 'High' : 'Medium') as 'Low' | 'Medium' | 'High' | 'Critical',
+        priority: (escalatingItem.severity === 'High' ? 'High' : 'Medium') as 'Low' | 'Medium' | 'High' | 'Critical',
         estimatedCost: '',
         deadline: '',
-        images: item.images || [],
-        tags: ['escalated', `evidence-${item.id}`],
+        images: escalatingItem.images,
+        tags: ['escalated', `evidence-${escalatingItem.evidenceId}`, `authority-${selectedAuthority}`],
       };
 
       await createProblem(problemData);
-      alert(`✓ Problem created from evidence #${item.id}`);
-      // Optionally navigate to problems tab
+      
+      setEscalatingStatus('sent');
+      setTimeout(() => {
+        alert(`✓ Evidence escalated to ${selectedAuthority}\nProblem ID: ${problemData.id}`);
+        setEscalatingItem(null);
+        setEscalatingStatus('');
+        loadEvidence();
+      }, 1500);
     } catch (error) {
       console.error('Failed to escalate evidence:', error);
+      setEscalatingStatus('');
       alert('Failed to escalate evidence. Please try again.');
     }
   };
 
-  // Filter evidence
-  const filteredEvidence = evidence.filter((item: EvidenceWithIndex) => {
+  // Filter and search evidence
+  let filteredEvidence = evidence.filter((item: EvidenceWithIndex) => {
     if (categoryFilter && item.category !== categoryFilter) return false;
     if (severityFilter && item.severity !== severityFilter) return false;
     if (zoneFilter && item.zone !== zoneFilter) return false;
     if (statusFilter === 'verified' && !item.verified) return false;
     if (statusFilter === 'unverified' && item.verified) return false;
+    if (searchQuery && !item.note.toLowerCase().includes(searchQuery.toLowerCase()) && 
+        !item.reporter.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        !item.id.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
+  });
+
+  // Sort evidence
+  filteredEvidence = [...filteredEvidence].sort((a, b) => {
+    switch (sortBy) {
+      case 'date-desc':
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      case 'date-asc':
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      case 'severity':
+        const severityOrder = { 'High': 3, 'Medium': 2, 'Low': 1 };
+        return (severityOrder[b.severity as keyof typeof severityOrder] || 0) - (severityOrder[a.severity as keyof typeof severityOrder] || 0);
+      case 'upvotes':
+        return b.upvotes - a.upvotes;
+      default:
+        return 0;
+    }
   });
 
   // Get unique values for filters
@@ -135,7 +206,7 @@ export default function EvidenceManagement() {
           <div className="flex items-center justify-between px-6 py-4">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Evidence Management</h1>
-              <p className="text-sm text-gray-600 mt-1">{filteredEvidence.length} evidence items</p>
+              <p className="text-sm text-gray-600 mt-1">{filteredEvidence.length} of {evidence.length} evidence items</p>
             </div>
             <button
               onClick={handleLogout}
@@ -160,9 +231,20 @@ export default function EvidenceManagement() {
             </button>
           </div>
 
-          {/* Filters */}
+          {/* Search Bar */}
           <div className="bg-white rounded-lg shadow p-4 mb-6">
-            <div className="grid grid-cols-4 gap-4">
+            <input
+              type="text"
+              placeholder="Search by ID, reporter, or description..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Filters & Sorting */}
+          <div className="bg-white rounded-lg shadow p-4 mb-6">
+            <div className="grid grid-cols-5 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
                 <select
@@ -217,6 +299,20 @@ export default function EvidenceManagement() {
                   <option value="unverified">Unverified</option>
                 </select>
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                >
+                  <option value="date-desc">Latest First</option>
+                  <option value="date-asc">Oldest First</option>
+                  <option value="severity">Highest Severity</option>
+                  <option value="upvotes">Most Upvotes</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -253,15 +349,33 @@ export default function EvidenceManagement() {
                             Verified
                           </span>
                         )}
+                        {item.images && item.images.length > 0 && (
+                          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700">
+                            📷 {item.images.length}
+                          </span>
+                        )}
                       </div>
                       <p className="text-sm text-gray-700 mb-2">{item.note}</p>
-                      <div className="grid grid-cols-3 gap-4 text-xs text-gray-600">
+                      <div className="grid grid-cols-4 gap-4 text-xs text-gray-600">
                         <div><span className="font-medium">Reporter:</span> {item.reporter}</div>
                         <div><span className="font-medium">Date:</span> {item.date}</div>
                         <div><span className="font-medium">Upvotes:</span> {item.upvotes}</div>
+                        <div><span className="font-medium">Location:</span> {item.lat.toFixed(4)}, {item.lng.toFixed(4)}</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1 ml-4">
+                    <div className="flex items-center gap-1 ml-4 flex-shrink-0">
+                      {item.images && item.images.length > 0 && (
+                        <button
+                          onClick={() => {
+                            setImagePreviewItem(item);
+                            setSelectedImageIndex(0);
+                          }}
+                          className="flex items-center gap-2 px-3 py-2 text-purple-600 hover:bg-purple-50 rounded transition"
+                          title="View images"
+                        >
+                          <Eye size={16} />
+                        </button>
+                      )}
                       <button
                         onClick={() => handleEditEvidence(item)}
                         className="flex items-center gap-2 px-3 py-2 text-blue-600 hover:bg-blue-50 rounded transition"
@@ -273,7 +387,7 @@ export default function EvidenceManagement() {
                         <button
                           onClick={() => handleEscalateEvidence(item)}
                           className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:bg-orange-50 rounded transition"
-                          title="Escalate to problem"
+                          title="Escalate to authority"
                         >
                           <AlertTriangle size={16} />
                         </button>
@@ -286,6 +400,148 @@ export default function EvidenceManagement() {
           </div>
         </main>
       </div>
+
+      {/* Image Preview Modal */}
+      {imagePreviewItem && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-lg font-bold text-gray-900">Evidence Images - #{imagePreviewItem.id}</h2>
+              <button
+                onClick={() => setImagePreviewItem(null)}
+                className="p-1 hover:bg-gray-100 rounded"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Image Display */}
+            <div className="flex-1 flex items-center justify-center bg-gray-100 overflow-auto">
+              {imagePreviewItem.images && imagePreviewItem.images.length > 0 ? (
+                <img
+                  src={imagePreviewItem.images[selectedImageIndex]}
+                  alt={`Evidence ${selectedImageIndex + 1}`}
+                  className="max-w-full max-h-full object-contain"
+                />
+              ) : (
+                <p className="text-gray-500">No images available</p>
+              )}
+            </div>
+
+            {/* Navigation */}
+            {imagePreviewItem.images && imagePreviewItem.images.length > 1 && (
+              <div className="flex items-center justify-between p-4 border-t border-gray-200">
+                <button
+                  onClick={() => setSelectedImageIndex((i) => (i - 1 + imagePreviewItem.images!.length) % imagePreviewItem.images!.length)}
+                  className="p-2 hover:bg-gray-100 rounded transition"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <p className="text-sm text-gray-600">
+                  Image {selectedImageIndex + 1} of {imagePreviewItem.images.length}
+                </p>
+                <button
+                  onClick={() => setSelectedImageIndex((i) => (i + 1) % imagePreviewItem.images!.length)}
+                  className="p-2 hover:bg-gray-100 rounded transition"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Escalation Modal */}
+      {escalatingItem && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-lg font-bold text-gray-900">Escalate Evidence to Authority</h2>
+              <button
+                onClick={() => !escalatingStatus && setEscalatingItem(null)}
+                disabled={!!escalatingStatus}
+                className="p-1 hover:bg-gray-100 rounded disabled:opacity-50"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              {/* Evidence Summary */}
+              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                <h3 className="font-semibold text-gray-900">Evidence Summary</h3>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div><span className="font-medium">Category:</span> {escalatingItem.category}</div>
+                  <div><span className="font-medium">Severity:</span> {escalatingItem.severity}</div>
+                  <div><span className="font-medium">Location:</span> {escalatingItem.zone}</div>
+                  <div><span className="font-medium">Reporter:</span> {escalatingItem.reporter}</div>
+                  <div className="col-span-2"><span className="font-medium">Description:</span> {escalatingItem.note}</div>
+                </div>
+              </div>
+
+              {/* Authority Selection */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">Select Authority</label>
+                <select
+                  value={selectedAuthority}
+                  onChange={(e) => setSelectedAuthority(e.target.value)}
+                  disabled={!!escalatingStatus}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                >
+                  <option value="">Choose an authority...</option>
+                  <option value="Municipal Sanitation">Municipal Sanitation</option>
+                  <option value="Parks & Recreation">Parks & Recreation</option>
+                  <option value="Environmental Health">Environmental Health</option>
+                  <option value="Water Management">Water Management</option>
+                  <option value="Local Administration">Local Administration</option>
+                </select>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">Message to Authority</label>
+                <textarea
+                  value={escalationMessage}
+                  onChange={(e) => setEscalationMessage(e.target.value)}
+                  disabled={!!escalatingStatus}
+                  rows={5}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                />
+              </div>
+
+              {/* Images attached */}
+              {escalatingItem.images && escalatingItem.images.length > 0 && (
+                <div className="bg-blue-50 rounded-lg p-3 text-sm text-blue-900">
+                  <span className="font-semibold">📷 {escalatingItem.images.length} image(s)</span> will be attached to this escalation.
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-gray-200">
+              <button
+                onClick={() => setEscalatingItem(null)}
+                disabled={!!escalatingStatus}
+                className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmEscalation}
+                disabled={!selectedAuthority || !escalationMessage.trim() || !!escalatingStatus}
+                className="flex items-center gap-2 px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition disabled:opacity-50"
+              >
+                <Send size={18} />
+                {escalatingStatus === 'creating' ? 'Creating...' : escalatingStatus === 'sent' ? 'Sent!' : 'Escalate & Forward'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Editor Modal */}
       {showEditor && (
