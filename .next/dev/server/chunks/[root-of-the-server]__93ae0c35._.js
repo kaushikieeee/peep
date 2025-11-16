@@ -247,14 +247,36 @@ async function appendSheetRow({ sheetName, values }) {
 async function deleteSheetRow(sheetName, rowIndex) {
     try {
         const sheets = getAuthClient();
-        const sheetId = process.env.GOOGLE_SHEETS_ID;
-        if (!sheetId) {
+        const spreadsheetId = process.env.GOOGLE_SHEETS_ID;
+        if (!spreadsheetId) {
             throw new Error('GOOGLE_SHEETS_ID not configured');
         }
-        const range = `${sheetName}!A${rowIndex}:Z${rowIndex}`;
-        const result = await sheets.spreadsheets.values.clear({
-            spreadsheetId: sheetId,
-            range
+        // First, get the sheet metadata to find the sheetId for the given sheetName
+        const metadata = await sheets.spreadsheets.get({
+            spreadsheetId
+        });
+        const sheet = metadata.data.sheets?.find((s)=>s.properties?.title === sheetName);
+        if (!sheet) {
+            throw new Error(`Sheet "${sheetName}" not found`);
+        }
+        const sheetId = sheet.properties?.sheetId;
+        // Delete the row using batchUpdate with DeleteDimensionRequest
+        const result = await sheets.spreadsheets.batchUpdate({
+            spreadsheetId,
+            requestBody: {
+                requests: [
+                    {
+                        deleteDimension: {
+                            range: {
+                                sheetId,
+                                dimension: 'ROWS',
+                                startIndex: rowIndex - 1,
+                                endIndex: rowIndex
+                            }
+                        }
+                    }
+                ]
+            }
         });
         return result.data;
     } catch (error) {

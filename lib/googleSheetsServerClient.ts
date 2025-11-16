@@ -147,17 +147,39 @@ export async function deleteSheetRow(
 ) {
   try {
     const sheets = getAuthClient();
-    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    const spreadsheetId = process.env.GOOGLE_SHEETS_ID;
 
-    if (!sheetId) {
+    if (!spreadsheetId) {
       throw new Error('GOOGLE_SHEETS_ID not configured');
     }
 
-    const range = `${sheetName}!A${rowIndex}:Z${rowIndex}`;
+    // First, get the sheet metadata to find the sheetId for the given sheetName
+    const metadata = await sheets.spreadsheets.get({ spreadsheetId });
+    const sheet = metadata.data.sheets?.find((s: any) => s.properties?.title === sheetName);
 
-    const result = await sheets.spreadsheets.values.clear({
-      spreadsheetId: sheetId,
-      range,
+    if (!sheet) {
+      throw new Error(`Sheet "${sheetName}" not found`);
+    }
+
+    const sheetId = sheet.properties?.sheetId;
+
+    // Delete the row using batchUpdate with DeleteDimensionRequest
+    const result = await sheets.spreadsheets.batchUpdate({
+      spreadsheetId,
+      requestBody: {
+        requests: [
+          {
+            deleteDimension: {
+              range: {
+                sheetId,
+                dimension: 'ROWS',
+                startIndex: rowIndex - 1, // 0-based index
+                endIndex: rowIndex, // exclusive
+              },
+            },
+          },
+        ],
+      },
     });
 
     return result.data;
