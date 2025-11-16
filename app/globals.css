@@ -155,3 +155,15 @@
   overflow: hidden !important;
 }
 
+/* Force dark mode globally */
+html, body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Remove all light mode colors */
+html {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+

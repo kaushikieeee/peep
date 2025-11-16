@@ -143,3 +143,4 @@ Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allow
 [00:40:16.266] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/peep/user/new-report","route":"/peep/user/new-report"}
 [00:40:16.266] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.29.9:3000/peep/user/new-report color: rgb(120, 120, 120) color: inherit {"dp":"/peep/user/new-report","o":"http://192.168.29.9:3000/peep/user/new-report","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1763267297414}
 [00:40:19.972] Server  LOG      ✓ Compiled in 155ms
+[00:41:39.860] Server  LOG      ✓ Compiled in 1236ms
